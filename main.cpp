@@ -1,0 +1,43 @@
+
+
+#include "Engine/Window/window.h"
+#include "Engine/Input/input.h"
+#include "Engine/Render/render.h"
+#include "Scene/scene.h"
+#include "User/SceneManager/scenemanager.h"
+
+int main(){
+
+    Window* window = new Window(windowWidth, windowHeight, "Prueba 1 GLFW");
+
+    Input* input = Input::getInput();
+	input->init(window);
+
+    Render* render = new Render();
+
+	Camera* camera = new Camera(Vec3(0.0f, 0.0f, 1.0f), Vec3(0.0f, 0.0f, -3.0f),perspective);
+	SceneManager* sceneManager = new SceneManager(camera);
+	// sceneManager->initSceneList();
+	
+	Scene* scene = sceneManager->list->find(0)->second;
+	scene->init();
+	//delete sceneManager;
+	//std::cout << "patata7" << std::endl;
+	scene->setCamera(camera);
+	//std::cout << "patata8" << std::endl;
+
+    while (window->stillAlive())
+	{
+		if (window->renderfps(60.0f)) {
+			render->drawScene(scene);
+			scene->update();//0.0
+			window->update();
+		}
+	}
+
+	delete sceneManager;
+	delete render;
+	delete window;
+	delete camera;
+    return 0;
+}

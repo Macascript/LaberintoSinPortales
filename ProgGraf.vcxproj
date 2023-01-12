@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Engine\Datatypes\Mat4\mat4_metal.cpp" />
+    <ClCompile Include="Engine\Datatypes\Mat4\mat4_opengl.cpp" />
+    <ClCompile Include="Engine\Datatypes\Shader\shader_metal.cpp" />
+    <ClCompile Include="Engine\Datatypes\Shader\shader_opengl.cpp" />
+    <ClCompile Include="Engine\Datatypes\Texture\texture_metal.cpp" />
+    <ClCompile Include="Engine\Datatypes\Texture\texture_opengl.cpp" />
+    <ClCompile Include="Engine\Datatypes\Utils\utils_metal.cpp" />
+    <ClCompile Include="Engine\Datatypes\Utils\utils_opengl.cpp" />
+    <ClCompile Include="Engine\Datatypes\Vec2\vec2_metal.cpp" />
+    <ClCompile Include="Engine\Datatypes\Vec2\vec2_opengl.cpp" />
+    <ClCompile Include="Engine\Datatypes\Vec3\vec3_metal.cpp" />
+    <ClCompile Include="Engine\Datatypes\Vec3\vec3_opengl.cpp" />
+    <ClCompile Include="Engine\Datatypes\Vec4\vec4_metal.cpp" />
+    <ClCompile Include="Engine\Datatypes\Vec4\vec4_opengl.cpp" />
+    <ClCompile Include="Engine\Input\input_metal.cpp" />
+    <ClCompile Include="Engine\Input\input_opengl.cpp" />
+    <ClCompile Include="Engine\Render\render_metal.cpp" />
+    <ClCompile Include="Engine\Render\render_opengl.cpp" />
+    <ClCompile Include="Object\Components\Text\text_opengl.cpp" />
+    <ClCompile Include="Engine\Window\window_metal.cpp" />
+    <ClCompile Include="Engine\Window\window_opengl.cpp" />
+    <ClCompile Include="Engine\Window\window_vulkan.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Object\component.cpp" />
+    <ClCompile Include="Object\Components\Camera\camera.cpp" />
+    <ClCompile Include="Object\Components\Collider\collider.cpp" />
+    <ClCompile Include="Object\Components\Mesh\mesh.cpp" />
+    <ClCompile Include="Object\Components\Transform\transform.cpp" />
+    <ClCompile Include="Object\Components\UI\ui.cpp" />
+    <ClCompile Include="Object\object.cpp" />
+    <ClCompile Include="Scene\scene.cpp" />
+    <ClCompile Include="User\SceneManager\scenemanager.cpp" />
+    <ClCompile Include="User\Scripts\MenuScene.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Engine\Commons\common.h" />
+    <ClInclude Include="Engine\Commons\common_metal.h" />
+    <ClInclude Include="Engine\Commons\common_opengl.h" />
+    <ClInclude Include="Engine\Datatypes\Mat4\mat4.h" />
+    <ClInclude Include="Engine\Datatypes\Mat4\mat4_opengl.h" />
+    <ClInclude Include="Engine\Datatypes\Shader\shader.h" />
+    <ClInclude Include="Engine\Datatypes\Texture\stb_image_opengl.h" />
+    <ClInclude Include="Engine\Datatypes\Texture\texture.h" />
+    <ClInclude Include="Engine\Datatypes\Utils\utils.h" />
+    <ClInclude Include="Engine\Datatypes\Vec2\vec2.h" />
+    <ClInclude Include="Engine\Datatypes\Vec2\vec2_opengl.h" />
+    <ClInclude Include="Engine\Datatypes\Vec3\vec3.h" />
+    <ClInclude Include="Engine\Datatypes\Vec3\vec3_opengl.h" />
+    <ClInclude Include="Engine\Datatypes\Vec4\vec4.h" />
+    <ClInclude Include="Engine\Datatypes\Vec4\vec4_opengl.h" />
+    <ClInclude Include="Engine\Datatypes\vertex.h" />
+    <ClInclude Include="Engine\Input\input.h" />
+    <ClInclude Include="Engine\Render\render.h" />
+    <ClInclude Include="Object\Components\Text\text.h" />
+    <ClInclude Include="Engine\Window\window.h" />
+    <ClInclude Include="Object\component.h" />
+    <ClInclude Include="Object\Components\Camera\camera.h" />
+    <ClInclude Include="Object\Components\Collider\collider.h" />
+    <ClInclude Include="Object\Components\Mesh\mesh.h" />
+    <ClInclude Include="Object\Components\Transform\transform.h" />
+    <ClInclude Include="Object\Components\UI\ui.h" />
+    <ClInclude Include="Object\object.h" />
+    <ClInclude Include="Scene\scene.h" />
+    <ClInclude Include="User\SceneManager\scenemanager.h" />
+    <ClInclude Include="User\Scripts\MenuScene.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="User\Models\menu.trg" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{8f5c6b6d-da94-44e2-9d1e-57b04c2d30e9}</ProjectGuid>
+    <RootNamespace>APIS3D2021</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="PropertySheet.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="PropertySheet.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="PropertySheet.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="PropertySheet.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);;$(ProjectDir)\externalLibs\glew\include;$(ProjectDir)\externalLibs\glfw\include;$(ProjectDir)\externalLibs\glm\include;$(ProjectDir)\externalLibs\pugixml\include</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);;$(ProjectDir)\externalLibs\glew\include;$(ProjectDir)\externalLibs\glfw\include;$(ProjectDir)\externalLibs\glm\include</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)\externalLibs\glew\include;$(ProjectDir)\externalLibs\glfw\include;$(ProjectDir)\externalLibs\glm\include;$(ProjectDir)\externalLibs\freetype2\include\freetype2;$(ProjectDir)\externalLibs\pugixml\include</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);;$(ProjectDir)\externalLibs\glew\include;$(ProjectDir)\externalLibs\glfw\include;$(ProjectDir)\externalLibs\glm\include</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(ProjectDir)\externalLibs\glew\lib;$(ProjectDir)\externalLibs\glfw\lib-vc2019;$(ProjectDir)\externalLibs\pugixml\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);OpenGL32.lib;glew32s.lib;glfw3.lib;pugixml.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(ProjectDir)\externalLibs\glew\lib;$(ProjectDir)\externalLibs\glfw\lib-vc2019;$(ProjectDir)\externalLibs\pugixml\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);OpenGL32.lib;glew32s.lib;glfw3.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\jdeca\source\repos\LaberintoPortales\externalLibs\pugixml\lib;C:\Users\jdeca\source\repos\LaberintoPortales\externalLibs\glew\lib;C:\Users\jdeca\source\repos\LaberintoPortales\externalLibs\freetype2\lib\x64;C:\Users\jdeca\source\repos\LaberintoPortales\externalLibs\glfw\lib-vc2019</AdditionalLibraryDirectories>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);OpenGL32.lib;glew32s.lib;glfw3.lib;pugixml.lib;libfreetype.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(ProjectDir)\externalLibs\glew\lib;$(ProjectDir)\externalLibs\glfw\lib-vc2019;$(ProjectDir)\externalLibs\pugixml\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);OpenGL32.lib;glew32s.lib;glfw3.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
