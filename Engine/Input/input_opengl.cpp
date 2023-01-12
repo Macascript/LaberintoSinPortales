@@ -5,7 +5,10 @@
 void updateKeys(GLFWwindow* window, int key, int scancode, int action, int mods);
 void updateMouse(GLFWwindow* window, int button, int action, int mods);
 
+Input* Input::input = nullptr;
+
 void Input::init(Window* window) {
+	input = new Input();
 	input->window = window;
 
 	memset(input->keys, 0, sizeof(bool) * 512);
@@ -67,7 +70,7 @@ bool Input::getMouseKey(int i) {
 //}
 
 Input* Input::getInput(){
-	if(input == nullptr) input = new Input();
+	//if(input == nullptr) input = new Input();
 	
 	return input;
 }

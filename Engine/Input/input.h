@@ -8,12 +8,11 @@
 class Input {
 private:
 	static Input* input;
-	bool* keys;
-	bool* mouseKeys;
+	bool* keys = new bool[512];
+	bool* mouseKeys = new bool[8];
 	Window* window;
 
 public:
-
 
 	static void init(Window* window);
 	static void setKey(int key, bool active);
