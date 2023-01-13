@@ -1,8 +1,8 @@
 #pragma once
 #include "../Object/Components/Camera/camera.h"
-#include "../Object/object.h"
 #include "../Object/Components/Mesh/mesh.h"
 #include "../Object/Components/Text/text.h"
+#include "../Object/Components/Button/button.h"
 #define USER_PATH ".\\User\\"
 #define windowWidth 640
 #define windowHeight 480

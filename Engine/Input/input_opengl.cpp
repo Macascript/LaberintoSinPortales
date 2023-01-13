@@ -7,7 +7,8 @@ void updateMouse(GLFWwindow* window, int button, int action, int mods);
 
 Input* Input::input = nullptr;
 
-void Input::init(Window* window) {
+void Input::init(Window* window)
+{
 	input = new Input();
 	input->window = window;
 
@@ -17,22 +18,40 @@ void Input::init(Window* window) {
 	memset(input->mouseKeys, 0, sizeof(bool) * 8);
 	input->mouseKeys[8] = { false };
 
-	/*memset(mouseKeysDown, 0, sizeof(char) * 8);
-	mouseKeysDown[8] = { false };*/
+	memset(input->keysBefore, 0, sizeof(bool) * 512);
+	input->keysBefore[512] = { false };
+
+	memset(input->mouseKeysBefore, 0, sizeof(bool) * 8);
+	input->mouseKeysBefore[8] = { false };
 
 	glfwSetKeyCallback((GLFWwindow*)window->getWindow(), updateKeys);
 	glfwSetMouseButtonCallback((GLFWwindow*)window->getWindow(), updateMouse);
 }
 
-void Input::setKey(int key, bool active){
+void Input::setKey(int key, bool active)
+{
+	input->keysBefore[key] = input->keys[key];
 	input->keys[key] = active;
+	if (active){
+		input->pressedKeys->push_back(key);
+	}else{
+		input->pressedKeys->remove(key);
+	}
 }
 
-void Input::setMouseKey(int key, bool active) {
+void Input::setMouseKey(int key, bool active)
+{
+	input->mouseKeysBefore[key] = input->mouseKeys[key];
 	input->mouseKeys[key] = active;
+	if (active){
+		input->pressedMouseKeys->push_back(key);
+	}else{
+		input->pressedMouseKeys->remove(key);
+	}
 }
 
-void updateKeys(GLFWwindow* window, int key, int scancode, int action, int mods) {
+void updateKeys(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
 	
 	switch (action) {
 		case GLFW_PRESS:
@@ -45,7 +64,8 @@ void updateKeys(GLFWwindow* window, int key, int scancode, int action, int mods)
 	}
 }
 
-bool Input::getKey(int i){
+bool Input::getKey(int i)
+{
     if (i < 0 || i >= KEYS_TAM){
         std::cout<<"ERROR: Key "<<i<<" doesn't exist"<<std::endl;
         return false;
@@ -53,7 +73,26 @@ bool Input::getKey(int i){
     return input->keys[i];
 }
 
-bool Input::getMouseKey(int i) {
+bool Input::getKeyDown(int i)
+{
+    if (i < 0 || i >= KEYS_TAM){
+        std::cout<<"ERROR: Key "<<i<<" doesn't exist"<<std::endl;
+        return false;
+    }
+    return input->keys[i] && !input->keysBefore[i];
+}
+
+bool Input::getKeyUp(int i)
+{
+    if (i < 0 || i >= KEYS_TAM){
+        std::cout<<"ERROR: Key "<<i<<" doesn't exist"<<std::endl;
+        return false;
+    }
+    return !input->keys[i] && input->keysBefore[i];
+}
+
+bool Input::getMouseKey(int i)
+{
 	if (i < 0 || i >= MOUSE_KEYS_TAM) {
 		std::cout << "ERROR: Mouse Key " << i << " doesn't exist" << std::endl;
 		return false;
@@ -61,15 +100,27 @@ bool Input::getMouseKey(int i) {
 	return input->mouseKeys[i];
 }
 
-//bool Input::getMouseKeyDown(int i) {
-//	if (i < 0 || i >= MOUSE_KEYS_TAM) {
-//		std::cout << "ERROR: Mouse Key " << i << " doesn't exist" << std::endl;
-//		return false;
-//	}
-//	return mouseKeys[i];
-//}
+bool Input::getMouseKeyDown(int i)
+{
+	if (i < 0 || i >= MOUSE_KEYS_TAM) {
+		std::cout << "ERROR: Mouse Key " << i << " doesn't exist" << std::endl;
+		return false;
+	}
+	// std::cout<<"Mouse key: "<<input->mouseKeys[i]<<" y Before: "<<input->mouseKeysBefore[i]<<std::endl;
+	return input->mouseKeys[i] && !input->mouseKeysBefore[i];
+}
 
-Input* Input::getInput(){
+bool Input::getMouseKeyUp(int i)
+{
+	if (i < 0 || i >= MOUSE_KEYS_TAM) {
+		std::cout << "ERROR: Mouse Key " << i << " doesn't exist" << std::endl;
+		return false;
+	}
+	return !input->mouseKeys[i] && input->mouseKeysBefore[i];
+}
+
+Input* Input::getInput()
+{
 	//if(input == nullptr) input = new Input();
 	
 	return input;
@@ -85,9 +136,9 @@ Vec2 Input::getMousePosition()
 
 void updateMouse(GLFWwindow* window, int button, int action, int mods) 
 {
+	// std::cout<<"updateMouse: "<<action<<std::endl;
 	switch (action) {
 	case GLFW_PRESS:
-		//Input::setMouseKeyDown(key, !getMouseKeyDown(key));
 		Input::setMouseKey(button, true);
 		break;
 
@@ -95,4 +146,20 @@ void updateMouse(GLFWwindow* window, int button, int action, int mods)
 		Input::setMouseKey(button, false);
 		break;
 	}
+}
+
+void Input::update()
+{
+	for (auto it = input->pressedMouseKeys->begin(); it != input->pressedMouseKeys->end(); it++){
+		input->mouseKeysBefore[*it] = input->mouseKeys[*it];
+	}
+	for (auto it = input->pressedKeys->begin(); it != input->pressedKeys->end(); it++){
+		input->keysBefore[*it] = input->keys[*it];
+	}
+	// for(int i = 0; i < MOUSE_KEYS_TAM; i++){
+	// 	input->mouseKeysBefore[i] = input->mouseKeys[i];
+	// }
+	// for(int i = 0; i < KEYS_TAM; i++){
+	// 	input->keysBefore[i] = input->keys[i];
+	// }
 }

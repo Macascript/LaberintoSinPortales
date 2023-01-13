@@ -1,6 +1,9 @@
 #pragma once
 
 #include "../Commons/common.h"
+#include "../Input/input.h"
+
+class Input;
 
 class Window{
 private:

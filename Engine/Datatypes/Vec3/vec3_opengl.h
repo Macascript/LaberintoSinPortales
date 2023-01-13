@@ -7,6 +7,7 @@ private:
     glm::vec3 vector = glm::vec3(0,0,0);
 public:
     Vec3();
+    Vec3(glm::vec3 vector);
     Vec3(float x, float y, float z);
     Vec3(glm::vec2 vector2,float z);
     Vec3(Vec2 vec2,float z);

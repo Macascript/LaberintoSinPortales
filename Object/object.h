@@ -3,6 +3,7 @@
 #include "../Engine/Commons/common.h"
 #include "Components/Transform/transform.h"
 #include "component.h"
+#include "../Engine/Input/input.h"
 
 class Component;
 

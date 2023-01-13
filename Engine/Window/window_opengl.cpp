@@ -57,6 +57,7 @@ bool Window::stillAlive(){
 
 void Window::update(){
     glfwSwapBuffers((GLFWwindow*) window);
+	Input::update();
 	glfwPollEvents();
 }
 

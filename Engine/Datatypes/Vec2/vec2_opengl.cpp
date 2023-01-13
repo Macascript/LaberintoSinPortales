@@ -5,6 +5,10 @@ Vec2::Vec2() {
 	vector = glm::vec2(0,0);
 }
 
+Vec2::Vec2(glm::vec2 vector){
+	this->vector = vector;
+}
+
 Vec2::Vec2(float x, float y){
 	vector = glm::vec2(x,y);
 }

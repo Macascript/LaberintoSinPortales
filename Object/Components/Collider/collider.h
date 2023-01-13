@@ -1,12 +1,12 @@
 #pragma once
 
-#include "../../object.h"
-#include "../../component.h"
+#include "../UI/ui.h"
 
 class BV{
 
 public:
 		virtual bool collision(BV* b2)=0;
+		virtual bool collisionPoint(Vec2 v2)=0;
 		virtual void init(Object* obj,int triangleIdx)=0;
 		virtual void update()=0;
 };
@@ -23,6 +23,7 @@ public:
 		int triangleIdx;
 		Box2D();
 		bool collision(BV* b2);
+		bool collisionPoint(Vec2 v2);
 		void init(Object* obj, int triangleIdx);
 		void update();
 	
@@ -41,5 +42,5 @@ public:
 	Collider(Object* obj);
 	void update();
 	bool collision(Collider* c2);
-
+	bool collisionPoint(Vec2 v2);
 };

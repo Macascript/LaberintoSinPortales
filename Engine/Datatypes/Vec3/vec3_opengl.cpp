@@ -7,6 +7,10 @@ Vec3::Vec3() {
 	vector = glm::vec3(0, 0, 0);
 }
 
+Vec3::Vec3(glm::vec3 vector) {
+	this->vector = vector;
+}
+
 Vec3::Vec3(float x, float y, float z){
 	vector = glm::vec3(x,y,z);
 }

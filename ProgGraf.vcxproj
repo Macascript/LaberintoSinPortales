@@ -37,6 +37,7 @@
     <ClCompile Include="Engine\Input\input_opengl.cpp" />
     <ClCompile Include="Engine\Render\render_metal.cpp" />
     <ClCompile Include="Engine\Render\render_opengl.cpp" />
+    <ClCompile Include="Object\Components\Button\button.cpp" />
     <ClCompile Include="Object\Components\Text\text_opengl.cpp" />
     <ClCompile Include="Engine\Window\window_metal.cpp" />
     <ClCompile Include="Engine\Window\window_opengl.cpp" />
@@ -72,6 +73,7 @@
     <ClInclude Include="Engine\Datatypes\vertex.h" />
     <ClInclude Include="Engine\Input\input.h" />
     <ClInclude Include="Engine\Render\render.h" />
+    <ClInclude Include="Object\Components\Button\button.h" />
     <ClInclude Include="Object\Components\Text\text.h" />
     <ClInclude Include="Engine\Window\window.h" />
     <ClInclude Include="Object\component.h" />

@@ -38,11 +38,18 @@ void MenuScene::init() {
     newTextObject->addComponent(newInterfaceText);
 
 
-    
+    //Object* newButton = new Object();
+    Collider* colliderButton = new Collider(newObject);
+    newObject->addComponent(colliderButton);
+    Button* componentButton = new Button(newObject);
+    newObject->addComponent(componentButton);
+
 
     createObject(newObject);
     createObject(background);
     
     createObject(newTextObject2);
     createObject(newTextObject);
+
+    //createObject(newButton);
 }

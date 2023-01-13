@@ -1,93 +1,112 @@
-//#include "collider.h"
-//#include "../../../Engine/Datatypes/vertex.h"
-//
-//Box2D::Box2D(){
-//
-//}
-//
-//bool Box2D::collision(BV* _b2){
-//	Box2D* b2=(Box2D*)_b2;	
-//	
-//        if((xMin<b2->xMax && xMin>b2->xMin)&&(yMin<b2->yMax &&yMin>b2->yMin)) return true;
-//        if((xMin<b2->xMax && xMin>b2->xMin)&&(yMax<b2->yMax &&yMax>b2->yMin)) return true;
-//        if((xMax<b2->xMax && xMax>b2->xMin)&&(yMin<b2->yMax &&yMin>b2->yMin)) return true;
-//        if((xMax<b2->xMax && xMax>b2->xMin)&&(yMax<b2->yMax &&yMax>b2->yMin)) return true;
-//	
-//	return false;
-//}
-//
-//void Box2D::init(Object* obj,int triangleIdx){
-//	this->obj=obj;
-//	this->triangleIdx=triangleIdx;
-//	update();
-//}
-//
-////void Box2D::update(){
-////	
-////		std::vector<vertex_t>* vertexList=obj->mesh->vertexList;
-////		std::vector<int>* faceList=obj->mesh->faceList;
-////        obj->computeMatrix();
-////        
-////        glm::mat4 m=obj->getMatrix();
-////		int numVertex=vertexList->size();
-////		glm::vec4 newPos;
-////
-////        vertex_t v=vertexList->data()[faceList->data()[triangleIdx*3]];
-////        
-////        
-////        newPos=m*v.posicion;
-////
-////        xMin=xMax=newPos.x;
-////        yMin=yMax=newPos.y;
-////
-////		for(int idV=(triangleIdx*3)+1; idV<(triangleIdx*3+3); idV++)
-////		{   
-////			vertex_t v=vertexList->data()[faceList->data()[idV]];
-////			newPos=m*v.posicion;
-////			
-////			if(xMin>newPos.x)xMin=newPos.x;
-////			else if(xMax<newPos.x)xMax=newPos.x;
-////			
-////			if(yMin>newPos.y)yMin=newPos.y;
-////			else if(yMax<newPos.y)yMax=newPos.y;
-////		}
-////}
-////
-////Collider::Collider(Object* obj)
-////{
-////
-////	boxList=new std::vector<BV*>();
-////	int numTriangles=obj->mesh->faceList->size()/3;
-////	//newBox->init(obj);
-////	for(int i=0;i<numTriangles;i++)
-////	{	
-////		BV* newBox=new Box2D();
-////		newBox->init(obj, i);
-////		boxList->push_back(newBox);
-////	}
-////	
-////}
-//	
-//void Collider::update(){
-//	for(auto it=boxList->begin();it!=boxList->end();it++)
-//		(*it)->update();	
-//}
-//
-//bool Collider::collision(Collider* c2){
-//        auto it1=boxList->begin();
-//
-//        bool collision=false;
-//        while(!collision && it1!=boxList->end())
-//		{
-//			auto it2=c2->boxList->begin();
-//			while(!collision && it2!=c2->boxList->end())
-//			{
-//		        collision=(*it1)->collision(*it2)||(*it2)->collision(*it1) ;
-//				it2++;
-//			}
-//			it1++;
-//		
-//        }
-//        return collision;
-//	
-//}
+#include "collider.h"
+#include "../../../engine/datatypes/vertex.h"
+
+Box2D::Box2D(){
+
+}
+
+bool Box2D::collision(BV* _b2){
+	Box2D* b2=(Box2D*)_b2;
+	
+        if((xMin<b2->xMax && xMin>b2->xMin)&&(yMin<b2->yMax && yMin>b2->yMin)) return true;
+        if((xMin<b2->xMax && xMin>b2->xMin)&&(yMax<b2->yMax && yMax>b2->yMin)) return true;
+        if((xMax<b2->xMax && xMax>b2->xMin)&&(yMin<b2->yMax && yMin>b2->yMin)) return true;
+        if((xMax<b2->xMax && xMax>b2->xMin)&&(yMax<b2->yMax && yMax>b2->yMin)) return true;
+	
+	return false;
+}
+
+bool Box2D::collisionPoint(Vec2 v2)
+{
+	Vec2 newV = Vec2(v2.x()/windowWidth, (windowHeight - v2.y())/windowHeight);
+    std::cout<<"PROBANDO COLISIONES: "<<xMin<<" <= "<<newV.x()<<" <= "<<xMax<<"?? y... "<<yMin<<" <= "<<newV.y()<<" <= "<<yMax<<" ??"<<std::endl;
+    //std::cout<<"PROBANDO COLISIONES: "<<newV.x()<<" , "<<newV.y()<<") frente a: ("<<xMin<<" , "<< xMax <<") , ("<<yMin<<" , "<<yMax<<")"<<std::endl;
+	return (xMin <= newV.x() && yMin <= newV.y()) && (xMax >= newV.x() && yMax >= newV.y());
+}
+
+void Box2D::init(Object* obj,int triangleIdx){
+	this->obj=obj;
+	this->triangleIdx = triangleIdx;
+	update();
+}
+
+void Box2D::update(){
+	
+		std::vector<vertex_t>* vertexlist = ((Mesh*)obj->getComponent("mesh"))->vertexList;
+		std::vector<int>* facelist = ((Mesh*)obj->getComponent("mesh"))->faceList;
+		obj->transform->computeMatrix();
+        
+		//Mat4 m = obj->transform->getMatrix();
+        Vec2 v2 =((UI*)obj->getComponent("ui"))->rectPosition.getVector(); // rectTransform
+		//int numvertex=vertexlist->size();
+		Vec4 newpos;
+
+        vertex_t v=vertexlist->data()[facelist->data()[triangleIdx *3]];    
+        
+        newpos = Vec4(v2, 0.0f, 0.0f) + v.posicion;// multiplicar por escalar¿?
+
+        xMin=xMax=newpos.x();
+        yMin=yMax=newpos.y();
+
+		for(int idv=(triangleIdx *3)+1; idv<((triangleIdx *3)+3); idv++)
+		{   
+			vertex_t v=vertexlist->data()[facelist->data()[idv]];
+			newpos = Vec4(v2,0.0f,0.0f) + v.posicion;// multiplicar por escalar¿?
+			
+			if(xMin>newpos.x())xMin=newpos.x();
+			else if(xMax<newpos.x())xMax=newpos.x();
+			
+			if(yMin>newpos.y())yMin=newpos.y();
+			else if(yMax<newpos.y())yMax=newpos.y();
+		}
+}
+
+Collider::Collider(Object* obj)
+{
+    type = "collider";
+	boxList=new std::vector<BV*>();
+	int numtriangles=((Mesh*)obj->getComponent("mesh"))->faceList->size() / 3;
+	//newbox->init(obj);
+	for(int i=0;i<numtriangles;i++)
+	{	
+		BV* newbox=new Box2D();
+		newbox->init(obj, i);
+		boxList->push_back(newbox);
+	}	
+}
+	
+void Collider::update(){
+	for(auto it= boxList->begin();it!= boxList->end();it++)
+		(*it)->update();	
+}
+
+bool Collider::collision(Collider* c2){
+        auto it1= boxList->begin();
+
+        bool collision=false;
+        while(!collision && it1!= boxList->end())
+		{
+			auto it2=c2->boxList->begin();
+			while(!collision && it2!=c2->boxList->end())
+			{
+		        collision=(*it1)->collision(*it2)||(*it2)->collision(*it1) ;
+				it2++;
+			}
+			it1++;		
+        }
+        return collision;	
+}
+
+bool Collider::collisionPoint(Vec2 v2)
+{
+    std::cout<<boxList->size()<<std::endl;
+	auto it1 = boxList->begin();
+
+	bool collision = false;
+	while (!collision && it1 != boxList->end())
+	{
+		collision = (*it1)->collisionPoint(v2);
+		it1++;
+	}
+	return collision;
+}

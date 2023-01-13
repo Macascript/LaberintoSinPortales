@@ -10,4 +10,6 @@ public:
     Mat4(float x);
     Mat4(glm::mat4 matrix);
     glm::mat4 getMatrix();
+    
+    //Vec4 operator * (Vec4 vec);
 };
