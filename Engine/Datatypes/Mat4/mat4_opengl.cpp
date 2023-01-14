@@ -17,6 +17,6 @@ glm::mat4 Mat4::getMatrix() {
 	return matrix;
 }
 
-//Vec4 Mat4::operator * (Vec4 vec) {
-//	return Vec4(matrix * vec.getVector());
-//}
+Vec4 Mat4::operator * (Vec4 vec) {
+	return Vec4(matrix * vec.getVector());
+}

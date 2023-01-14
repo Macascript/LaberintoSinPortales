@@ -24,4 +24,5 @@ public:
     float& getW();
 
     Vec4 operator + (Vec4 vec4);
+    Vec4 operator * (Vec4 vec4);
 };

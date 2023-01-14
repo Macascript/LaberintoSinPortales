@@ -26,7 +26,6 @@ public:
 		bool collisionPoint(Vec2 v2);
 		void init(Object* obj, int triangleIdx);
 		void update();
-	
 };
 
 // class Nodo{

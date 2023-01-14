@@ -88,16 +88,6 @@ void Render::drawObject(Object* obj,Scene* scene){
 
 	camPos = glm::vec4(cam->position.getVector(), 1.0f);
 	
-
-	//if (obj->getComponent("ui")) 
-	//{
-	//	glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(640), 0.0f, static_cast<float>(480));
-	//	glUniformMatrix4fv(glGetUniformLocation(((Mesh*)obj->getComponent("mesh"))->shader->programID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
-	//	glBufferSubData(GL_ARRAY_BUFFER, 0, ((Mesh*)obj->getComponent("mesh"))->faceList->size(), ((Mesh*)obj->getComponent("mesh"))->faceList);
-	//	//glUniformMatrix4fv(0, 1, GL_FALSE, &(projection * obj->transform->getMatrix().getMatrix())[0][0]);
-	//}
-	//else 
-	//{
 	if (!obj->getComponent("ui")) 
 	{
 		glUniformMatrix4fv(0, 1, GL_FALSE, &(proj.getMatrix() * view.getMatrix() * obj->transform->getMatrix().getMatrix())[0][0]);
@@ -105,17 +95,23 @@ void Render::drawObject(Object* obj,Scene* scene){
 	}
 	else 
 	{
-		//Mat4 projection = cam->getProjectionMatrix();
-		//glUniformMatrix4fv(0, 1, GL_FALSE, &(projection.getMatrix())[0][0]);
 		glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(640), 0.0f, static_cast<float>(480));
 		glUniformMatrix4fv(0, 1, GL_FALSE, glm::value_ptr(proj.getMatrix() * obj->transform->getMatrix().getMatrix()));
-		//glUniformMatrix4fv(1, 1, GL_FALSE, &(obj->transform->position.getVector())[0]);
+		//glUniformMatrix4fv(1, 1, GL_FALSE, &(obj->transform->getMatrix().getMatrix())[0][0]);
+		/*for (int i = 0; i < 4;++i)
+		{
+			for (int j = 0; j < 4; ++j)
+			{
+				std::cout << obj->transform->getMatrix().getMatrix()[i][j] << "  ";;
+			}
+			std::cout << std::endl;
+		}*/
+		//std::cout << obj->transform->position.x() << ", " << obj->transform->position.y() << ", " << obj->transform->position.z() << std::endl;
 	}
 
 	glUniformMatrix4fv(1, 1, GL_FALSE, &(obj->transform->getMatrix().getMatrix())[0][0]);
 	//glUniform4fv(2,1,&glm::vec4(((*scene->getLights())[0]->position),1.0f)[0]);
 	glUniform4fv(3, 1, &camPos[0]);
-	//}
 
 	int textureUnit = 0;
 	glUniform1i(4,textureUnit);

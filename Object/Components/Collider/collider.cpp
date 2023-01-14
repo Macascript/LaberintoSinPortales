@@ -37,13 +37,13 @@ void Box2D::update(){
 		obj->transform->computeMatrix();
         
 		//Mat4 m = obj->transform->getMatrix();
-        Vec2 v2 =((UI*)obj->getComponent("ui"))->rectPosition.getVector(); // rectTransform
+        Mat4 v2 = obj->transform->getMatrix(); // rectTransform
 		//int numvertex=vertexlist->size();
 		Vec4 newpos;
 
         vertex_t v=vertexlist->data()[facelist->data()[triangleIdx *3]];    
         
-        newpos = Vec4(v2, 0.0f, 0.0f) + v.posicion;// multiplicar por escalar¿?
+        newpos = v2 * v.posicion;// multiplicar por escalar¿?
 
         xMin=xMax=newpos.x();
         yMin=yMax=newpos.y();
@@ -51,7 +51,7 @@ void Box2D::update(){
 		for(int idv=(triangleIdx *3)+1; idv<((triangleIdx *3)+3); idv++)
 		{   
 			vertex_t v=vertexlist->data()[facelist->data()[idv]];
-			newpos = Vec4(v2,0.0f,0.0f) + v.posicion;// multiplicar por escalar¿?
+			newpos = v2 * v.posicion;// multiplicar por escalar¿?
 			
 			if(xMin>newpos.x())xMin=newpos.x();
 			else if(xMax<newpos.x())xMax=newpos.x();
@@ -59,6 +59,11 @@ void Box2D::update(){
 			if(yMin>newpos.y())yMin=newpos.y();
 			else if(yMax<newpos.y())yMax=newpos.y();
 		}
+
+		yMin = ((yMin + 4.02505f) / 8.01599f);
+		yMax = ((yMax + 4.02505f) / 8.01599f);
+		xMin = ((xMin + 5.34855f) / 10.68f);
+		xMax = ((xMax + 5.34855f) / 10.68f);
 }
 
 Collider::Collider(Object* obj)

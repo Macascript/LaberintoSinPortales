@@ -23,7 +23,7 @@ void MenuScene::init() {
     Object* newObject = new Object();
     Mesh* newMesh = new Mesh(defaultuiModel, guiVshader, guiFshader, USER_PATH "Textures\\marcianitos.png");
     UI* newInterface = new UI(camera);
-    newInterface->rectPosition = Vec2(0.5,0.5);
+    newInterface->rectPosition = Vec2(0.1,0.7);
     //newInterface->layer = 1;
     newObject->addComponent(newMesh);
     newObject->addComponent(newInterface);
@@ -46,7 +46,7 @@ void MenuScene::init() {
 
 
     createObject(newObject);
-    createObject(background);
+    //createObject(background);
     
     createObject(newTextObject2);
     createObject(newTextObject);
