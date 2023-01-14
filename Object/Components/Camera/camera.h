@@ -1,6 +1,7 @@
 #pragma once
 #include "../../../Engine/Commons/common.h"
 #include "../../../Engine/Datatypes/Utils/utils.h"
+#include "../../../Engine/Input/input.h"
 
 typedef enum cameraType_e {
 	perspective,
@@ -10,13 +11,15 @@ typedef enum cameraType_e {
 class Camera{
 
 public:
-	Vec3 up;
+	Vec3 up = Vec3(0.0f, 1.0f, 0.0f);
 	Vec3 position;
 	Vec3 rotation;
 	Vec3 lookAt;
 	Mat4 viewMatrix;
 	Mat4 projMatrix;
 	cameraType_e type = perspective;
+	double horizontalAngle = 3.14f;
+	double verticalAngle = 0;
 
 	float alphaDegrees = 90;
 	float fovy = Utils::radians(alphaDegrees);

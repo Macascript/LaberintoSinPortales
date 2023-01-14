@@ -33,3 +33,15 @@ float Vec3::z(){return vector.z;}
 float& Vec3::getX(){return vector.x;}
 float& Vec3::getY(){return vector.y;}
 float& Vec3::getZ(){return vector.z;}
+
+Vec3 Vec3::operator - (Vec3 vec3) {
+	return Vec3(vector - vec3.getVector());
+}
+
+Vec3 Vec3::operator + (Vec3 vec3) {
+	return Vec3(vector + vec3.getVector());
+}
+
+Vec3 Vec3::operator * (float constant) {
+	return Vec3(vector * constant);
+}

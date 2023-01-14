@@ -95,7 +95,7 @@ void Render::drawObject(Object* obj,Scene* scene){
 	}
 	else 
 	{
-		glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(640), 0.0f, static_cast<float>(480));
+		//glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(640), 0.0f, static_cast<float>(480));
 		glUniformMatrix4fv(0, 1, GL_FALSE, glm::value_ptr(proj.getMatrix() * obj->transform->getMatrix().getMatrix()));
 		//glUniformMatrix4fv(1, 1, GL_FALSE, &(obj->transform->getMatrix().getMatrix())[0][0]);
 		/*for (int i = 0; i < 4;++i)
@@ -117,7 +117,7 @@ void Render::drawObject(Object* obj,Scene* scene){
 	glUniform1i(4,textureUnit);
 	((Mesh*) obj->getComponent("mesh"))->texture->bind(textureUnit);
 
-	glUniform1f(5,1.0);
+	glUniform1f(5,0);
 
 	// if (obj->typeObject == BACKGROUND_OBJ){
 	// 	Background* bg = (Background*) obj;

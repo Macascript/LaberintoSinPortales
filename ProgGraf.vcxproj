@@ -52,6 +52,7 @@
     <ClCompile Include="Object\object.cpp" />
     <ClCompile Include="Scene\scene.cpp" />
     <ClCompile Include="User\SceneManager\scenemanager.cpp" />
+    <ClCompile Include="User\Scripts\LaberintoScene.cpp" />
     <ClCompile Include="User\Scripts\MenuScene.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -85,10 +86,8 @@
     <ClInclude Include="Object\object.h" />
     <ClInclude Include="Scene\scene.h" />
     <ClInclude Include="User\SceneManager\scenemanager.h" />
+    <ClInclude Include="User\Scripts\LaberintoScene.h" />
     <ClInclude Include="User\Scripts\MenuScene.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="User\Models\menu.trg" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

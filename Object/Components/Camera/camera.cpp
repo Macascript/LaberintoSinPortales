@@ -1,19 +1,14 @@
 #include "camera.h"
 
 Camera::Camera(Vec3 pos, Vec3 lookAt, cameraType_e type) {
-	//std::cout << "patata1" << std::endl;
 	this->position = pos;
 
-	//std::cout << "patata2" << std::endl;
 	this->lookAt = lookAt;
 
-	//std::cout << "patata3" << std::endl;
 	this->rotation = Vec3(0.0f, 0.0f, 0.0f);
 
-	//std::cout << "patata4" << std::endl;
 	this->viewMatrix = Mat4(1.0f);
 
-	//std::cout << "patata5" << std::endl;
 	this->type = type;
 	switch (type) {
 
@@ -31,39 +26,81 @@ Camera::Camera(Vec3 pos, Vec3 lookAt, cameraType_e type) {
 	//std::cout << "patata6" << std::endl;
 }
 
-void Camera::step() {
+void Camera::step()
+{
+	Vec3 auxVector = lookAt - position;
+	Vec3 auxCross = Utils::cross(auxVector, up);
 
-
-	/*if (InputManager::keys['W'])
-	{
-		rotation.z += 0.01f;
-
-		lookAt.y += 0.01f;
-		lookAt.z += 0.01f;
+	if (Input::getKey('W')) {
+		position = position + Utils::normalize(auxVector) * Input::getSpeed();
+		lookAt = lookAt + Utils::normalize(auxVector) * Input::getSpeed();
 	}
 
-	if (InputManager::keys['S'])
-	{
-		rotation.z -= 0.01f;
+	if (Input::getKey('S')) {
+		position = position - Utils::normalize(auxVector) * Input::getSpeed();
+		lookAt = lookAt - Utils::normalize(auxVector) * Input::getSpeed();
+	}
 
-		lookAt.y -= 0.01f;
-		lookAt.z -= 0.01f;
-	}*/
+	if (Input::getKey('D'))
+	{
+		position = position + Utils::normalize(auxCross) * Input::getSpeed();
+		lookAt = lookAt + Utils::normalize(auxCross) * Input::getSpeed();
+	}
+
+	if (Input::getKey('A'))
+	{
+		position = position - Utils::normalize(auxCross) * Input::getSpeed();
+		lookAt = lookAt - Utils::normalize(auxCross) * Input::getSpeed();
+	}
+
+	if (Input::getKey('M')) {
+		lookAt.getX() = cos(-7.283f / 360) * (lookAt.x() - position.x()) + sin(-7.283f / 360) * (lookAt.z() - position.z()) + position.x();
+		lookAt.getZ() = -sin(-7.283f / 360) * (lookAt.x() - position.x()) + cos(-7.283f / 360) * (lookAt.z() - position.z()) + position.z();
+	}
+
+	if (Input::getKey('N')) {
+		lookAt.getX() = cos(7.283f / 360) * (lookAt.x() - position.x()) + sin(7.283f / 360) * (lookAt.z() - position.z()) + position.x();
+		lookAt.getZ() = -sin(7.283f / 360) * (lookAt.x() - position.x()) + cos(7.283f / 360) * (lookAt.z() - position.z()) + position.z();
+	}
+
+	horizontalAngle = Input::getMouseSpeed() * Input::getDeltaTime() * float((960 / 2) - Input::getMousePosition().x());
+	verticalAngle = Input::getMouseSpeed() * Input::getDeltaTime() * float((720 / 2) - Input::getMousePosition().y());
+
+	/*lookAt = Vec3(
+		cos(Utils::radians(horizontalAngle)) * (lookAt.x() - position.x()) + sin(Utils::radians(horizontalAngle)) * (lookAt.z() - position.z()) + position.x(),
+		lookAt.y(),
+		-sin(Utils::radians(horizontalAngle)) * (lookAt.x() - position.x()) + cos(Utils::radians(horizontalAngle)) * (lookAt.z() - position.z()) + position.z()
+	);*/
+
+	//std::cout << horizontalAngle << "º, " << verticalAngle << "º" <<std::endl;
+
+	/*lookAt = Vec3(
+		cos(Utils::radians(verticalAngle)) * sin(Utils::radians(horizontalAngle)),
+		sin(Utils::radians(verticalAngle)),
+		cos(Utils::radians(verticalAngle)) * cos(Utils::radians(horizontalAngle))
+	);*/
+
+	/*Vec3 right = Vec3(
+		sin(horizontalAngle - 3.14f / 2.0f),
+		0,
+		cos(horizontalAngle - 3.14f / 2.0f)
+	);
+
+	up = Utils::cross(right, lookAt);*/
 }
 
-void Camera::computeMatrix() {
-	//std::cout << "patata10" << std::endl;
+void Camera::computeMatrix()
+{
 	Vec3 aux = Vec3(0, 1.0f, 0);
 	this->viewMatrix = Utils::lookAt(position, lookAt, aux);
-	//std::cout << "patata11" << std::endl;
 }
 
-Mat4& Camera::getMatrix() {
-
+Mat4& Camera::getMatrix()
+{
 	return this->viewMatrix;
 }
 
-Mat4& Camera::getProjectionMatrix() {
-	
+Mat4& Camera::getProjectionMatrix()
+{
 	return this->projMatrix;
 }

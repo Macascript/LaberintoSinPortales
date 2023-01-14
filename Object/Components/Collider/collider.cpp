@@ -19,7 +19,7 @@ bool Box2D::collision(BV* _b2){
 bool Box2D::collisionPoint(Vec2 v2)
 {
 	Vec2 newV = Vec2(v2.x()/windowWidth, (windowHeight - v2.y())/windowHeight);
-    std::cout<<"PROBANDO COLISIONES: "<<xMin<<" <= "<<newV.x()<<" <= "<<xMax<<"?? y... "<<yMin<<" <= "<<newV.y()<<" <= "<<yMax<<" ??"<<std::endl;
+    //std::cout<<"PROBANDO COLISIONES: "<<xMin<<" <= "<<newV.x()<<" <= "<<xMax<<"?? y... "<<yMin<<" <= "<<newV.y()<<" <= "<<yMax<<" ??"<<std::endl;
     //std::cout<<"PROBANDO COLISIONES: "<<newV.x()<<" , "<<newV.y()<<") frente a: ("<<xMin<<" , "<< xMax <<") , ("<<yMin<<" , "<<yMax<<")"<<std::endl;
 	return (xMin <= newV.x() && yMin <= newV.y()) && (xMax >= newV.x() && yMax >= newV.y());
 }

@@ -8,8 +8,8 @@ class Button:public Component
 {
 private:
 	Collider* collider;
+	std::function<void()> onClick;
 public:
-	Button(Object* obj);
-	void onClick();
+	Button(Object* obj, std::function<void()> onClick);
 	void update();
 };

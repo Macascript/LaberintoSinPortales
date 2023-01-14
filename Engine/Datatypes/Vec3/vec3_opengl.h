@@ -18,4 +18,8 @@ public:
     float& getX();
     float& getY();
     float& getZ();
+
+    Vec3 operator - (Vec3 vec3);
+    Vec3 operator + (Vec3 vec3);
+    Vec3 operator * (float constant);
 };

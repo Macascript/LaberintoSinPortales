@@ -15,22 +15,21 @@ int main(){
 
     Render* render = new Render();
 
-	Camera* camera = new Camera(Vec3(0.0f, 0.0f, 1.0f), Vec3(0.0f, 0.0f, -3.0f),perspective);
+	Camera* camera = new Camera(Vec3(0.0f, 0.0f, 9.0f), Vec3(0.0f, 0.0f, -3.0f),perspective);
 	SceneManager* sceneManager = new SceneManager(camera);
 	// sceneManager->initSceneList();
 	
-	Scene* scene = sceneManager->list->find(0)->second;
-	scene->init();
+	sceneManager->actualScene()->init();
 	//delete sceneManager;
 	//std::cout << "patata7" << std::endl;
-	scene->setCamera(camera);
+	sceneManager->actualScene()->setCamera(camera);
 	//std::cout << "patata8" << std::endl;
 
     while (window->stillAlive())
 	{
 		if (window->renderfps(60.0f)) {
-			render->drawScene(scene);
-			scene->update();//0.0
+			render->drawScene(sceneManager->actualScene());
+			sceneManager->actualScene()->update();//0.0
 			window->update();
 		}
 	}

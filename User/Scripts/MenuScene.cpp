@@ -1,7 +1,7 @@
 #pragma once
 
 #include "MenuScene.h"
-
+void loadLaberinto();
 void MenuScene::init() {
 
     Object* background = new Object();
@@ -23,7 +23,7 @@ void MenuScene::init() {
     Object* newObject = new Object();
     Mesh* newMesh = new Mesh(defaultuiModel, guiVshader, guiFshader, USER_PATH "Textures\\marcianitos.png");
     UI* newInterface = new UI(camera);
-    newInterface->rectPosition = Vec2(0.1,0.7);
+    newInterface->rectPosition = Vec2(0.5,0.5);
     //newInterface->layer = 1;
     newObject->addComponent(newMesh);
     newObject->addComponent(newInterface);
@@ -38,10 +38,9 @@ void MenuScene::init() {
     newTextObject->addComponent(newInterfaceText);
 
 
-    //Object* newButton = new Object();
     Collider* colliderButton = new Collider(newObject);
     newObject->addComponent(colliderButton);
-    Button* componentButton = new Button(newObject);
+    Button* componentButton = new Button(newObject,&loadLaberinto);
     newObject->addComponent(componentButton);
 
 
@@ -50,6 +49,8 @@ void MenuScene::init() {
     
     createObject(newTextObject2);
     createObject(newTextObject);
+}
 
-    //createObject(newButton);
+void loadLaberinto(){
+    SceneManager::loadScene(1);
 }

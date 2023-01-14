@@ -1,6 +1,8 @@
 #pragma once
+
 #include "../Window/window.h"
 #include "../Datatypes/Utils/utils.h"
+//#include "../../Scene/scene.h"
 
 #define KEYS_TAM 512
 #define MOUSE_KEYS_TAM 8
@@ -17,6 +19,11 @@ private:
 	bool* mouseKeys = new bool[8];
 	bool* mouseKeysBefore = new bool[8];
 	Window* window;
+	double lastFrame = glfwGetTime();
+	double currentFrame = glfwGetTime();
+	double deltaTime;
+	float mouseSpeed = 200.0f;
+	float speed = 0.1f;
 
 public:
 
@@ -35,4 +42,8 @@ public:
 
 	static Input* getInput();
 	static Vec2 getMousePosition();
+
+	static double getDeltaTime();
+	static float getMouseSpeed();
+	static float getSpeed();
 };

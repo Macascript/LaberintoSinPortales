@@ -11,3 +11,5 @@
 #include <memory>
 #include <cmath>
 #include <list>
+#include <functional>
+#include <cstring>

@@ -24,8 +24,8 @@ void Input::init(Window* window)
 	memset(input->mouseKeysBefore, 0, sizeof(bool) * 8);
 	input->mouseKeysBefore[8] = { false };
 
-	glfwSetKeyCallback((GLFWwindow*)window->getWindow(), updateKeys);
-	glfwSetMouseButtonCallback((GLFWwindow*)window->getWindow(), updateMouse);
+	glfwSetKeyCallback((GLFWwindow*)input->window->getWindow(), updateKeys);
+	glfwSetMouseButtonCallback((GLFWwindow*)input->window->getWindow(), updateMouse);
 }
 
 void Input::setKey(int key, bool active)
@@ -156,10 +156,26 @@ void Input::update()
 	for (auto it = input->pressedKeys->begin(); it != input->pressedKeys->end(); it++){
 		input->keysBefore[*it] = input->keys[*it];
 	}
-	// for(int i = 0; i < MOUSE_KEYS_TAM; i++){
-	// 	input->mouseKeysBefore[i] = input->mouseKeys[i];
-	// }
-	// for(int i = 0; i < KEYS_TAM; i++){
-	// 	input->keysBefore[i] = input->keys[i];
-	// }
+	
+	input->currentFrame = glfwGetTime();
+	input->deltaTime = input->currentFrame - input->lastFrame;
+	input->lastFrame = input->currentFrame;
+
+	//glfwGetCursorPos((GLFWwindow*)input->window->getWindow(), &input->mousePosX,&input->mousePosY);
+	//glfwSetCursorPos((GLFWwindow*)input->window->getWindow(), 960 / 2, 720 / 2);
+}
+
+double Input::getDeltaTime()
+{
+	return input->deltaTime;
+}
+
+float Input::getMouseSpeed()
+{
+	return input->mouseSpeed;
+}
+
+float Input::getSpeed()
+{
+	return input->speed;
 }

@@ -38,3 +38,15 @@ float Utils::radians(float degrees) {
 Mat4 Utils::perspective(float fovy, float aspect, float zNear, float zFar) {
     return Mat4(glm::perspective(fovy, aspect, zNear, zFar));
 }
+
+//Mat4 Utils::value_ptr(Mat4 &matrix) {
+//    return Mat4(glm::value_ptr(matrix.getMatrix()));
+//}
+
+Vec3 Utils::cross(Vec3& vector1, Vec3& vector2) {
+    return Vec3(glm::cross(vector1.getVector(), vector2.getVector()));
+}
+
+Vec3 Utils::normalize(Vec3& vector) {
+    return Vec3(glm::normalize(vector.getVector()));
+}

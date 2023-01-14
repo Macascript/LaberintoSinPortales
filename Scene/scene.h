@@ -3,9 +3,12 @@
 #include "../Object/Components/Mesh/mesh.h"
 #include "../Object/Components/Text/text.h"
 #include "../Object/Components/Button/button.h"
+#include "../User/SceneManager/scenemanager.h"
 #define USER_PATH ".\\User\\"
-#define windowWidth 640
-#define windowHeight 480
+#define windowWidth 960
+#define windowHeight 720
+
+class SceneManager;
 
 class Scene {
 private:

@@ -2,14 +2,10 @@
 
 #include "button.h"
 
-Button::Button(Object* obj){
+Button::Button(Object* obj,std::function<void()> onClick){
 	type = "button";
 	collider = (Collider*) obj->getComponent("collider");
-}
-
-void Button::onClick() 
-{
-	std::cout<<"Me pulsaste!!!"<<std::endl;
+	this->onClick = onClick;
 }
 
 void Button::update()
@@ -18,7 +14,7 @@ void Button::update()
 	{
 		Vec2 mousePosition;
 		mousePosition = Input::getMousePosition();
-		std::cout<<mousePosition.x()<<","<<mousePosition.y() << std::endl;
+		//std::cout<<mousePosition.x()<<","<<mousePosition.y() << std::endl;
 		if (collider->collisionPoint(mousePosition))
 			onClick();
 	}
