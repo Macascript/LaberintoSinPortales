@@ -30,6 +30,7 @@ void Camera::step()
 {
 	Vec3 auxVector = lookAt - position;
 	Vec3 auxCross = Utils::cross(auxVector, up);
+	Vec3 auxCrossRight = Utils::cross(auxVector, up);
 
 	if (Input::getKey('W')) {
 		position = position + Utils::normalize(auxVector) * Input::getSpeed();

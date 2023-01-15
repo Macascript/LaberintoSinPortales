@@ -22,8 +22,8 @@ private:
 	double lastFrame = glfwGetTime();
 	double currentFrame = glfwGetTime();
 	double deltaTime;
-	float mouseSpeed = 200.0f;
-	float speed = 0.1f;
+	float mouseSpeed = 2.0f;
+	float speed = 1.0f;
 
 public:
 

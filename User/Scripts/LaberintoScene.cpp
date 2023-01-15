@@ -10,9 +10,11 @@ void LaberintoScene::init() {
     // createObject(celda);
 }
 
-void LaberintoScene::createCelda(std::string modelo,int angulo){
+void LaberintoScene::createCelda(std::string modelo, int x, int z, int angulo){
     Object* celda = new Object();
-    celda->transform->rotation.getY() = angulo;
+    celda->transform->position.getX() = x;
+    celda->transform->position.getZ() = z;
+    celda->transform->rotation.getY() = Utils::radians(angulo);
     Mesh* meshCelda = new Mesh(modelo, defaultVshader, defaultFshader, defaultTexture);
     celda->addComponent(meshCelda);
     createObject(celda);
@@ -45,52 +47,52 @@ void LaberintoScene::genLaberinto() {
             switch (std::stoi(leyendaCelda))
             {
             case 0:
-                createCelda(USER_PATH "Models\\celda0.trg",0);
+                createCelda(USER_PATH "Models\\celda0.trg",x,z,0);
                 break;
             case 1:
-                createCelda(USER_PATH "Models\\celda3.trg",0);
+                createCelda(USER_PATH "Models\\celda3.trg",x,z,180);
                 break;
             case 2:
-                createCelda(USER_PATH "Models\\celda3.trg",90);
+                createCelda(USER_PATH "Models\\celda3.trg",x,z,90);
                 break;
             case 3:
-                createCelda(USER_PATH "Models\\celda3.trg",180);
+                createCelda(USER_PATH "Models\\celda3.trg",x,z,0);
                 break;
             case 4:
-                createCelda(USER_PATH "Models\\celda3.trg",270);
+                createCelda(USER_PATH "Models\\celda3.trg",x,z,270);
                 break;
             case 5:
-                createCelda(USER_PATH "Models\\celda2.trg",0);
+                createCelda(USER_PATH "Models\\celda2.trg",x,z,180);
                 break;
             case 6:
-                createCelda(USER_PATH "Models\\celda2.trg",90);
+                createCelda(USER_PATH "Models\\celda2.trg",x,z,90);
                 break;
             case 7:
-                createCelda(USER_PATH "Models\\celda2.trg",180);
+                createCelda(USER_PATH "Models\\celda2.trg",x,z,0);
                 break;
             case 8:
-                createCelda(USER_PATH "Models\\celda2.trg",270);
+                createCelda(USER_PATH "Models\\celda2.trg",x,z,270);
                 break;
             case 9:
-                createCelda(USER_PATH "Models\\celda2paralelo.trg",0);
+                createCelda(USER_PATH "Models\\celda2paralelo.trg",x,z,0);
                 break;
             case 10:
-                createCelda(USER_PATH "Models\\celda2paralelo.trg",90);
+                createCelda(USER_PATH "Models\\celda2paralelo.trg",x,z,90);
                 break;
             case 11:
-                createCelda(USER_PATH "Models\\celda1.trg",0);
+                createCelda(USER_PATH "Models\\celda1.trg",x,z,180);
                 break;
             case 12:
-                createCelda(USER_PATH "Models\\celda1.trg",90);
+                createCelda(USER_PATH "Models\\celda1.trg",x,z,90);
                 break;
             case 13:
-                createCelda(USER_PATH "Models\\celda1.trg",180);
+                createCelda(USER_PATH "Models\\celda1.trg",x,z,0);
                 break;
             case 14:
-                createCelda(USER_PATH "Models\\celda1.trg",270);
+                createCelda(USER_PATH "Models\\celda1.trg",x,z,270);
                 break;
             case 15:
-                createCelda(USER_PATH "Models\\celda4.trg",0);
+                createCelda(USER_PATH "Models\\celda4.trg", x, z,0);
                 break;
             }
             x += CELLDISTANCE;
