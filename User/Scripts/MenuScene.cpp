@@ -26,6 +26,8 @@ void MenuScene::init() {
     Mesh* newMeshButton1 = new Mesh(defaultuiModel, guiVshader, guiFshader, USER_PATH "Textures\\boton.png");
     UI* newInterfaceButton1 = new UI(camera);
     newInterfaceButton1->rectPosition = Vec2(0.29,0.48);
+    //newInterfaceButton1->rectPosition = Vec2(2.87, 2.87);
+    //newInterfaceButton1->rectPosition = Vec2(0, 0);
     //newInterface->layer = 1;
     button1->addComponent(newMeshButton1);
     button1->addComponent(newInterfaceButton1);
@@ -56,7 +58,7 @@ void MenuScene::init() {
     Collider* colliderButton2 = new Collider(button2);
     button2->addComponent(colliderButton2);
     Button* componentButton2 = new Button(button2, &loadOpciones);
-    button2->addComponent(componentButton1);
+    button2->addComponent(componentButton2);
     createObject(button2);
 
     Object* textButton2 = new Object();

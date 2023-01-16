@@ -33,4 +33,7 @@ public:
 	void computeMatrix();
 	Mat4& getMatrix();
 	Mat4& getProjectionMatrix();
+
+	void setLookAt(Vec3 newLookAt);
+	void setPosition(Vec3 newPosition);
 };
