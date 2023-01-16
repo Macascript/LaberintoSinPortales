@@ -4,6 +4,8 @@
 
 void LaberintoScene::init() {
     genLaberinto();
+    camera->position = Vec3(0.0f, 0.0f, -18.0f);
+    camera->lookAt = Vec3(0.0f, 0.0f, -17.999f);
     // Object* celda = new Object();
     // Mesh* celdaMesh = new Mesh(USER_PATH "Models\\celda3.trg", defaultVshader, defaultFshader, defaultTexture);
     // celda->addComponent(celdaMesh);

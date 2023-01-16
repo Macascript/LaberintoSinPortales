@@ -15,7 +15,7 @@ int main(){
 
     Render* render = new Render();
 
-	Camera* camera = new Camera(Vec3(0.0f, 0.0f, -18.0f), Vec3(0.0f, 0.0f, -17.9f),perspective);
+	Camera* camera = new Camera(Vec3(0.0f, 0.0f, -18.0f), Vec3(0.0f, 0.0f, -17.999f),perspective);
 	SceneManager* sceneManager = new SceneManager(camera);
 	// sceneManager->initSceneList();
 	
