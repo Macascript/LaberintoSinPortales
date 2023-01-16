@@ -162,7 +162,8 @@ void Input::update()
 	input->lastFrame = input->currentFrame;
 
 	//glfwGetCursorPos((GLFWwindow*)input->window->getWindow(), &input->mousePosX,&input->mousePosY);
-	//glfwSetCursorPos((GLFWwindow*)input->window->getWindow(), 960 / 2, 720 / 2);
+	glfwSetCursorPos((GLFWwindow*)input->window->getWindow(), 960 / 2, 720 / 2);
+	glfwSetInputMode((GLFWwindow*)input->window->getWindow(), GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 }
 
 double Input::getDeltaTime()
@@ -178,4 +179,14 @@ float Input::getMouseSpeed()
 float Input::getSpeed()
 {
 	return input->speed;
+}
+
+void Input::setMouseSpeed(float newSpeed)
+{
+	input->mouseSpeed = newSpeed;
+}
+
+void Input::setSpeed(float newSpeed)
+{
+	input->speed = newSpeed;
 }

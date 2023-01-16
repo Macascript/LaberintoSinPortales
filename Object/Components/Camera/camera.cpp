@@ -65,9 +65,6 @@ void Camera::step()
 		lookAt.getZ() = -sin(7.283f / 360) * (lookAt.x() - position.x()) + cos(7.283f / 360) * (lookAt.z() - position.z()) + position.z();
 	}
 
-	/*horizontalAngle = Input::getMouseSpeed() * Input::getDeltaTime() * float((960 / 2) - Input::getMousePosition().x());
-	verticalAngle = Input::getMouseSpeed() * Input::getDeltaTime() * float((720 / 2) - Input::getMousePosition().y());*/
-
 	horizontalAngle = Input::getMouseSpeed() * Input::getDeltaTime() * (Input::getMousePosition().x() - float((960 / 2)));
 	verticalAngle = Input::getMouseSpeed() * Input::getDeltaTime() * (Input::getMousePosition().y() - float((720 / 2)));
 
@@ -75,21 +72,7 @@ void Camera::step()
 	lookAt.getY() = cos(-verticalAngle / 360) * (lookAt.y() - position.y()) + sin(-verticalAngle / 360) * (abs(lookAt.z() - position.z())) + sin(-verticalAngle / 360) * (abs(lookAt.x() - position.x())) + position.y();
 	lookAt.getZ() = -sin(-horizontalAngle / 360) * (lookAt.x() - position.x()) + cos(-horizontalAngle / 360) * (lookAt.z() - position.z()) + position.z();
 
-	//std::cout << horizontalAngle << "º, " << verticalAngle << "º" <<std::endl;
-
-	/*lookAt = Vec3(
-		cos(Utils::radians(verticalAngle)) * sin(Utils::radians(horizontalAngle)),
-		sin(Utils::radians(verticalAngle)),
-		cos(Utils::radians(verticalAngle)) * cos(Utils::radians(horizontalAngle))
-	);*/
-
-	/*Vec3 right = Vec3(
-		sin(horizontalAngle - 3.14f / 2.0f),
-		0,
-		cos(horizontalAngle - 3.14f / 2.0f)
-	);
-
-	up = Utils::cross(right, lookAt);*/
+	//up = Utils::cross(right, lookAt);
 }
 
 void Camera::computeMatrix()

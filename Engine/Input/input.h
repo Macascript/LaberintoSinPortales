@@ -22,7 +22,7 @@ private:
 	double lastFrame = glfwGetTime();
 	double currentFrame = glfwGetTime();
 	double deltaTime;
-	float mouseSpeed = 2.0f;
+	float mouseSpeed = 20.0f;
 	float speed = 1.0f;
 
 public:
@@ -46,4 +46,7 @@ public:
 	static double getDeltaTime();
 	static float getMouseSpeed();
 	static float getSpeed();
+
+	static void setMouseSpeed(float newSpeed);
+	static void setSpeed(float newSpeed);
 };

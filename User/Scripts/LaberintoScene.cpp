@@ -8,6 +8,16 @@ void LaberintoScene::init() {
     // Mesh* celdaMesh = new Mesh(USER_PATH "Models\\celda3.trg", defaultVshader, defaultFshader, defaultTexture);
     // celda->addComponent(celdaMesh);
     // createObject(celda);
+
+    Object* newObject = new Object();
+    Mesh* newMesh = new Mesh(defaultuiModel, guiVshader, guiFshader, USER_PATH "Textures\\marcianitos.png");
+    UI* newInterface = new UI(camera);
+    newInterface->rectPosition = Vec2(0.5, 0.5);
+    //newInterface->layer = 1;
+    newObject->addComponent(newMesh);
+    newObject->addComponent(newInterface);
+    newObject->transform->scale = Vec3(2.0f, 2.0f, 1.0f);
+    createObject(newObject);
 }
 
 void LaberintoScene::createCelda(std::string modelo, int x, int z, int angulo){
