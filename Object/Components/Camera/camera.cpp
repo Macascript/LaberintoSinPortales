@@ -29,6 +29,7 @@ Camera::Camera(Vec3 pos, Vec3 lookAt, cameraType_e type) {
 void Camera::step()
 {
 	Vec3 auxVector = lookAt - position;
+	auxVector.getY() = 0;
 	Vec3 auxCross = Utils::cross(auxVector, up);
 	Vec3 auxCrossRight = Utils::cross(auxVector, up);
 
@@ -64,14 +65,15 @@ void Camera::step()
 		lookAt.getZ() = -sin(7.283f / 360) * (lookAt.x() - position.x()) + cos(7.283f / 360) * (lookAt.z() - position.z()) + position.z();
 	}
 
-	horizontalAngle = Input::getMouseSpeed() * Input::getDeltaTime() * float((960 / 2) - Input::getMousePosition().x());
-	verticalAngle = Input::getMouseSpeed() * Input::getDeltaTime() * float((720 / 2) - Input::getMousePosition().y());
+	/*horizontalAngle = Input::getMouseSpeed() * Input::getDeltaTime() * float((960 / 2) - Input::getMousePosition().x());
+	verticalAngle = Input::getMouseSpeed() * Input::getDeltaTime() * float((720 / 2) - Input::getMousePosition().y());*/
 
-	/*lookAt = Vec3(
-		cos(Utils::radians(horizontalAngle)) * (lookAt.x() - position.x()) + sin(Utils::radians(horizontalAngle)) * (lookAt.z() - position.z()) + position.x(),
-		lookAt.y(),
-		-sin(Utils::radians(horizontalAngle)) * (lookAt.x() - position.x()) + cos(Utils::radians(horizontalAngle)) * (lookAt.z() - position.z()) + position.z()
-	);*/
+	horizontalAngle = Input::getMouseSpeed() * Input::getDeltaTime() * (Input::getMousePosition().x() - float((960 / 2)));
+	verticalAngle = Input::getMouseSpeed() * Input::getDeltaTime() * (Input::getMousePosition().y() - float((720 / 2)));
+
+	lookAt.getX() = cos(-horizontalAngle / 360) * (lookAt.x() - position.x()) + sin(-horizontalAngle / 360) * (lookAt.z() - position.z()) + position.x();
+	lookAt.getY() = cos(-verticalAngle / 360) * (lookAt.y() - position.y()) + sin(-verticalAngle / 360) * (abs(lookAt.z() - position.z())) + sin(-verticalAngle / 360) * (abs(lookAt.x() - position.x())) + position.y();
+	lookAt.getZ() = -sin(-horizontalAngle / 360) * (lookAt.x() - position.x()) + cos(-horizontalAngle / 360) * (lookAt.z() - position.z()) + position.z();
 
 	//std::cout << horizontalAngle << "º, " << verticalAngle << "º" <<std::endl;
 
