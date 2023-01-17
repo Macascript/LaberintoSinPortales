@@ -38,8 +38,8 @@ void UI::update(){
             camera->position.y() - h / 2.0f + (((rectPosition.y() * 1.67f) - 0.75f) / 100 * windowHeight),*/
             camera->lookAt.x() - camera->position.x() + ((rectPosition.x() * 10.688f) - 5.34855f),
             camera->lookAt.y() - camera->position.y() + ((rectPosition.y() * 8.01599) - 4.02505f),
-            /*-18 - layer*/
             -4
+            //camera->lookAt.z() - camera->position.z() -1
         );
     }
     //if (gameObject->getComponent("collider")) std::cout<<"UI position: ("<<newPos.x()<<","<<newPos.y()<<","<< gameObject->transform->position.z()<<")"<<std::endl;
