@@ -104,3 +104,7 @@ void Text::loadCharactersToMap(FT_Face font)
         Characters.insert(std::pair<char, Character>(c, character));
     }
 }
+
+void Text::changeText(std::string newText) {
+    this->text = newText;
+}

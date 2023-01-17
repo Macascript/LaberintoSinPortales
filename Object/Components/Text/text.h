@@ -35,4 +35,5 @@ public:
     Text(std::string texto, float fontSize, std::string font, std::string textvShader, std::string textfShader, Vec3 color);
     void init(std::string texto, float fontSize, std::string font_name, std::string textvShader, std::string textfShader, Vec3 color);
     void loadCharactersToMap(FT_Face font);
+    void changeText(std::string newText);
 };

@@ -19,8 +19,8 @@ private:
 	bool* mouseKeys = new bool[8];
 	bool* mouseKeysBefore = new bool[8];
 	Window* window;
-	double lastFrame = glfwGetTime();
-	double currentFrame = glfwGetTime();
+	double lastFrame = input->getTime();
+	double currentFrame = input->getTime();
 	double deltaTime;
 	float mouseSpeed = 20.0f;
 	float speed = 1.0f;
@@ -44,9 +44,15 @@ public:
 	static Vec2 getMousePosition();
 
 	static double getDeltaTime();
+	static double getTime();
 	static float getMouseSpeed();
 	static float getSpeed();
 
 	static void setMouseSpeed(float newSpeed);
 	static void setSpeed(float newSpeed);
+	static void setCursorPos(int x, int y);
+
+	static void hideMouse();
+	static void disableMouse();
+	static void restartTime();
 };

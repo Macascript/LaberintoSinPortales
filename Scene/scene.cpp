@@ -73,4 +73,5 @@ void Scene::update(){
 	// for(int i = 0; i < lightList->size(); i++){
 	// 	(*lightList)[i]->step();
 	// }
+	SceneManager::actualScene()->userUpdate();
 }

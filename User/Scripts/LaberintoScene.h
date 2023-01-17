@@ -10,6 +10,7 @@ private:
 public:
 	LaberintoScene(Camera* camera) : Scene(camera) {}
 	void init() override;
+	void userUpdate() override;
 	void createCelda(std::string modelo, int x, int z, int angulo);
 	void genLaberinto();
 	~LaberintoScene();

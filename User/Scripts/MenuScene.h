@@ -6,4 +6,5 @@ class MenuScene: public Scene{
 public:
 	MenuScene(Camera* camera): Scene(camera){}
 	void init() override;
+	void userUpdate() override;
 };

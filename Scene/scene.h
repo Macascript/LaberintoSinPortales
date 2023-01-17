@@ -26,6 +26,7 @@ public:
 	std::map<int, Object*>* addedObjectList;
 	Scene(Camera* cam);
 	virtual void init() {};
+	virtual void userUpdate() {};
 	Camera* getCamera();
 	void setCamera(Camera* camera);
 	void update();

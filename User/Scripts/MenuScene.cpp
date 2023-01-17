@@ -78,3 +78,7 @@ void loadLaberinto(){
 void loadOpciones() {
     SceneManager::loadScene(1);
 }
+
+void MenuScene::userUpdate() {
+
+}

@@ -162,8 +162,8 @@ void Input::update()
 	input->lastFrame = input->currentFrame;
 
 	//glfwGetCursorPos((GLFWwindow*)input->window->getWindow(), &input->mousePosX,&input->mousePosY);
-	glfwSetCursorPos((GLFWwindow*)input->window->getWindow(), 960 / 2, 720 / 2);
-	glfwSetInputMode((GLFWwindow*)input->window->getWindow(), GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+	//glfwSetCursorPos((GLFWwindow*)input->window->getWindow(), 960 / 2, 720 / 2);
+	//glfwSetInputMode((GLFWwindow*)input->window->getWindow(), GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 }
 
 double Input::getDeltaTime()
@@ -189,4 +189,24 @@ void Input::setMouseSpeed(float newSpeed)
 void Input::setSpeed(float newSpeed)
 {
 	input->speed = newSpeed;
+}
+
+double Input::getTime() {
+	return glfwGetTime();
+}
+
+void Input::restartTime() {
+	glfwSetTime(0);
+}
+
+void Input::setCursorPos(int x, int y) {
+	glfwSetCursorPos((GLFWwindow*)input->window->getWindow(), x, y);
+}
+
+void Input::hideMouse() {
+	glfwSetInputMode((GLFWwindow*)input->window->getWindow(), GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+}
+
+void Input::disableMouse() {
+	glfwSetInputMode((GLFWwindow*)input->window->getWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 }

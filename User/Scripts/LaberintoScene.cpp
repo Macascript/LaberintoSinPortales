@@ -2,6 +2,8 @@
 
 #include "LaberintoScene.h"
 
+Text* newTextTime;
+
 void LaberintoScene::init() {
     genLaberinto();
     camera->position = Vec3(0.0f, 0.0f, -18.0f);
@@ -20,6 +22,17 @@ void LaberintoScene::init() {
     newObject->addComponent(newInterface);
     newObject->transform->scale = Vec3(2.0f, 2.0f, 1.0f);
     createObject(newObject);
+
+    Input::restartTime();
+
+    Object* textTime = new Object();
+    newTextTime = new Text(std::to_string(Input::getTime()) + " s", defaultTextFontSize, Vec3(0.0f, 1.0f, 0));
+    UI* newInterfaceTextTime = new UI(camera);
+    newInterfaceTextTime->rectPosition = Vec2(0.69, 0.03);
+    //newInterfaceText->layer = 2;
+    textTime->addComponent(newTextTime);
+    textTime->addComponent(newInterfaceTextTime);
+    createObject(textTime);
 }
 
 void LaberintoScene::createCelda(std::string modelo, int x, int z, int angulo){
@@ -113,6 +126,13 @@ void LaberintoScene::genLaberinto() {
     }
 
     archivo.close();
+}
+
+void LaberintoScene::userUpdate()
+{
+    newTextTime->changeText(std::to_string(Input::getTime()) + " s");
+    Input::setCursorPos(windowWidth/2,windowHeight/2);
+    Input::hideMouse();
 }
 
 LaberintoScene::~LaberintoScene(){
