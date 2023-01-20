@@ -1,10 +1,19 @@
 #version 430
 
-layout(location=2) uniform vec4 lightPos;
+//struct Light
+//{
+//  vec3 eyePosOrDir;
+//  bool isDirectional;
+//  vec3 intensity;
+//  float attenuation;
+//} variableName;
+
+layout(location=2) uniform int lightArraySize;
 layout(location=3) uniform vec4 eyePos;
 layout(location=4) uniform sampler2D texture;
 layout(location=5) uniform float maskPercentage;
 layout(location=6) uniform vec2 scroll;
+layout(location=7) uniform vec4[100] lightPos;
 
 in vec4 fcolor;
 in vec4 fpos;
@@ -14,23 +23,38 @@ in vec2 ftext;
 out vec4 gli_FragColor;
 
 void main() {
-	vec4 finalColor = fcolor;
 
-	float amb=0.2f;
-	float diffuse=0.0f;
+	vec4 eyeDir = normalize(eyePos - fpos);
+
+	float Id = 0.5f;
+	float kd = 0.5f;
+	float Is = 0.1f;
+	float ks = 0.1f;
+	float powSpecular = 3f;
+	float amb = 0.175f;
+
+	
+	float IdifusaTotal = 0;
+	float IespecularTotal = 0;
+	float auxDot = 0;
+	vec4 auxLightDir = vec4(0.0);
+	vec4 auxReflectedDir = vec4(0.0);
+
+	for(int i = 0; i < lightArraySize; ++i)
+	{
+		auxLightDir = normalize(lightPos[i] - fpos);
+		auxDot = max(dot(auxLightDir,fnorm),0.0f);
+		IdifusaTotal += Id * kd * auxDot;
+		
+		if(auxDot > 0)
+			auxReflectedDir = 2 * fnorm * (dot(auxLightDir,fnorm)) - auxLightDir;
+			IespecularTotal += Is * ks * pow(max(dot(auxReflectedDir,eyeDir),0.0f),powSpecular);
+	}
 
 	vec4 textColor = texture2D(texture,ftext+scroll);
-	
-	finalColor = maskPercentage * textColor + (1.0 - maskPercentage) * finalColor;
+	vec4 finalColor = maskPercentage * textColor + (1.0 - maskPercentage) * fcolor;
 
-	vec4 lightDir=normalize(lightPos-fpos);
-	vec4 reflectedDir=2*fnorm*(dot(lightDir,fnorm))-lightDir;
-	vec4 eyeDir = normalize(eyePos-fpos);
-	
-	diffuse=max(dot(fnorm,lightDir),0.0f); //color luz
-	
-	float specular= pow(max(dot(eyeDir,reflectedDir), 0.0f),256);
-	
-    //gli_FragColor = (finalColor)*(amb+diffuse+specular);
-	gli_FragColor = finalColor * 2.0f;
+
+	gli_FragColor = finalColor * (amb + IdifusaTotal + IespecularTotal);
+	gli_FragColor.w = textColor.w;
 }

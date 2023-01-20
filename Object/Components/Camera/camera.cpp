@@ -31,7 +31,7 @@ void Camera::step()
 	Vec3 auxVector = lookAt - position;
 	auxVector.getY() = 0;
 	Vec3 auxCross = Utils::cross(auxVector, up);
-	Vec3 auxCrossRight = Utils::cross(auxVector, up);
+	//Vec3 auxCrossRight = Utils::cross(auxVector, up);
 
 	if (Input::getKey('W')) {
 		position = position + Utils::normalize(auxVector) * Input::getSpeed();
@@ -68,16 +68,19 @@ void Camera::step()
 	horizontalAngle = Input::getMouseSpeed() * Input::getDeltaTime() * (Input::getMousePosition().x() - float((960 / 2)));
 	verticalAngle = Input::getMouseSpeed() * Input::getDeltaTime() * (Input::getMousePosition().y() - float((720 / 2)));
 
-	lookAt.getX() = cos(-horizontalAngle / 360) * (lookAt.x() - position.x()) + sin(-horizontalAngle / 360) * (lookAt.z() - position.z())/* + sin(-horizontalAngle / 360) * (lookAt.y() - position.y()) */ + position.x();
-	//lookAt.getY() = cos(-verticalAngle / 360) * (lookAt.y() - position.y()) + sin(-verticalAngle / 360) * (abs(lookAt.z() - position.z())) + sin(-verticalAngle / 360) * (abs(lookAt.x() - position.x())) + position.y();
-	lookAt.getZ() = -sin(-horizontalAngle / 360) * (lookAt.x() - position.x()) + cos(-horizontalAngle / 360) * (lookAt.z() - position.z())/* - sin(-horizontalAngle / 360) * (lookAt.y() - position.y())*/ + position.z();
+	//  lookAt.getX() = cos(-horizontalAngle / 360) * (lookAt.x() - position.x()) + sin(-horizontalAngle / 360) * (lookAt.z() - position.z())/* + sin(-horizontalAngle / 360) * (lookAt.y() - position.y()) */ + position.x();
+	//  lookAt.getY() = cos(-verticalAngle / 360) * (lookAt.y() - position.y()) + sin(-verticalAngle / 360) * (abs(lookAt.z() - position.z())) + sin(-verticalAngle / 360) * (abs(lookAt.x() - position.x())) + position.y();
+	//  lookAt.getZ() = -sin(-horizontalAngle / 360) * (lookAt.x() - position.x()) + cos(-horizontalAngle / 360) * (lookAt.z() - position.z())/* - sin(-horizontalAngle / 360) * (lookAt.y() - position.y())*/ + position.z();
 
 	Vec3 v = Vec3(0.0f, 1.0f, 0.0f);
 	Vec3 postolook = lookAt - position;
-	Vec3 aux = postolook * cos(horizontalAngle / 360) + Utils::cross(v, postolook) * sin(horizontalAngle / 360) + v * (v * postolook) * (1 - cos(horizontalAngle / 360));
-	postolook = aux - position;
-	v = Utils::cross(postolook, v);
-	lookAt = postolook * cos(verticalAngle / 360) + Utils::cross(v, postolook) * sin(verticalAngle / 360) + v * (v * postolook) * (1 - cos(verticalAngle / 360));
+	Vec3 aux = postolook * cos(-horizontalAngle / 360) + Utils::cross(v, postolook) * sin(-horizontalAngle / 360) + v * (v * postolook) * (1 - cos(-horizontalAngle / 360));
+	lookAt = position + aux;
+	lookAt.getY() = cos(-verticalAngle / 360) * (lookAt.y() - position.y()) + sin(-verticalAngle / 360) * (abs(lookAt.z() - position.z())) + sin(-verticalAngle / 360) * (abs(lookAt.x() - position.x())) + position.y();
+	// postolook = aux;
+	// v = Utils::cross(postolook, v);
+	// lookAt = position + (postolook * cos(verticalAngle / 360) + Utils::cross(v, postolook) * sin(verticalAngle / 360) + v * (v * postolook) * (1 - cos(verticalAngle / 360)));
+	
 	//up = Utils::cross(right, lookAt);
 }
 

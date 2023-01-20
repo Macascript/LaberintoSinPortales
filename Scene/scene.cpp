@@ -31,6 +31,14 @@ void Scene::removeObject(Object* object) {
 	it->second->markedDelete = true;
 }
 
+std::vector<Light*>* Scene::getLights() {
+	return lightList;
+}
+
+void Scene::addLight(Light* light) {
+	lightList->push_back(light);
+}
+
 void Scene::update(){
 	for(auto it=addedObjectList->begin();
             it!=addedObjectList->end();

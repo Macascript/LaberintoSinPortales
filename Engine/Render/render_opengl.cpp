@@ -110,7 +110,16 @@ void Render::drawObject(Object* obj,Scene* scene){
 	}
 
 	glUniformMatrix4fv(1, 1, GL_FALSE, &(obj->transform->getMatrix().getMatrix())[0][0]);
-	//glUniform4fv(2,1,&glm::vec4(((*scene->getLights())[0]->position),1.0f)[0]);
+
+	std::vector<glm::vec4>* lights = nullptr;
+	int sizeLights = 0;
+	if (scene->getLights()) sizeLights = scene->getLights()->size();
+	for (int i = 0; i < sizeLights;++i) {
+		lights->push_back(glm::vec4(((*scene->getLights())[0]->transform->position.getVector()), 1.0f));
+	}
+	//glUniform4fv(2,1,&glm::vec4(((*scene->getLights())[0]->transform->position.getVector()),1.0f)[0]);
+	glUniform1i(2, sizeLights);
+
 	glUniform4fv(3, 1, &camPos[0]);
 
 	int textureUnit = 0;
@@ -125,8 +134,7 @@ void Render::drawObject(Object* obj,Scene* scene){
 	// }else{
 		glUniform2fv(6,1,&glm::vec2(0.0f,0.0f)[0]);
 	// }
-	
-	//glUniform4fv(7,1,&glm::vec4(((*scene->getLights())[1]->position),1.0f)[0]);
+	glUniform4fv(7, sizeLights, reinterpret_cast<GLfloat*>(&lights[0]));
 
 	glEnable(GL_ALPHA_TEST);
 	glEnable(GL_BLEND);

@@ -4,6 +4,7 @@
 #include "../Object/Components/Text/text.h"
 #include "../Object/Components/Button/button.h"
 #include "../User/SceneManager/scenemanager.h"
+#include "../Object/Light/light.h"
 #define USER_PATH ".\\User\\"
 #define windowWidth 960
 #define windowHeight 720
@@ -16,6 +17,7 @@ private:
 
 	void addObject(Object* obj);
 	void removeObject(Object* obj);
+	std::vector<Light*>* lightList = nullptr;
 
 protected:
 	Camera* camera = nullptr;
@@ -30,4 +32,6 @@ public:
 	Camera* getCamera();
 	void setCamera(Camera* camera);
 	void update();
+	std::vector<Light*>* getLights();
+	void addLight(Light* light);
 };
