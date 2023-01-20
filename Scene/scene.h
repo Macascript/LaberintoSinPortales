@@ -17,7 +17,7 @@ private:
 
 	void addObject(Object* obj);
 	void removeObject(Object* obj);
-	std::vector<Light*>* lightList = nullptr;
+	std::vector<Light*>* lightList;
 
 protected:
 	Camera* camera = nullptr;

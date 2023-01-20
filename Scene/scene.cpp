@@ -5,6 +5,7 @@ Scene::Scene(Camera* cam) {
 	camera = cam;
 	objectList = new std::map<int, Object*>();
 	addedObjectList = new std::map<int, Object*>();
+	lightList = new std::vector<Light*>();
 	//std::cout << "patata" << std::endl;
 }
 

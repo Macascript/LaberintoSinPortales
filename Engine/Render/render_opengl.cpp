@@ -111,11 +111,39 @@ void Render::drawObject(Object* obj,Scene* scene){
 
 	glUniformMatrix4fv(1, 1, GL_FALSE, &(obj->transform->getMatrix().getMatrix())[0][0]);
 
-	std::vector<glm::vec4>* lights = nullptr;
+	//std::vector<glm::vec4>* lights = nullptr;
 	int sizeLights = 0;
 	if (scene->getLights()) sizeLights = scene->getLights()->size();
+	GLuint loc;
 	for (int i = 0; i < sizeLights;++i) {
-		lights->push_back(glm::vec4(((*scene->getLights())[0]->transform->position.getVector()), 1.0f));
+		//lights->push_back(glm::vec4(((*scene->getLights())[i]->transform->position.getVector()), 1.0f));
+
+		loc = glGetUniformLocation(7, ("lights[" + std::to_string(i) + "].lightPos").c_str());
+		glUniform4fv(loc, 1, &glm::vec4(((*scene->getLights())[i]->transform->position.getVector()), 1.0f)[0]);
+
+		loc = glGetUniformLocation(7, ("lights[" + std::to_string(i) + "].intensityD").c_str());
+		glUniform1f(loc, (*scene->getLights())[i]->intensityDiffuse);
+
+		loc = glGetUniformLocation(7, ("lights[" + std::to_string(i) + "].reflectanceD").c_str());
+		glUniform1f(loc, (*scene->getLights())[i]->reflectanceDiffuse);
+
+		loc = glGetUniformLocation(7, ("lights[" + std::to_string(i) + "].intensityS").c_str());
+		glUniform1f(loc, (*scene->getLights())[i]->intensitySpecular);
+
+		loc = glGetUniformLocation(7, ("lights[" + std::to_string(i) + "].reflectanceS").c_str());
+		glUniform1f(loc, (*scene->getLights())[i]->reflectanceSpecular);
+
+		loc = glGetUniformLocation(7, ("lights[" + std::to_string(i) + "].shininessCoef").c_str());
+		glUniform1f(loc, (*scene->getLights())[i]->shininessCoef);
+
+		loc = glGetUniformLocation(7, ("lights[" + std::to_string(i) + "].intensityA").c_str());
+		glUniform1f(loc, (*scene->getLights())[i]->intensityAmbiental);
+
+		loc = glGetUniformLocation(7, ("lights[" + std::to_string(i) + "].reflectanceA").c_str());
+		glUniform1f(loc, (*scene->getLights())[i]->reflectanceAmbiental);
+
+		loc = glGetUniformLocation(7, ("lights[" + std::to_string(i) + "].lightColor").c_str());
+		glUniform4fv(loc, 1, &(*scene->getLights())[i]->color.getVector()[0]);
 	}
 	//glUniform4fv(2,1,&glm::vec4(((*scene->getLights())[0]->transform->position.getVector()),1.0f)[0]);
 	glUniform1i(2, sizeLights);
@@ -134,7 +162,7 @@ void Render::drawObject(Object* obj,Scene* scene){
 	// }else{
 		glUniform2fv(6,1,&glm::vec2(0.0f,0.0f)[0]);
 	// }
-	glUniform4fv(7, sizeLights, reinterpret_cast<GLfloat*>(&lights[0]));
+	//glUniform4fv(7, sizeLights, reinterpret_cast<GLfloat*>(&lights[0]));
 
 	glEnable(GL_ALPHA_TEST);
 	glEnable(GL_BLEND);

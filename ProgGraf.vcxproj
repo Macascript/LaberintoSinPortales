@@ -49,6 +49,8 @@
     <ClCompile Include="Object\Components\Mesh\mesh.cpp" />
     <ClCompile Include="Object\Components\Transform\transform.cpp" />
     <ClCompile Include="Object\Components\UI\ui.cpp" />
+    <ClCompile Include="Object\Light\light.cpp" />
+    <ClCompile Include="Object\Light\orbitalLight.cpp" />
     <ClCompile Include="Object\object.cpp" />
     <ClCompile Include="Scene\scene.cpp" />
     <ClCompile Include="User\SceneManager\scenemanager.cpp" />
@@ -84,6 +86,8 @@
     <ClInclude Include="Object\Components\Mesh\mesh.h" />
     <ClInclude Include="Object\Components\Transform\transform.h" />
     <ClInclude Include="Object\Components\UI\ui.h" />
+    <ClInclude Include="Object\Light\light.h" />
+    <ClInclude Include="Object\Light\orbitalLight.h" />
     <ClInclude Include="Object\object.h" />
     <ClInclude Include="Scene\scene.h" />
     <ClInclude Include="User\SceneManager\scenemanager.h" />

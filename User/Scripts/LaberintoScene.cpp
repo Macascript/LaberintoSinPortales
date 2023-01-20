@@ -14,15 +14,15 @@ void LaberintoScene::init() {
     // celda->addComponent(celdaMesh);
     // createObject(celda);
 
-    Object* newObject = new Object();
-    Mesh* newMesh = new Mesh(defaultuiModel, guiVshader, guiFshader, USER_PATH "Textures\\marcianitos.png");
-    UI* newInterface = new UI(camera);
-    newInterface->rectPosition = Vec2(0.5, 0.5);
-    //newInterface->layer = 1;
-    newObject->addComponent(newMesh);
-    newObject->addComponent(newInterface);
-    newObject->transform->scale = Vec3(2.0f, 2.0f, 1.0f);
-    createObject(newObject);
+    //Object* newObject = new Object();
+    //Mesh* newMesh = new Mesh(defaultuiModel, guiVshader, guiFshader, USER_PATH "Textures\\marcianitos.png");
+    //UI* newInterface = new UI(camera);
+    //newInterface->rectPosition = Vec2(0.5, 0.5);
+    ////newInterface->layer = 1;
+    //newObject->addComponent(newMesh);
+    //newObject->addComponent(newInterface);
+    //newObject->transform->scale = Vec3(2.0f, 2.0f, 1.0f);
+    ////createObject(newObject);
 
     Input::restartTime();
 
@@ -35,13 +35,20 @@ void LaberintoScene::init() {
     textTime->addComponent(newInterfaceTextTime);
     createObject(textTime);
 
-    Object* debugBox = new Object();
-    Mesh* meshDebugBox = new Mesh(default3DModel,defaultVshader,defaultFshader,USER_PATH "Textures\\marcianitos.png");
-    LookAtFollower* lookAtDebugBox = new LookAtFollower(camera);
-    debugBox->transform->scale = Vec3(0.01f, 0.01f, 0.01f);
-    //debugBox->addComponent(meshDebugBox);
-    debugBox->addComponent(lookAtDebugBox);
-    createObject(debugBox);
+    Light* newLight = new Light(Vec3(0, 3, 0));
+    addLight(newLight);
+
+    Light* newLight2 = new Light(Vec3(0, 3, 0), Vec4(1.0f,0.0f,0.0f,1.0f));
+    addLight(newLight2);
+
+
+    //Object* debugBox = new Object();
+    //Mesh* meshDebugBox = new Mesh(default3DModel,defaultVshader,defaultFshader,USER_PATH "Textures\\marcianitos.png");
+    //LookAtFollower* lookAtDebugBox = new LookAtFollower(camera);
+    //debugBox->transform->scale = Vec3(0.01f, 0.01f, 0.01f);
+    ////debugBox->addComponent(meshDebugBox);
+    //debugBox->addComponent(lookAtDebugBox);
+    ////createObject(debugBox);
 }
 
 void LaberintoScene::createCelda(std::string modelo, int x, int z, int angulo){
@@ -114,16 +121,16 @@ void LaberintoScene::genLaberinto() {
                 createCelda(USER_PATH "Models\\celda2paralelo.trg",x,z,90);
                 break;
             case 11:
-                createCelda(USER_PATH "Models\\celda1.trg",x,z,180);
+                createCelda(USER_PATH "Models\\probandoprobando.trg",x,z,180);
                 break;
             case 12:
-                createCelda(USER_PATH "Models\\celda1.trg",x,z,90);
+                createCelda(USER_PATH "Models\\probandoprobando.trg",x,z,90);
                 break;
             case 13:
-                createCelda(USER_PATH "Models\\celda1.trg",x,z,0);
+                createCelda(USER_PATH "Models\\probandoprobando.trg",x,z,0);
                 break;
             case 14:
-                createCelda(USER_PATH "Models\\celda1.trg",x,z,270);
+                createCelda(USER_PATH "Models\\probandoprobando.trg",x,z,270);
                 break;
             case 15:
                 createCelda(USER_PATH "Models\\celda4.trg", x, z,0);
