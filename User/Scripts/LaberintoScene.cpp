@@ -1,6 +1,7 @@
 #pragma once
 
 #include "LaberintoScene.h"
+#include "LookAtFollower.h"
 
 Text* newTextTime;
 
@@ -33,6 +34,14 @@ void LaberintoScene::init() {
     textTime->addComponent(newTextTime);
     textTime->addComponent(newInterfaceTextTime);
     createObject(textTime);
+
+    Object* debugBox = new Object();
+    Mesh* meshDebugBox = new Mesh(default3DModel,defaultVshader,defaultFshader,USER_PATH "Textures\\marcianitos.png");
+    LookAtFollower* lookAtDebugBox = new LookAtFollower(camera);
+    debugBox->transform->scale = Vec3(0.01f, 0.01f, 0.01f);
+    //debugBox->addComponent(meshDebugBox);
+    debugBox->addComponent(lookAtDebugBox);
+    createObject(debugBox);
 }
 
 void LaberintoScene::createCelda(std::string modelo, int x, int z, int angulo){

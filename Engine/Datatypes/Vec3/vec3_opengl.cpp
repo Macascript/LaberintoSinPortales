@@ -45,3 +45,7 @@ Vec3 Vec3::operator + (Vec3 vec3) {
 Vec3 Vec3::operator * (float constant) {
 	return Vec3(vector * constant);
 }
+
+Vec3 Vec3::operator * (Vec3 vec3) {
+	return Vec3(vector * vec3.getVector());
+}

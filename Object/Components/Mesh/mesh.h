@@ -7,6 +7,7 @@
 #include "../../../Engine/Datatypes/Texture/texture.h"
 
 #define defaultModel ".\\Object\\Components\\Mesh\\defaultmodel.trg"
+#define default3DModel ".\\Object\\Components\\Mesh\\default3dcube.trg"
 #define defaultuiModel ".\\Object\\Components\\Mesh\\defaultuimodel.trg"
 #define defaultVshader ".\\Engine\\Datatypes\\Shader\\defaultvshader.glsl"
 #define defaultFshader ".\\Engine\\Datatypes\\Shader\\defaultfshader.glsl"
