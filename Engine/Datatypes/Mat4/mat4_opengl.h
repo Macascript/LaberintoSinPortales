@@ -13,4 +13,5 @@ public:
     glm::mat4 getMatrix();
     
     Vec4 operator * (Vec4 vec);
+    Mat4 operator * (Mat4 mat);
 };

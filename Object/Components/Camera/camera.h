@@ -2,13 +2,17 @@
 #include "../../../Engine/Commons/common.h"
 #include "../../../Engine/Datatypes/Utils/utils.h"
 #include "../../../Engine/Input/input.h"
+#include "../../../Scene/scene.h"
+#include "../Collider/boxCollider.h"
+
+class Object;
 
 typedef enum cameraType_e {
 	perspective,
 	ortho
 }cameraType_e;
 
-class Camera{
+class Camera:public Object{
 
 public:
 	Vec3 up = Vec3(0.0f, 1.0f, 0.0f);

@@ -4,7 +4,7 @@
 
 Button::Button(Object* obj,std::function<void()> onClick){
 	type = "button";
-	collider = (Collider*) obj->getComponent("collider");
+	collider = (Collider*) obj->getComponent("meshCollider");
 	this->onClick = onClick;
 }
 

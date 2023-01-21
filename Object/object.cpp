@@ -30,22 +30,29 @@ int Object::getId() {
 	return this->id;
 }
 
-Component* Object::getComponent(std::string type){
+Component* Object::getComponent(std::string type, int index){
 	if (components->count(type) == 0){ // Precondition
 		return nullptr;
 	}
-	return (*components)[type];
+	if ((*components)[type]->size() <= index){
+		return nullptr;
+	}
+
+	return (*(*components)[type])[index];
 }
 
 void Object::addComponent(Component* component){
-	if (components->count(component->getType())){ // Precondition
-		std::cout<<"ERROR: The object "<<id<<" already has a component of type "<<component->getType()<<std::endl;
-		return;
-		//throw std::exception("ERROR: The object "+id+" already has a component of type "+component->getType())
+	// if (components->count(component->getType())){ // Precondition
+	// 	std::cout<<"ERROR: The object "<<id<<" already has a component of type "<<component->getType()<<std::endl;
+	// 	return;
+	// 	//throw std::exception("ERROR: The object "+id+" already has a component of type "+component->getType())
+	// }
+	if (components->count(component->getType()) == 0){
+		(*components)[component->getType()] = new std::vector<Component*>();
 	}
 	std::cout << "object.cpp addComponent():" << component->getType() << std::endl;
 	component->setGameObject(this);
-	(*components)[component->getType()] = component;
+	(*components)[component->getType()]->push_back(component);
 }
 
 void Object::removeComponent(std::string type){
@@ -61,12 +68,18 @@ void Object::removeComponent(std::string type){
 
 void Object::update(){
 	for (auto it = components->begin(); it != components->end(); ++it){
-    	it->second->update();
+		for (int i = 0; i < it->second->size(); ++i){
+			(*it->second)[i]->update();
+		}
+    	
 	}
 }
 
 Object::~Object(){
 	for (auto it = components->begin(); it != components->end(); ++it){
+		for (int i = 0; i < it->second->size(); ++i){
+			delete (*it->second)[i];
+		}
     	delete it->second;
 	}
 	delete transform;

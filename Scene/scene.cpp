@@ -84,3 +84,35 @@ void Scene::update(){
 	// }
 	SceneManager::actualScene()->userUpdate();
 }
+
+std::vector<Object*>* Scene::getCollisions(Object* obj)
+{
+	std::vector<Object*>* objects = new std::vector<Object*>();
+
+	int numFilas = sceneGrid->numFilas;
+	int numColumnas = sceneGrid->numColumnas;
+
+	int coordX = (obj->transform->position.x() - sceneGrid->minX) / (sceneGrid->tamX / numColumnas);
+	int coordY = (obj->transform->position.y() - sceneGrid->minY) / (sceneGrid->tamY / numFilas);
+
+	for (int i = -1; i < 2; i++)
+		for (int j = -1; j < 2; j++)
+		{
+
+			if ((((coordX + j) >= 0) && (coordX + j) < numColumnas) &&
+				(((coordY + i) >= 0) && (coordY + i) < numFilas))
+			{
+
+				for (auto it = sceneGrid->grid[i + coordY][j + coordX].begin();
+					it != sceneGrid->grid[i + coordY][j + coordX].end();
+					it++)
+				{
+					if (it->second->collider->collision(obj->getComponent("collider"))) {
+						objects->push_back(it->second);
+					}
+				}
+			}
+		}
+	return objects;
+
+}

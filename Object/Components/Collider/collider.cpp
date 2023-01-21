@@ -137,13 +137,15 @@ void Box3D::update(){
 
 Collider::Collider(Object* obj)
 {
-    type = "collider";
+    type = "meshCollider";
 	boxList=new std::vector<BV*>();
 	int numtriangles=((Mesh*)obj->getComponent("mesh"))->faceList->size() / 3;
 	//newbox->init(obj);
 	for(int i=0;i<numtriangles;i++)
 	{	
-		BV* newbox=new Box2D();
+		BV* newbox;
+		if((UI*)obj->getComponent("ui")) newbox = new Box2D();
+		else newbox = new Box3D();
 		newbox->init(obj, i);
 		boxList->push_back(newbox);
 	}	

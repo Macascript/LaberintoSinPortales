@@ -4,6 +4,7 @@
 #include "Components/Transform/transform.h"
 #include "component.h"
 #include "../Engine/Input/input.h"
+#include "Components/Collider/collider.h"
 
 class Component;
 
@@ -18,7 +19,7 @@ private:
 	La clave es el nombre en string del tipo del Component y el valor es un puntero a un Component.
 	No puede haber más de un Component del mismo tipo.
 	*/
-	std::map<std::string,Component*>* components = new std::map<std::string,Component*>();
+	std::map<std::string,std::vector<Component*>*>* components = new std::map<std::string,std::vector<Component*>*>();
 	/**
 	Contador de Objects para ir asignando ids a cada uno.
 	*/
@@ -65,7 +66,7 @@ public:
 	/**
 	Si tiene un componente del tipo type lo devuelve, sino devuelve nullptr
 	*/
-	Component* getComponent(std::string type);
+	Component* getComponent(std::string type, int index = 0);
 
 	/**
 	Añade el componente que se pasa por parámetro.

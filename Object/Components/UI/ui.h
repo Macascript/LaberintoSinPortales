@@ -5,6 +5,8 @@
 //#include "../Camera/camera.h"
 //#include "../../component.h"
 
+class Camera;
+
 class UI: public Component{
 protected:
     void destroy();

@@ -10,6 +10,7 @@
 #define windowHeight 720
 
 class SceneManager;
+class Camera;
 
 class Scene {
 private:
@@ -34,4 +35,5 @@ public:
 	void update();
 	std::vector<Light*>* getLights();
 	void addLight(Light* light);
+	std::vector<Object*>* getCollisions(Object* obj);
 };

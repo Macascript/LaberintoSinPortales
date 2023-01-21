@@ -28,6 +28,7 @@ Camera::Camera(Vec3 pos, Vec3 lookAt, cameraType_e type) {
 
 void Camera::step()
 {
+	this->transform->position = position;
 	Vec3 auxVector = lookAt - position;
 	auxVector.getY() = 0;
 	Vec3 auxCross = Utils::cross(auxVector, up);
@@ -65,8 +66,8 @@ void Camera::step()
 		lookAt.getZ() = -sin(7.283f / 360) * (lookAt.x() - position.x()) + cos(7.283f / 360) * (lookAt.z() - position.z()) + position.z();
 	}
 
-	horizontalAngle = Input::getMouseSpeed() * Input::getDeltaTime() * (Input::getMousePosition().x() - float((960 / 2)));
-	verticalAngle = Input::getMouseSpeed() * Input::getDeltaTime() * (Input::getMousePosition().y() - float((720 / 2)));
+	horizontalAngle = Input::getMouseSpeed() * Input::getDeltaTime() * (Input::getMousePosition().x() - float((windowWidth / 2)));
+	verticalAngle = Input::getMouseSpeed() * Input::getDeltaTime() * (Input::getMousePosition().y() - float((windowHeight / 2)));
 
 	//  lookAt.getX() = cos(-horizontalAngle / 360) * (lookAt.x() - position.x()) + sin(-horizontalAngle / 360) * (lookAt.z() - position.z())/* + sin(-horizontalAngle / 360) * (lookAt.y() - position.y()) */ + position.x();
 	//  lookAt.getY() = cos(-verticalAngle / 360) * (lookAt.y() - position.y()) + sin(-verticalAngle / 360) * (abs(lookAt.z() - position.z())) + sin(-verticalAngle / 360) * (abs(lookAt.x() - position.x())) + position.y();
@@ -82,6 +83,7 @@ void Camera::step()
 	// lookAt = position + (postolook * cos(verticalAngle / 360) + Utils::cross(v, postolook) * sin(verticalAngle / 360) + v * (v * postolook) * (1 - cos(verticalAngle / 360)));
 	
 	//up = Utils::cross(right, lookAt);
+	//if(((BoxCollider*)getComponent("boxCollider"))->collision())
 }
 
 void Camera::computeMatrix()

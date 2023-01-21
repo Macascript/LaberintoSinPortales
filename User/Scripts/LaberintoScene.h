@@ -3,6 +3,7 @@
 #define CELLDISTANCE 20
 #define COLUMNSLAB 18 
 #include "../../Object/Components/UI/ui.h"
+#include "../../Object/Components/Collider/boxCollider.h"
 
 class LaberintoScene : public Scene {
 private:

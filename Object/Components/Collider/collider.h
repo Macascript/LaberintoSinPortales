@@ -53,11 +53,16 @@ public:
 // };
 
 class Collider: public Component{
+	void update();
+	bool collision(Collider* c2);
+	bool collisionPoint(Vec2 v2);
+}
+class MeshCollider: public Collider{
 
 public:
 	std::vector<BV*> *boxList;
-	Collider(Object* obj);
+	MeshCollider(Object* obj);
 	void update();
-	bool collision(Collider* c2);
+	bool collision(MeshCollider* c2);
 	bool collisionPoint(Vec2 v2);
 };

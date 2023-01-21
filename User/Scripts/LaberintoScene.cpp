@@ -41,6 +41,8 @@ void LaberintoScene::init() {
     Light* newLight2 = new Light(Vec3(0, 3, 0), Vec4(1.0f,0.0f,0.0f,1.0f));
     addLight(newLight2);
 
+    BoxCollider* colliderCamera = new BoxCollider(camera);
+    camera->addComponent(colliderCamera);
 
     //Object* debugBox = new Object();
     //Mesh* meshDebugBox = new Mesh(default3DModel,defaultVshader,defaultFshader,USER_PATH "Textures\\marcianitos.png");
@@ -58,6 +60,8 @@ void LaberintoScene::createCelda(std::string modelo, int x, int z, int angulo){
     celda->transform->rotation.getY() = Utils::radians(angulo);
     Mesh* meshCelda = new Mesh(modelo, defaultVshader, defaultFshader, defaultTexture);
     celda->addComponent(meshCelda);
+    Collider* colliderCelda = new Collider(celda);
+    celda->addComponent(colliderCelda);
     createObject(celda);
     (*laberinto)[celda->getId()] = celda;
 }
