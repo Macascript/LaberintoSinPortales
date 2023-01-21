@@ -25,21 +25,23 @@ bool BoxCollider::collision(Collider* c2)
 
 bool BoxCollider::collisionBox(BoxCollider* c2){
     Vec3 pos = gameObject->transform->position;
-    float xMin = pos.x() + offset.x() - bounds.x();
-    float yMin = pos.y() + offset.y() - bounds.y();
-    float zMin = pos.z() + offset.z() - bounds.z();
-    float xMax = pos.x() + offset.x() + bounds.x();
-    float yMax = pos.y() + offset.y() + bounds.y();
-    float zMax = pos.z() + offset.z() + bounds.z();
+    Vec3 scale = gameObject->transform->scale;
+    float xMin = pos.x() + offset.x() * scale.x() - bounds.x() * scale.x();
+    float yMin = pos.y() + offset.y() * scale.y() - bounds.y() * scale.y();
+    float zMin = pos.z() + offset.z() * scale.z() - bounds.z() * scale.z();
+    float xMax = pos.x() + offset.x() * scale.x() + bounds.x() * scale.x();
+    float yMax = pos.y() + offset.y() * scale.y() + bounds.y() * scale.y();
+    float zMax = pos.z() + offset.z() * scale.z() + bounds.z() * scale.z();
 
     Vec3 posC2 = c2->gameObject->transform->position;
+    Vec3 scaleC2 = c2->gameObject->transform->scale;
 
-    float xMinC2 = posC2.x() + c2->offset.x() - c2->bounds.x();
-    float yMinC2 = posC2.y() + c2->offset.y() - c2->bounds.y();
-    float zMinC2 = posC2.z() + c2->offset.z() - c2->bounds.z();
-    float xMaxC2 = posC2.x() + c2->offset.x() + c2->bounds.x();
-    float yMaxC2 = posC2.y() + c2->offset.y() + c2->bounds.y();
-    float zMaxC2 = posC2.z() + c2->offset.z() + c2->bounds.z();
+    float xMinC2 = posC2.x() + c2->offset.x() * scaleC2.x() - c2->bounds.x() * scaleC2.x();
+    float yMinC2 = posC2.y() + c2->offset.y() * scaleC2.y() - c2->bounds.y() * scaleC2.y();
+    float zMinC2 = posC2.z() + c2->offset.z() * scaleC2.z() - c2->bounds.z() * scaleC2.z();
+    float xMaxC2 = posC2.x() + c2->offset.x() * scaleC2.x() + c2->bounds.x() * scaleC2.x();
+    float yMaxC2 = posC2.y() + c2->offset.y() * scaleC2.y() + c2->bounds.y() * scaleC2.y();
+    float zMaxC2 = posC2.z() + c2->offset.z() * scaleC2.z() + c2->bounds.z() * scaleC2.z();
 
     if((xMin<xMaxC2 && xMin>xMinC2)&&(yMin<yMaxC2 && yMin>yMinC2)&&(zMin<zMaxC2 && zMin>zMinC2)) return true;
     if((xMin<xMaxC2 && xMin>xMinC2)&&(yMax<yMaxC2 && yMax>yMinC2)&&(zMax<zMaxC2 && zMax>zMinC2)) return true;
