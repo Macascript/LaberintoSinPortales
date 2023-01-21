@@ -1,68 +1,15 @@
 #pragma once
 
-#include "../UI/ui.h"
+#include "../../component.h"
 
-class BV{
+class Object;
+class Component;
+class UI;
 
+class Collider : public Component {
 public:
-		virtual bool collision(BV* b2)=0;
-		virtual bool collisionPoint(Vec2 v2)=0;
-		virtual void init(Object* obj,int triangleIdx)=0;
-		virtual void update()=0;
+	virtual void update() = 0;
+	virtual bool collision(Collider* c2) = 0;
+	virtual bool collisionPoint(Vec2 v2) = 0;
 };
 
-class Box2D: public BV
-{
-public:
-		//glm::vec3 position=glm::vec3(0,0,0);//esquina inferior izquierda
-		float xMax=0;
-		float yMax=0;
-		float yMin=0;
-		float xMin=0;
-		Object* obj=nullptr;
-		int triangleIdx;
-		Box2D();
-		bool collision(BV* b2);
-		bool collisionPoint(Vec2 v2);
-		void init(Object* obj, int triangleIdx);
-		void update();
-};
-
-class Box3D: public BV
-{
-public:
-		//glm::vec3 position=glm::vec3(0,0,0);//esquina inferior izquierda
-		float xMax=0;
-		float yMax=0;
-		float zMax=0;
-		float xMin=0;
-		float yMin=0;
-		float zMin=0;
-		Object* obj=nullptr;
-		int triangleIdx;
-		Box3D();
-		bool collision(BV* b2);
-		bool collisionPoint(Vec2 v2);
-		void init(Object* obj, int triangleIdx);
-		void update();
-};
-// class Nodo{
-// 	Nodo* hijoIzquierd = nullptr;
-// 	Nodo* hijoDerecho = nullptr;
-
-// };
-
-class Collider: public Component{
-	void update();
-	bool collision(Collider* c2);
-	bool collisionPoint(Vec2 v2);
-}
-class MeshCollider: public Collider{
-
-public:
-	std::vector<BV*> *boxList;
-	MeshCollider(Object* obj);
-	void update();
-	bool collision(MeshCollider* c2);
-	bool collisionPoint(Vec2 v2);
-};

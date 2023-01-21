@@ -6,7 +6,7 @@ Scene::Scene(Camera* cam) {
 	objectList = new std::map<int, Object*>();
 	addedObjectList = new std::map<int, Object*>();
 	lightList = new std::vector<Light*>();
-	//std::cout << "patata" << std::endl;
+	sceneGrid = new SpatialHashing(objectList, 8, 8, 8, -1.0f, -1.0f, -1.0f, 2.0f, 2.0f, 2.0f);
 }
 
 Camera* Scene::getCamera(){
@@ -49,16 +49,8 @@ void Scene::update(){
         (*objectList)[it->first]=it->second;
     }
     addedObjectList->clear();
-
-
-    /*for(auto it=objectList->begin();
-		it!= objectList->end();
-		it++)
-	{
-		it->second->updateCollider();	
-	}*/
 	
-	// sceneGrid->update();
+	sceneGrid->update();
 	camera->step();
 	for(auto it=objectList->begin();
 		it!= objectList->end();
@@ -79,9 +71,9 @@ void Scene::update(){
 		}
 	}
 
-	// for(int i = 0; i < lightList->size(); i++){
-	// 	(*lightList)[i]->step();
-	// }
+	for(int i = 0; i < lightList->size(); i++){
+		(*lightList)[i]->update();
+	}
 	SceneManager::actualScene()->userUpdate();
 }
 
@@ -91,28 +83,30 @@ std::vector<Object*>* Scene::getCollisions(Object* obj)
 
 	int numFilas = sceneGrid->numFilas;
 	int numColumnas = sceneGrid->numColumnas;
+	int numCeldas = sceneGrid->numCeldas;
 
 	int coordX = (obj->transform->position.x() - sceneGrid->minX) / (sceneGrid->tamX / numColumnas);
 	int coordY = (obj->transform->position.y() - sceneGrid->minY) / (sceneGrid->tamY / numFilas);
+	int coordZ = (obj->transform->position.z() - sceneGrid->minZ) / (sceneGrid->tamZ / numCeldas);
 
-	for (int i = -1; i < 2; i++)
-		for (int j = -1; j < 2; j++)
-		{
-
-			if ((((coordX + j) >= 0) && (coordX + j) < numColumnas) &&
-				(((coordY + i) >= 0) && (coordY + i) < numFilas))
+	for (int i = sceneGrid->minY; i < sceneGrid->tamY; i++)
+		for (int j = sceneGrid->minX; j < sceneGrid->tamX; j++)
+			for (int z = sceneGrid->minZ; z < sceneGrid->tamZ; z++)
 			{
-
-				for (auto it = sceneGrid->grid[i + coordY][j + coordX].begin();
-					it != sceneGrid->grid[i + coordY][j + coordX].end();
-					it++)
+				if ((((coordX + j) >= 0) && (coordX + j) < numColumnas) &&
+					(((coordY + i) >= 0) && (coordY + i) < numFilas) &&
+					(((coordZ + i) >= 0) && (coordZ + i) < numCeldas))
 				{
-					if (it->second->collider->collision(obj->getComponent("collider"))) {
-						objects->push_back(it->second);
+
+					for (auto it = sceneGrid->grid[i + coordY][j + coordX][z + coordZ].begin();
+						it != sceneGrid->grid[i + coordY][j + coordX][z + coordZ].end();
+						it++)
+					{
+						if (((Collider*)it->second->getComponent("collider"))->collision((Collider*)obj->getComponent("collider"))) {
+							objects->push_back(it->second);
+						}
 					}
 				}
 			}
-		}
 	return objects;
-
 }

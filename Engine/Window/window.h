@@ -8,8 +8,6 @@ class Input;
 class Window{
 private:
     void* window;
-    int windowWidth;
-    int windowHeight;
 public:
     Window(int resolutionX, int resolutionY, const char* title);
     // init(int resolutionX, int resolutionY,std::string title);

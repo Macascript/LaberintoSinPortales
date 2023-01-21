@@ -1,3 +1,5 @@
+#pragma once;
+
 #include "../../Object/component.h"
 #include "../../Object/Components/Camera/camera.h"
 

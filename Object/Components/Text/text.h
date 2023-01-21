@@ -12,6 +12,8 @@
 #define defaultTextFontSize 48.0f
 #define defaultTextFontColor Vec3(0,0,0)
 
+class Component;
+
 struct Character {
     unsigned int TextureID;  // ID handle of the glyph texture
     glm::ivec2   Size;       // Size of glyph

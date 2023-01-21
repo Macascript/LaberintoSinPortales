@@ -2,10 +2,10 @@
 #include "../../../Engine/Commons/common.h"
 #include "../../../Engine/Datatypes/Utils/utils.h"
 #include "../../../Engine/Input/input.h"
-#include "../../../Scene/scene.h"
 #include "../Collider/boxCollider.h"
 
 class Object;
+class BoxCollider;
 
 typedef enum cameraType_e {
 	perspective,

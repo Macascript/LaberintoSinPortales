@@ -20,7 +20,3 @@ Light::Light(Vec3 position, Vec4 color, float iAmb, float iDif, float iSpec, flo
     this->reflectanceSpecular = std::max(0.0f, std::min(kSpec, 1.0f));
     this->shininessCoef = std::max(shininess, 0.0f);
 }
-
-void Light::step(){
-
-}

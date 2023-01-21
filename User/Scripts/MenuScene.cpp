@@ -32,7 +32,7 @@ void MenuScene::init() {
     button1->addComponent(newMeshButton1);
     button1->addComponent(newInterfaceButton1);
     button1->transform->scale = Vec3(4.0f, 2.0f, 1.0f);
-    Collider* colliderButton1 = new Collider(button1);
+    Collider* colliderButton1 = new MeshCollider(button1);
     button1->addComponent(colliderButton1);
     Button* componentButton1 = new Button(button1, &loadLaberinto);
     button1->addComponent(componentButton1);
@@ -55,7 +55,7 @@ void MenuScene::init() {
     button2->addComponent(newMeshButton2);
     button2->addComponent(newInterfaceButton2);
     button2->transform->scale = Vec3(4.0f, 2.0f, 1.0f);
-    Collider* colliderButton2 = new Collider(button2);
+    Collider* colliderButton2 = new MeshCollider(button2);
     button2->addComponent(colliderButton2);
     Button* componentButton2 = new Button(button2, &loadOpciones);
     button2->addComponent(componentButton2);

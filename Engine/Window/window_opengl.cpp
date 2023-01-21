@@ -11,8 +11,6 @@ Window::Window(int resolutionX, int resolutionY, const char* title){
 	/*glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);*/
-	this->windowWidth = resolutionX;
-	this->windowHeight = resolutionY;
 
     window = (void*) glfwCreateWindow(resolutionX,resolutionY,title, nullptr, nullptr); // (GLFWwindow*)
     glfwMakeContextCurrent((GLFWwindow*) window);
@@ -31,11 +29,11 @@ void* Window::getWindow(){
 }
 
 int Window::getWindowWidth() {
-	return this->windowWidth;
+	return windowWidth;
 }
 
 int Window::getWindowHeight() {
-	return this->windowHeight;
+	return windowHeight;
 }
 
 bool Window::renderfps(double framerate){

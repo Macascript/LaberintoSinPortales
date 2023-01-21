@@ -4,7 +4,7 @@
 #include "Components/Transform/transform.h"
 #include "component.h"
 #include "../Engine/Input/input.h"
-#include "Components/Collider/collider.h"
+//#include "Components/Collider/collider.h"
 
 class Component;
 
@@ -61,7 +61,7 @@ public:
 	/**
 	Método llamado cada frame. LLama al update de todos sus componentes.
 	*/
-	void update();
+	virtual void update();
 
 	/**
 	Si tiene un componente del tipo type lo devuelve, sino devuelve nullptr

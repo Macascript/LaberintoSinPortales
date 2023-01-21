@@ -4,6 +4,7 @@
 #include "../../Engine/Commons/common.h"
 
 class Scene;
+class Camera;
 
 class SceneManager {
 private:

@@ -39,6 +39,7 @@
     <ClCompile Include="Engine\Render\render_opengl.cpp" />
     <ClCompile Include="Object\Components\Button\button.cpp" />
     <ClCompile Include="Object\Components\Collider\boxCollider.cpp" />
+    <ClCompile Include="Object\Components\Collider\meshCollider.cpp" />
     <ClCompile Include="Object\Components\Text\text_opengl.cpp" />
     <ClCompile Include="Engine\Window\window_metal.cpp" />
     <ClCompile Include="Engine\Window\window_opengl.cpp" />
@@ -46,7 +47,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Object\component.cpp" />
     <ClCompile Include="Object\Components\Camera\camera.cpp" />
-    <ClCompile Include="Object\Components\Collider\collider.cpp" />
     <ClCompile Include="Object\Components\Mesh\mesh.cpp" />
     <ClCompile Include="Object\Components\Transform\transform.cpp" />
     <ClCompile Include="Object\Components\UI\ui.cpp" />
@@ -54,6 +54,7 @@
     <ClCompile Include="Object\Light\orbitalLight.cpp" />
     <ClCompile Include="Object\object.cpp" />
     <ClCompile Include="Scene\scene.cpp" />
+    <ClCompile Include="Scene\spatialHashing.cpp" />
     <ClCompile Include="User\SceneManager\scenemanager.cpp" />
     <ClCompile Include="User\Scripts\LaberintoScene.cpp" />
     <ClCompile Include="User\Scripts\LookAtFollower.cpp" />
@@ -80,6 +81,7 @@
     <ClInclude Include="Engine\Render\render.h" />
     <ClInclude Include="Object\Components\Button\button.h" />
     <ClInclude Include="Object\Components\Collider\boxCollider.h" />
+    <ClInclude Include="Object\Components\Collider\meshCollider.h" />
     <ClInclude Include="Object\Components\Text\text.h" />
     <ClInclude Include="Engine\Window\window.h" />
     <ClInclude Include="Object\component.h" />
@@ -92,6 +94,8 @@
     <ClInclude Include="Object\Light\orbitalLight.h" />
     <ClInclude Include="Object\object.h" />
     <ClInclude Include="Scene\scene.h" />
+    <ClInclude Include="Scene\spatialHashing.h" />
+    <ClInclude Include="User\engine.h" />
     <ClInclude Include="User\SceneManager\scenemanager.h" />
     <ClInclude Include="User\Scripts\LaberintoScene.h" />
     <ClInclude Include="User\Scripts\LookAtFollower.h" />

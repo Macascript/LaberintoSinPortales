@@ -3,6 +3,8 @@
 #include "../Collider/collider.h"
 
 class Collider;
+class Component;
+class Object;
 
 class Button:public Component 
 {

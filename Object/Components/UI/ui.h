@@ -1,11 +1,12 @@
 #pragma once
 
-#include "../../../Scene/scene.h"
+// #include "../../../Scene/scene.h"
 //#include "../../../Engine/Datatypes/Utils/utils.h"
-//#include "../Camera/camera.h"
-//#include "../../component.h"
+#include "../Camera/camera.h"
+#include "../../component.h"
 
 class Camera;
+class Component;
 
 class UI: public Component{
 protected:

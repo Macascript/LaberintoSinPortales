@@ -2,6 +2,7 @@
 #include "../../Scene/scene.h"
 #include "../Datatypes/vertex.h"
 #include "../../Object/Components/Mesh/mesh.h"
+#include "../../Object/Components/Text/text.h"
 
 typedef struct bufferObject_t {
 	unsigned int abo; //array buffer object ID

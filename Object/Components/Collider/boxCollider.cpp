@@ -1,8 +1,8 @@
 # include "boxCollider.h"
 
 BoxCollider::BoxCollider(Camera* camera){
-    type = "boxCollider";
-    gameObject->transform->computeMatrix();
+    type = "collider";
+    // gameObject->transform->computeMatrix();
     this->camera = camera;
 }
 
@@ -14,7 +14,16 @@ void BoxCollider::update(){
     
 }
 
-bool BoxCollider::collision(BoxCollider* c2){
+bool BoxCollider::collision(Collider* c2)
+{
+    if (instanceof<MeshCollider>(c2))
+        return collisionMesh((MeshCollider*)c2);
+    if (instanceof<BoxCollider>(c2))
+        return collisionBox((BoxCollider*)c2);
+    return false;
+}
+
+bool BoxCollider::collisionBox(BoxCollider* c2){
     Vec3 pos = gameObject->transform->position;
     float xMin = pos.x() + offset.x() - bounds.x();
     float yMin = pos.y() + offset.y() - bounds.y();
@@ -44,6 +53,8 @@ bool BoxCollider::collision(BoxCollider* c2){
 
 	return false;
 }
+
+bool BoxCollider::collisionMesh(MeshCollider* c2) { return false; }
 
 bool BoxCollider::collisionPoint(Vec2 v2){
     Vec3 pos = gameObject->transform->position;

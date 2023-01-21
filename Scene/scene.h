@@ -1,16 +1,17 @@
 #pragma once
 #include "../Object/Components/Camera/camera.h"
 #include "../Object/Components/Mesh/mesh.h"
-#include "../Object/Components/Text/text.h"
+//#include "../Object/Components/Text/text.h"
 #include "../Object/Components/Button/button.h"
 #include "../User/SceneManager/scenemanager.h"
 #include "../Object/Light/light.h"
+#include "spatialHashing.h"
 #define USER_PATH ".\\User\\"
-#define windowWidth 960
-#define windowHeight 720
 
 class SceneManager;
 class Camera;
+class Light;
+class SpatialHashing;
 
 class Scene {
 private:
@@ -19,6 +20,7 @@ private:
 	void addObject(Object* obj);
 	void removeObject(Object* obj);
 	std::vector<Light*>* lightList;
+	SpatialHashing* sceneGrid = nullptr;
 
 protected:
 	Camera* camera = nullptr;

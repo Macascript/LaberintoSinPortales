@@ -1,6 +1,8 @@
 #pragma once
 
 #include "../../Object/Components/UI/ui.h" 
+#include "../../Scene/scene.h"
+#include "../../Object/Components/Text/text.h"
 
 class MenuScene: public Scene{
 public:

@@ -15,6 +15,8 @@
 #define guiFshader ".\\Engine\\Datatypes\\Shader\\defaultguifshader.glsl"
 #define defaultTexture ".\\Engine\\Datatypes\\Texture\\defaulttexture.png"
 
+class Component;
+
 class Mesh : public Component {
 public:
     //atributos

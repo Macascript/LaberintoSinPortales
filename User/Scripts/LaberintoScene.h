@@ -4,6 +4,8 @@
 #define COLUMNSLAB 18 
 #include "../../Object/Components/UI/ui.h"
 #include "../../Object/Components/Collider/boxCollider.h"
+#include "../../Scene/scene.h"
+#include "../../Object/Components/Text/text.h"
 
 class LaberintoScene : public Scene {
 private:

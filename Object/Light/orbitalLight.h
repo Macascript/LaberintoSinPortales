@@ -14,5 +14,5 @@ public:
         this->radio = radio;
         this->angle = startAngle;
     };
-    virtual void step() override;
+    virtual void update() override;
 };

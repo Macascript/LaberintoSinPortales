@@ -1,5 +1,5 @@
-#include "collider.h"
-#include "../../../engine/datatypes/vertex.h"
+#include "meshCollider.h"
+
 
 Box2D::Box2D(){
 
@@ -135,30 +135,39 @@ void Box3D::update(){
 		}
 }
 
-Collider::Collider(Object* obj)
+MeshCollider::MeshCollider(Object* obj)
 {
-    type = "meshCollider";
+    type = "collider";
 	boxList=new std::vector<BV*>();
 	int numtriangles=((Mesh*)obj->getComponent("mesh"))->faceList->size() / 3;
 	//newbox->init(obj);
 	for(int i=0;i<numtriangles;i++)
 	{	
 		BV* newbox;
-		if((UI*)obj->getComponent("ui")) newbox = new Box2D();
+		if(obj->getComponent("ui")) newbox = new Box2D();
 		else newbox = new Box3D();
 		newbox->init(obj, i);
 		boxList->push_back(newbox);
 	}	
 }
 	
-void Collider::update(){
+void MeshCollider::update(){
 	for(auto it= boxList->begin();it!= boxList->end();it++)
 		(*it)->update();	
 }
 
-bool Collider::collision(Collider* c2){
-        auto it1= boxList->begin();
+bool MeshCollider::collision(Collider* c2)
+{
+	if (instanceof<MeshCollider>(c2))
+		return collisionMesh((MeshCollider*)c2);
+	if (instanceof<BoxCollider>(c2))
+		return collisionBox((BoxCollider*)c2);
+	return false;
+}
 
+bool MeshCollider::collisionMesh(MeshCollider* c2){
+        auto it1= boxList->begin();
+		
         bool collision=false;
         while(!collision && it1!= boxList->end())
 		{
@@ -173,9 +182,11 @@ bool Collider::collision(Collider* c2){
         return collision;	
 }
 
+bool MeshCollider::collisionBox(BoxCollider* c2) { return false; }
 
 
-bool Collider::collisionPoint(Vec2 v2)
+
+bool MeshCollider::collisionPoint(Vec2 v2)
 {
     std::cout<<boxList->size()<<std::endl;
 	auto it1 = boxList->begin();

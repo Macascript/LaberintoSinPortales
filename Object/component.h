@@ -1,8 +1,11 @@
 #pragma once
-#include "../Engine/Commons/common.h"
+class Component;
+
+//#include "../Engine/Commons/common.h"
 #include "../Object/object.h"
 
 class Object;
+class UI;
 
 /**
 	Clase padre de todos los componentes.

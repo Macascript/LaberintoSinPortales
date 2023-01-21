@@ -2,6 +2,8 @@
 #include "../../Engine/Commons/common.h"
 #include "../object.h"
 
+class Object;
+
 class Light: public Object{
 public:
     float intensityAmbiental = 0.5f; //0-1
@@ -16,6 +18,4 @@ public:
     Light(Vec3 position);
     Light(Vec3 position, Vec4 color);
     Light(Vec3 position, Vec4 color, float iAmb, float iDif, float iSpec, float kAmb, float kDif, float kSpec, float shineniness);
-
-    virtual void step();
 };
