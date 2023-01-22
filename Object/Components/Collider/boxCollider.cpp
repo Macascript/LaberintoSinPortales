@@ -16,6 +16,7 @@ void BoxCollider::update(){
 
 bool BoxCollider::collision(Collider* c2)
 {
+    if (c2 == nullptr) return false;
     if (instanceof<MeshCollider>(c2))
         return collisionMesh((MeshCollider*)c2);
     if (instanceof<BoxCollider>(c2))
@@ -26,24 +27,24 @@ bool BoxCollider::collision(Collider* c2)
 bool BoxCollider::collisionBox(BoxCollider* c2){
     Vec3 pos = gameObject->transform->position;
     Vec3 scale = gameObject->transform->scale;
-    float xMin = pos.x() + offset.x() * scale.x() - bounds.x() * scale.x();
-    float yMin = pos.y() + offset.y() * scale.y() - bounds.y() * scale.y();
-    float zMin = pos.z() + offset.z() * scale.z() - bounds.z() * scale.z();
-    float xMax = pos.x() + offset.x() * scale.x() + bounds.x() * scale.x();
-    float yMax = pos.y() + offset.y() * scale.y() + bounds.y() * scale.y();
-    float zMax = pos.z() + offset.z() * scale.z() + bounds.z() * scale.z();
+    float xMin = pos.x() + offset.x() * scale.x() - bounds.x()/2 * scale.x();
+    float yMin = pos.y() + offset.y() * scale.y() - bounds.y()/2 * scale.y();
+    float zMin = pos.z() + offset.z() * scale.z() - bounds.z()/2 * scale.z();
+    float xMax = pos.x() + offset.x() * scale.x() + bounds.x()/2 * scale.x();
+    float yMax = pos.y() + offset.y() * scale.y() + bounds.y()/2 * scale.y();
+    float zMax = pos.z() + offset.z() * scale.z() + bounds.z()/2 * scale.z();
 
     Vec3 posC2 = c2->gameObject->transform->position;
     Vec3 scaleC2 = c2->gameObject->transform->scale;
 
-    float xMinC2 = posC2.x() + c2->offset.x() * scaleC2.x() - c2->bounds.x() * scaleC2.x();
-    float yMinC2 = posC2.y() + c2->offset.y() * scaleC2.y() - c2->bounds.y() * scaleC2.y();
-    float zMinC2 = posC2.z() + c2->offset.z() * scaleC2.z() - c2->bounds.z() * scaleC2.z();
-    float xMaxC2 = posC2.x() + c2->offset.x() * scaleC2.x() + c2->bounds.x() * scaleC2.x();
-    float yMaxC2 = posC2.y() + c2->offset.y() * scaleC2.y() + c2->bounds.y() * scaleC2.y();
-    float zMaxC2 = posC2.z() + c2->offset.z() * scaleC2.z() + c2->bounds.z() * scaleC2.z();
+    float xMinC2 = posC2.x() + c2->offset.x() * scaleC2.x() - c2->bounds.x()/2 * scaleC2.x();
+    float yMinC2 = posC2.y() + c2->offset.y() * scaleC2.y() - c2->bounds.y()/2 * scaleC2.y();
+    float zMinC2 = posC2.z() + c2->offset.z() * scaleC2.z() - c2->bounds.z()/2 * scaleC2.z();
+    float xMaxC2 = posC2.x() + c2->offset.x() * scaleC2.x() + c2->bounds.x()/2 * scaleC2.x();
+    float yMaxC2 = posC2.y() + c2->offset.y() * scaleC2.y() + c2->bounds.y()/2 * scaleC2.y();
+    float zMaxC2 = posC2.z() + c2->offset.z() * scaleC2.z() + c2->bounds.z()/2 * scaleC2.z();
 
-    if((xMin<xMaxC2 && xMin>xMinC2)&&(yMin<yMaxC2 && yMin>yMinC2)&&(zMin<zMaxC2 && zMin>zMinC2)) return true;
+    /*if((xMin<xMaxC2 && xMin>xMinC2)&&(yMin<yMaxC2 && yMin>yMinC2)&&(zMin<zMaxC2 && zMin>zMinC2)) return true;
     if((xMin<xMaxC2 && xMin>xMinC2)&&(yMax<yMaxC2 && yMax>yMinC2)&&(zMax<zMaxC2 && zMax>zMinC2)) return true;
     if((xMax<xMaxC2 && xMax>xMinC2)&&(yMin<yMaxC2 && yMin>yMinC2)&&(zMin<zMaxC2 && zMin>zMinC2)) return true;
     if((xMax<xMaxC2 && xMax>xMinC2)&&(yMax<yMaxC2 && yMax>yMinC2)&&(zMax<zMaxC2 && zMax>zMinC2)) return true;
@@ -51,7 +52,9 @@ bool BoxCollider::collisionBox(BoxCollider* c2){
     if((xMin<xMaxC2 && xMin>xMinC2)&&(yMin<yMaxC2 && yMin>yMinC2)&&(zMax<zMaxC2 && zMax>zMinC2)) return true;
     if((xMin<xMaxC2 && xMin>xMinC2)&&(yMax<yMaxC2 && yMax>yMinC2)&&(zMin<zMaxC2 && zMin>zMinC2)) return true;
     if((xMax<xMaxC2 && xMax>xMinC2)&&(yMin<yMaxC2 && yMin>yMinC2)&&(zMax<zMaxC2 && zMax>zMinC2)) return true;
-    if((xMax<xMaxC2 && xMax>xMinC2)&&(yMax<yMaxC2 && yMax>yMinC2)&&(zMin<zMaxC2 && zMin>zMinC2)) return true;
+    if((xMax<xMaxC2 && xMax>xMinC2)&&(yMax<yMaxC2 && yMax>yMinC2)&&(zMin<zMaxC2 && zMin>zMinC2)) return true;*/
+
+    if ((xMin<xMaxC2 && xMax>xMinC2) && (yMin<yMaxC2 && yMax>yMinC2) && (zMin<zMaxC2 && zMax>zMinC2)) return true;
 
 	return false;
 }
@@ -63,14 +66,14 @@ bool BoxCollider::collisionPoint(Vec2 v2){
     Mat4 m = gameObject->transform->getMatrix();
     Mat4 proj = camera->getProjectionMatrix();
     Mat4 view = camera->viewMatrix;
-    Vec4 _000 = proj * view * m * Vec4(pos + offset - bounds,1.0f); // (0, 0, 0)
-    Vec4 _001 = proj * view * m * Vec4(pos + offset + Vec3(-bounds.x(),-bounds.y(),bounds.z()),1.0f); // (0, 0, 1)
-    Vec4 _010 = proj * view * m * Vec4(pos + offset + Vec3(-bounds.x(),bounds.y(),-bounds.z()), 1.0f); // (0, 1, 0)
-    Vec4 _011 = proj * view * m * Vec4(pos + offset + Vec3(-bounds.x(),bounds.y(),bounds.z()), 1.0f); // (0, 1, 1)
-    Vec4 _100 = proj * view * m * Vec4(pos + offset + Vec3(bounds.x(),-bounds.y(),-bounds.z()), 1.0f); // (1, 0, 0)
-    Vec4 _101 = proj * view * m * Vec4(pos + offset + Vec3(bounds.x(),-bounds.y(),bounds.z()), 1.0f); // (1, 0, 1)
-    Vec4 _110 = proj * view * m * Vec4(pos + offset + Vec3(bounds.x(),bounds.y(),-bounds.z()), 1.0f); // (1, 1, 0)
-    Vec4 _111 = proj * view * m * Vec4(pos + offset + bounds, 1.0f); // (1, 1, 1)
+    Vec4 _000 = proj * view * m * Vec4(pos + offset - bounds/2,1.0f); // (0, 0, 0)
+    Vec4 _001 = proj * view * m * Vec4(pos + offset + Vec3(-bounds.x()/2,-bounds.y()/2,bounds.z()/2),1.0f); // (0, 0, 1)
+    Vec4 _010 = proj * view * m * Vec4(pos + offset + Vec3(-bounds.x()/2,bounds.y()/2,-bounds.z()/2), 1.0f); // (0, 1, 0)
+    Vec4 _011 = proj * view * m * Vec4(pos + offset + Vec3(-bounds.x()/2,bounds.y()/2,bounds.z()/2), 1.0f); // (0, 1, 1)
+    Vec4 _100 = proj * view * m * Vec4(pos + offset + Vec3(bounds.x()/2,-bounds.y()/2,-bounds.z()/2), 1.0f); // (1, 0, 0)
+    Vec4 _101 = proj * view * m * Vec4(pos + offset + Vec3(bounds.x()/2,-bounds.y()/2,bounds.z()/2), 1.0f); // (1, 0, 1)
+    Vec4 _110 = proj * view * m * Vec4(pos + offset + Vec3(bounds.x()/2,bounds.y()/2,-bounds.z()/2), 1.0f); // (1, 1, 0)
+    Vec4 _111 = proj * view * m * Vec4(pos + offset + bounds/2, 1.0f); // (1, 1, 1)
     float xMin = _000.x();
     float yMin = _000.y();
     float xMax = _000.x();

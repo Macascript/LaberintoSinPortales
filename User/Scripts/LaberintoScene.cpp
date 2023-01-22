@@ -41,7 +41,8 @@ void LaberintoScene::init() {
     Light* newLight2 = new Light(Vec3(0, 3, 0), Vec4(1.0f,0.0f,0.0f,1.0f));
     addLight(newLight2);
 
-    Collider* colliderCamera = new BoxCollider(camera);
+    BoxCollider* colliderCamera = new BoxCollider(camera);
+    colliderCamera->bounds = Vec3(1, 1, 1);
     camera->addComponent(colliderCamera);
 
     //Object* debugBox = new Object();
@@ -63,6 +64,22 @@ void LaberintoScene::createCelda(std::string modelo, int x, int z, int angulo, b
     /*Collider* colliderCelda = new MeshCollider(celda);
     celda->addComponent(colliderCelda);*/
     BoxCollider* c;
+    c = new BoxCollider(camera);
+    celda->addComponent(c);
+    c->offset = Vec3(9.5f,0,9.5f);
+    c->bounds = Vec3(1,9*2,1);
+    c = new BoxCollider(camera);
+    celda->addComponent(c);
+    c->offset = Vec3(-9.5f,0,9.5f);
+    c->bounds = Vec3(1,9*2,1);
+    c = new BoxCollider(camera);
+    celda->addComponent(c);
+    c->offset = Vec3(9.5f,0,-9.5f);
+    c->bounds = Vec3(1,9*2,1);
+    c = new BoxCollider(camera);
+    celda->addComponent(c);
+    c->offset = Vec3(-9.5f,0,-9.5f);
+    c->bounds = Vec3(1,9*2,1);
     if (primera) {
         c = new BoxCollider(camera);
         celda->addComponent(c);
@@ -121,32 +138,32 @@ void LaberintoScene::genLaberinto() {
                 createCelda(USER_PATH "Models\\celda0.trg",x,z,0,false,false,false,false);
                 break;
             case 'A':
-                createCelda(USER_PATH "Models\\celda3.trg",x,z,180,true,false,true,true);
+                createCelda(USER_PATH "Models\\celda3.trg",x,z,180,true, true,true, false);
                 //createCelda(USER_PATH "Models\\celda3.trg",x,z,0,true,false,true,true);
                 break;
             case 'B':
-                createCelda(USER_PATH "Models\\celda3.trg",x,z,90,true,true,false,true);
+                createCelda(USER_PATH "Models\\celda3.trg",x,z,90, false,true, true,true);
                 break;
             case 'C':
-                createCelda(USER_PATH "Models\\celda3.trg",x,z,0,true,true,true,false);
+                createCelda(USER_PATH "Models\\celda3.trg",x,z,0, true, false, true, true);
                 //createCelda(USER_PATH "Models\\celda3.trg",x,z,180,true,true,true,false);
                 break;
             case 'D':
-                createCelda(USER_PATH "Models\\celda3.trg",x,z,270,false,true,true,true);
+                createCelda(USER_PATH "Models\\celda3.trg",x,z,270, true,true, false,true);
                 break;
             case 'E':
-                createCelda(USER_PATH "Models\\celda2.trg",x,z,180,true,false,false,true);
+                createCelda(USER_PATH "Models\\celda2.trg",x,z,180,false,true,true,false);
                 //createCelda(USER_PATH "Models\\celda2.trg",x,z,0,true,false,false,true);
                 break;
             case 'F':
-                createCelda(USER_PATH "Models\\celda2.trg",x,z,90,true,true,false,false);
+                createCelda(USER_PATH "Models\\celda2.trg",x,z,90,false,false,true,true);
                 break;
             case 'G':
-                createCelda(USER_PATH "Models\\celda2.trg",x,z,0,false,true,true,false);
+                createCelda(USER_PATH "Models\\celda2.trg",x,z,0,true,false,false,true);
                 //createCelda(USER_PATH "Models\\celda2.trg",x,z,180,false,true,true,false);
                 break;
             case 'H':
-                createCelda(USER_PATH "Models\\celda2.trg",x,z,270,false,false,true,true);
+                createCelda(USER_PATH "Models\\celda2.trg",x,z,270,true,true,false,false);
                 break;
             case 'I':
                 createCelda(USER_PATH "Models\\celda2paralelo.trg",x,z,0,true,false,true,false);
@@ -155,18 +172,18 @@ void LaberintoScene::genLaberinto() {
                 createCelda(USER_PATH "Models\\celda2paralelo.trg",x,z,90,false,true,false,true);
                 break;
             case 'K':
-                createCelda(USER_PATH "Models\\probandoprobando.trg",x,z,180,false,false,false,true);
+                createCelda(USER_PATH "Models\\probandoprobando.trg",x,z,180,false,true,false,false);
                 //createCelda(USER_PATH "Models\\probandoprobando.trg",x,z,0,false,false,false,true);
                 break;
             case 'L':
-                createCelda(USER_PATH "Models\\probandoprobando.trg",x,z,90,true,false,false,false);
+                createCelda(USER_PATH "Models\\probandoprobando.trg",x,z,90,false,false,true,false);
                 break;
             case 'M':
-                createCelda(USER_PATH "Models\\probandoprobando.trg",x,z,0,false,true,false,false);
+                createCelda(USER_PATH "Models\\probandoprobando.trg",x,z,0,false,false,false,true);
                 //createCelda(USER_PATH "Models\\probandoprobando.trg",x,z,180,false,true,false,false);
                 break;
             case 'N':
-                createCelda(USER_PATH "Models\\probandoprobando.trg",x,z,270,false,false,true,false);
+                createCelda(USER_PATH "Models\\probandoprobando.trg",x,z,270,true,false,false,false);
                 break;
             case 'P':
                 createCelda(USER_PATH "Models\\celda4.trg", x, z,0,true,true,true,true);

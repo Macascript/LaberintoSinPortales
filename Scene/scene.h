@@ -38,4 +38,5 @@ public:
 	std::vector<Light*>* getLights();
 	void addLight(Light* light);
 	std::vector<Object*>* getCollisions(Object* obj);
+	std::vector<Object*>* getCollisions(Collider* col);
 };

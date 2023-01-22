@@ -73,7 +73,7 @@ Box3D::Box3D(){
 bool Box3D::collision(BV* _b2){
 	Box3D* b2=(Box3D*)_b2;
 	
-        if((xMin<b2->xMax && xMin>b2->xMin)&&(yMin<b2->yMax && yMin>b2->yMin)&&(zMin<b2->zMax && zMin>b2->zMin)) return true;
+        /*if((xMin<b2->xMax && xMin>b2->xMin)&&(yMin<b2->yMax && yMin>b2->yMin)&&(zMin<b2->zMax && zMin>b2->zMin)) return true;
         if((xMin<b2->xMax && xMin>b2->xMin)&&(yMax<b2->yMax && yMax>b2->yMin)&&(zMax<b2->zMax && zMax>b2->zMin)) return true;
         if((xMax<b2->xMax && xMax>b2->xMin)&&(yMin<b2->yMax && yMin>b2->yMin)&&(zMin<b2->zMax && zMin>b2->zMin)) return true;
         if((xMax<b2->xMax && xMax>b2->xMin)&&(yMax<b2->yMax && yMax>b2->yMin)&&(zMax<b2->zMax && zMax>b2->zMin)) return true;
@@ -81,7 +81,9 @@ bool Box3D::collision(BV* _b2){
         if((xMin<b2->xMax && xMin>b2->xMin)&&(yMin<b2->yMax && yMin>b2->yMin)&&(zMax<b2->zMax && zMax>b2->zMin)) return true;
         if((xMin<b2->xMax && xMin>b2->xMin)&&(yMax<b2->yMax && yMax>b2->yMin)&&(zMin<b2->zMax && zMin>b2->zMin)) return true;
         if((xMax<b2->xMax && xMax>b2->xMin)&&(yMin<b2->yMax && yMin>b2->yMin)&&(zMax<b2->zMax && zMax>b2->zMin)) return true;
-        if((xMax<b2->xMax && xMax>b2->xMin)&&(yMax<b2->yMax && yMax>b2->yMin)&&(zMin<b2->zMax && zMin>b2->zMin)) return true;
+        if((xMax<b2->xMax && xMax>b2->xMin)&&(yMax<b2->yMax && yMax>b2->yMin)&&(zMin<b2->zMax && zMin>b2->zMin)) return true;*/
+
+		if ((xMin<b2->xMax && xMax>b2->xMin) && (yMin<b2->yMax && yMax>b2->yMin) && (zMin<b2->zMax && zMax>b2->zMin)) return true;
 	
 	return false;
 }
@@ -158,6 +160,7 @@ void MeshCollider::update(){
 
 bool MeshCollider::collision(Collider* c2)
 {
+	if (c2 == nullptr) return false;
 	if (instanceof<MeshCollider>(c2))
 		return collisionMesh((MeshCollider*)c2);
 	if (instanceof<BoxCollider>(c2))

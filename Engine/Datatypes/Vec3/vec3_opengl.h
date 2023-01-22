@@ -23,4 +23,5 @@ public:
     Vec3 operator + (Vec3 vec3);
     Vec3 operator * (float constant);
     Vec3 operator * (Vec3 vec3);
+    Vec3 operator / (float constant);
 };

@@ -41,6 +41,15 @@ Component* Object::getComponent(std::string type, int index){
 	return (*(*components)[type])[index];
 }
 
+std::vector<Component*>* Object::getComponents(std::string type) {
+
+	if (components->count(type) == 0) { // Precondition
+		return nullptr;
+	}
+
+	return (*components)[type];
+}
+
 void Object::addComponent(Component* component){
 	// if (components->count(component->getType())){ // Precondition
 	// 	std::cout<<"ERROR: The object "<<id<<" already has a component of type "<<component->getType()<<std::endl;

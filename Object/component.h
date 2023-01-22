@@ -48,4 +48,5 @@ public:
 	std::string getType();
 	~Component();
 	void setGameObject(Object* obj);
+	Object* getGameObject();
 };

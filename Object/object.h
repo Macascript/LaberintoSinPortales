@@ -68,6 +68,8 @@ public:
 	*/
 	Component* getComponent(std::string type, int index = 0);
 
+	std::vector<Component*>* getComponents(std::string type);
+
 	/**
 	Añade el componente que se pasa por parámetro.
 	Si ya contaba con un componente del mismo tipo, imprime error y no hace nada.
