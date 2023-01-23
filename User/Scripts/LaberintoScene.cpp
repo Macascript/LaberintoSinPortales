@@ -34,7 +34,7 @@ void LaberintoScene::init() {
     Object* textTime = new Object();
     newTextTime = new Text(to_string_with_precision(Input::getTime(), 2) + " s", defaultTextFontSize, Vec3(0.0f, 1.0f, 0));
     UI* newInterfaceTextTime = new UI(camera);
-    newInterfaceTextTime->rectPosition = Vec2(0.82, 0.03);
+    newInterfaceTextTime->rectPosition = Vec2(0.79, 0.03);
     //newInterfaceText->layer = 2;
     textTime->addComponent(newTextTime);
     textTime->addComponent(newInterfaceTextTime);
