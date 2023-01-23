@@ -21,3 +21,12 @@ template<typename Base, typename T>
 inline bool instanceof(const T *ptr) {
    return dynamic_cast<const Base*>(ptr) != nullptr;
 }
+
+template <typename T>
+std::string to_string_with_precision(const T a_value, const int n = 3)
+{
+    std::ostringstream out;
+    out.precision(n);
+    out << std::fixed << a_value;
+    return out.str();
+}
