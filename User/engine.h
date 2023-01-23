@@ -7,6 +7,7 @@ class Camera;
 class Collider;
 class BoxCollider;
 class MeshCollider;
+class SphereCollider;
 class Mesh;
 class Text;
 class UI;
@@ -33,6 +34,7 @@ class SpatialHashing;
 #include "../Object/Components/Camera/camera.h"
 #include "../Object/Components/Collider/collider.h"
 #include "../Object/Components/Collider/boxCollider.h"
+#include "../Object/Components/Collider/sphereCollider.h"
 #include "../Object/Components/Collider/meshCollider.h"
 #include "../Object/Components/Mesh/mesh.h"
 #include "../Object/Components/Text/text.h"

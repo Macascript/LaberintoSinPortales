@@ -51,7 +51,7 @@ void Scene::update(){
     addedObjectList->clear();
 	
 	sceneGrid->update();
-	camera->step();
+	camera->update();
 	for(auto it=objectList->begin();
 		it!= objectList->end();
 		it++)

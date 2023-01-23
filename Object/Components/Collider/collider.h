@@ -8,7 +8,6 @@ class UI;
 
 class Collider : public Component {
 public:
-	virtual void update() = 0;
 	virtual bool collision(Collider* c2) = 0;
 	virtual bool collisionPoint(Vec2 v2) = 0;
 };

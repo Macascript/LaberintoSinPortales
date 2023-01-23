@@ -10,8 +10,9 @@ BoxCollider::BoxCollider(Camera* camera){
 
 // }
 
-void BoxCollider::update(){
-    
+void BoxCollider::update()
+{
+
 }
 
 bool BoxCollider::collision(Collider* c2)
@@ -21,28 +22,31 @@ bool BoxCollider::collision(Collider* c2)
         return collisionMesh((MeshCollider*)c2);
     if (instanceof<BoxCollider>(c2))
         return collisionBox((BoxCollider*)c2);
+    if (instanceof<SphereCollider>(c2))
+        return collisionSphere((SphereCollider*)c2);
     return false;
 }
 
-bool BoxCollider::collisionBox(BoxCollider* c2){
+bool BoxCollider::collisionBox(BoxCollider* c2)
+{
     Vec3 pos = gameObject->transform->position;
     Vec3 scale = gameObject->transform->scale;
-    float xMin = pos.x() + offset.x() * scale.x() - bounds.x()/2 * scale.x();
-    float yMin = pos.y() + offset.y() * scale.y() - bounds.y()/2 * scale.y();
-    float zMin = pos.z() + offset.z() * scale.z() - bounds.z()/2 * scale.z();
-    float xMax = pos.x() + offset.x() * scale.x() + bounds.x()/2 * scale.x();
-    float yMax = pos.y() + offset.y() * scale.y() + bounds.y()/2 * scale.y();
-    float zMax = pos.z() + offset.z() * scale.z() + bounds.z()/2 * scale.z();
+    float xMin = pos.x() + offset.x() * scale.x() - bounds.x() / 2 * scale.x();
+    float yMin = pos.y() + offset.y() * scale.y() - bounds.y() / 2 * scale.y();
+    float zMin = pos.z() + offset.z() * scale.z() - bounds.z() / 2 * scale.z();
+    float xMax = pos.x() + offset.x() * scale.x() + bounds.x() / 2 * scale.x();
+    float yMax = pos.y() + offset.y() * scale.y() + bounds.y() / 2 * scale.y();
+    float zMax = pos.z() + offset.z() * scale.z() + bounds.z() / 2 * scale.z();
 
     Vec3 posC2 = c2->gameObject->transform->position;
     Vec3 scaleC2 = c2->gameObject->transform->scale;
 
-    float xMinC2 = posC2.x() + c2->offset.x() * scaleC2.x() - c2->bounds.x()/2 * scaleC2.x();
-    float yMinC2 = posC2.y() + c2->offset.y() * scaleC2.y() - c2->bounds.y()/2 * scaleC2.y();
-    float zMinC2 = posC2.z() + c2->offset.z() * scaleC2.z() - c2->bounds.z()/2 * scaleC2.z();
-    float xMaxC2 = posC2.x() + c2->offset.x() * scaleC2.x() + c2->bounds.x()/2 * scaleC2.x();
-    float yMaxC2 = posC2.y() + c2->offset.y() * scaleC2.y() + c2->bounds.y()/2 * scaleC2.y();
-    float zMaxC2 = posC2.z() + c2->offset.z() * scaleC2.z() + c2->bounds.z()/2 * scaleC2.z();
+    float xMinC2 = posC2.x() + c2->offset.x() * scaleC2.x() - c2->bounds.x() / 2 * scaleC2.x();
+    float yMinC2 = posC2.y() + c2->offset.y() * scaleC2.y() - c2->bounds.y() / 2 * scaleC2.y();
+    float zMinC2 = posC2.z() + c2->offset.z() * scaleC2.z() - c2->bounds.z() / 2 * scaleC2.z();
+    float xMaxC2 = posC2.x() + c2->offset.x() * scaleC2.x() + c2->bounds.x() / 2 * scaleC2.x();
+    float yMaxC2 = posC2.y() + c2->offset.y() * scaleC2.y() + c2->bounds.y() / 2 * scaleC2.y();
+    float zMaxC2 = posC2.z() + c2->offset.z() * scaleC2.z() + c2->bounds.z() / 2 * scaleC2.z();
 
     /*if((xMin<xMaxC2 && xMin>xMinC2)&&(yMin<yMaxC2 && yMin>yMinC2)&&(zMin<zMaxC2 && zMin>zMinC2)) return true;
     if((xMin<xMaxC2 && xMin>xMinC2)&&(yMax<yMaxC2 && yMax>yMinC2)&&(zMax<zMaxC2 && zMax>zMinC2)) return true;
@@ -53,13 +57,51 @@ bool BoxCollider::collisionBox(BoxCollider* c2){
     if((xMin<xMaxC2 && xMin>xMinC2)&&(yMax<yMaxC2 && yMax>yMinC2)&&(zMin<zMaxC2 && zMin>zMinC2)) return true;
     if((xMax<xMaxC2 && xMax>xMinC2)&&(yMin<yMaxC2 && yMin>yMinC2)&&(zMax<zMaxC2 && zMax>zMinC2)) return true;
     if((xMax<xMaxC2 && xMax>xMinC2)&&(yMax<yMaxC2 && yMax>yMinC2)&&(zMin<zMaxC2 && zMin>zMinC2)) return true;*/
-
+    //std::cout << "Objeto: " << "( " << xMin << ", " << yMin << ", " << zMin << " )" << "( " << xMax << ", " << yMax << ", " << zMax << " )" << std::endl;
+    //std::cout << "Camara: " << "( " << c2->xMin << ", " << c2->yMin << ", " << c2->zMin << " )" << "( " << c2->xMax << ", " << c2->yMax << ", " << c2->zMax << " )" << std::endl;
+    
     if ((xMin<xMaxC2 && xMax>xMinC2) && (yMin<yMaxC2 && yMax>yMinC2) && (zMin<zMaxC2 && zMax>zMinC2)) return true;
 
 	return false;
 }
 
-bool BoxCollider::collisionMesh(MeshCollider* c2) { return false; }
+bool BoxCollider::collisionMesh(MeshCollider* c2)
+{
+    auto it1 = c2->boxList->begin();
+
+    bool collision = false;
+    while (!collision && it1 != c2->boxList->end())
+    {
+        //TODO
+        it1++;
+    }
+    return collision;
+}
+
+bool BoxCollider::collisionSphere(SphereCollider* c2)
+{ 
+    Vec3 pos = gameObject->transform->position;
+    Vec3 scale = gameObject->transform->scale;
+    float xMin = pos.x() + offset.x() * scale.x() - bounds.x() / 2 * scale.x();
+    float yMin = pos.y() + offset.y() * scale.y() - bounds.y() / 2 * scale.y();
+    float zMin = pos.z() + offset.z() * scale.z() - bounds.z() / 2 * scale.z();
+    float xMax = pos.x() + offset.x() * scale.x() + bounds.x() / 2 * scale.x();
+    float yMax = pos.y() + offset.y() * scale.y() + bounds.y() / 2 * scale.y();
+    float zMax = pos.z() + offset.z() * scale.z() + bounds.z() / 2 * scale.z();
+
+    float x = std::max(xMin, std::min(c2->getCenter().x(), xMax));
+    float y = std::max(yMin, std::min(c2->getCenter().y(), yMax));
+    float z = std::max(zMin, std::min(c2->getCenter().z(), zMax));
+
+    // this is the same as isPointInsideSphere
+    float distance = std::sqrt(
+        (x - c2->getCenter().x()) * (x - c2->getCenter().x()) +
+        (y - c2->getCenter().y()) * (y - c2->getCenter().y()) +
+        (z - c2->getCenter().z()) * (z - c2->getCenter().z())
+    );
+
+    return distance < c2->radius;
+}
 
 bool BoxCollider::collisionPoint(Vec2 v2){
     Vec3 pos = gameObject->transform->position;

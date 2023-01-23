@@ -40,6 +40,7 @@
     <ClCompile Include="Object\Components\Button\button.cpp" />
     <ClCompile Include="Object\Components\Collider\boxCollider.cpp" />
     <ClCompile Include="Object\Components\Collider\meshCollider.cpp" />
+    <ClCompile Include="Object\Components\Collider\sphereCollider.cpp" />
     <ClCompile Include="Object\Components\Text\text_opengl.cpp" />
     <ClCompile Include="Engine\Window\window_metal.cpp" />
     <ClCompile Include="Engine\Window\window_opengl.cpp" />
@@ -82,6 +83,7 @@
     <ClInclude Include="Object\Components\Button\button.h" />
     <ClInclude Include="Object\Components\Collider\boxCollider.h" />
     <ClInclude Include="Object\Components\Collider\meshCollider.h" />
+    <ClInclude Include="Object\Components\Collider\sphereCollider.h" />
     <ClInclude Include="Object\Components\Text\text.h" />
     <ClInclude Include="Engine\Window\window.h" />
     <ClInclude Include="Object\component.h" />

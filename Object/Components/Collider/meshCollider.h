@@ -5,9 +5,11 @@ class MeshCollider;
 #include "../Mesh/mesh.h"
 #include "boxCollider.h"
 #include "collider.h"
+#include "sphereCollider.h"
 
 class Collider;
 class BoxCollider;
+class SphereCollider;
 class Object;
 
 class BV{
@@ -71,4 +73,5 @@ public:
 private:
 	bool collisionMesh(MeshCollider* c2);
 	bool collisionBox(BoxCollider* c2);
+	bool collisionSphere(SphereCollider* c2);
 };

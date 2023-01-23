@@ -7,8 +7,13 @@ Text* newTextTime;
 
 void LaberintoScene::init() {
     genLaberinto();
-    camera->position = Vec3(0.0f, 0.0f, -18.0f);
-    camera->lookAt = Vec3(0.0f, 0.0f, -17.999f);
+    //camera->position = Vec3(0.0f, 0.0f, -18.0f);
+    //camera->lookAt = Vec3(0.0f, 0.0f, -17.999f);
+
+    camera->transform->position = Vec3(340.0f, 0.0f, 359.0f);
+    camera->position = Vec3(340.0f, 0.0f, 359.0f);
+    camera->lookAt = Vec3(340.0f, 0.0f, 358.999f);
+
     // Object* celda = new Object();
     // Mesh* celdaMesh = new Mesh(USER_PATH "Models\\celda3.trg", defaultVshader, defaultFshader, defaultTexture);
     // celda->addComponent(celdaMesh);
@@ -27,7 +32,7 @@ void LaberintoScene::init() {
     Input::restartTime();
 
     Object* textTime = new Object();
-    newTextTime = new Text(std::to_string(Input::getTime()) + " s", defaultTextFontSize, Vec3(0.0f, 1.0f, 0));
+    newTextTime = new Text(std::to_string(std::round(Input::getTime()*100)/100) + " s", defaultTextFontSize, Vec3(0.0f, 1.0f, 0));
     UI* newInterfaceTextTime = new UI(camera);
     newInterfaceTextTime->rectPosition = Vec2(0.69, 0.03);
     //newInterfaceText->layer = 2;
@@ -39,7 +44,7 @@ void LaberintoScene::init() {
     addLight(newLight);
 
     Light* newLight2 = new Light(Vec3(0, 3, 0), Vec4(1.0f,0.0f,0.0f,1.0f));
-    addLight(newLight2);
+    //addLight(newLight2);
 
     BoxCollider* colliderCamera = new BoxCollider(camera);
     colliderCamera->bounds = Vec3(1, 1, 1);
@@ -54,12 +59,13 @@ void LaberintoScene::init() {
     ////createObject(debugBox);
 }
 
+
 void LaberintoScene::createCelda(std::string modelo, int x, int z, int angulo, bool primera, bool segunda, bool tercera, bool cuarta){
     Object* celda = new Object();
     celda->transform->position.getX() = x;
     celda->transform->position.getZ() = z;
     celda->transform->rotation.getY() = Utils::radians(angulo);
-    Mesh* meshCelda = new Mesh(modelo, defaultVshader, defaultFshader, defaultTexture);
+    Mesh* meshCelda = new Mesh(modelo, defaultVshader, defaultFshader, USER_PATH "Textures\\lightRock.jpg");
     celda->addComponent(meshCelda);
     /*Collider* colliderCelda = new MeshCollider(celda);
     celda->addComponent(colliderCelda);*/
@@ -199,7 +205,7 @@ void LaberintoScene::genLaberinto() {
 
 void LaberintoScene::userUpdate()
 {
-    newTextTime->changeText(std::to_string(Input::getTime()) + " s");
+    newTextTime->changeText(std::to_string(std::round(Input::getTime() * 100) / 100) + " s");
     Input::setCursorPos(windowWidth/2,windowHeight/2);
     Input::hideMouse();
 }

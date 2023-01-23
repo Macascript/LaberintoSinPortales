@@ -27,8 +27,9 @@ Camera::Camera(Vec3 pos, Vec3 lookAt, cameraType_e type) {
 	//std::cout << "patata6" << std::endl;
 }
 
-void Camera::step()
+void Camera::update()
 {
+	Object::update();
 	// this->transform->position = position;
 	Vec3 actualLookAt = lookAt;
 	Vec3 auxVector = lookAt - this->transform->position;

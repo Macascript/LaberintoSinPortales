@@ -154,7 +154,7 @@ void Render::drawObject(Object* obj,Scene* scene){
 	glUniform1i(4,textureUnit);
 	((Mesh*) obj->getComponent("mesh"))->texture->bind(textureUnit);
 
-	glUniform1f(5,0);
+	glUniform1f(5,1.0f);
 
 	// if (obj->typeObject == BACKGROUND_OBJ){
 	// 	Background* bg = (Background*) obj;

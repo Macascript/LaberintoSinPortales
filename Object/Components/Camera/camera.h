@@ -34,7 +34,7 @@ public:
 
 	Camera(Vec3 pos, Vec3 lookAt, cameraType_e type);
 
-	void step();
+	void update() override;
 	void computeMatrix();
 	Mat4& getMatrix();
 	Mat4& getProjectionMatrix();
