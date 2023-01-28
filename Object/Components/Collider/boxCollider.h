@@ -27,4 +27,5 @@ public:
 	void update() override;
 	bool collision(Collider* c2) override;
 	bool collisionPoint(Vec2 v2) override;
+	bool collisionTriangle(BV* triangle);
 };

@@ -17,5 +17,6 @@ public:
     static Mat4 perspective(float fovy, float aspect, float zNear, float zFar);
     static Mat4 value_ptr(Mat4 &matrix);
     static Vec3 cross(Vec3 &vector1, Vec3 &vector2);
+    static float dot(Vec3& vector1, Vec3& vector2);
     static Vec3 normalize(Vec3 &vector);
 };

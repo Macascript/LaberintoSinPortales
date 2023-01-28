@@ -42,9 +42,9 @@ class Box3D: public BV
 {
 public:
 		//glm::vec3 position=glm::vec3(0,0,0);//esquina inferior izquierda
-		Vec4 ver1 = Vec4(0.0f, 0.0f, 0.0f, 0.0f);
-		Vec4 ver2 = Vec4(0.0f, 0.0f, 0.0f, 0.0f);
-		Vec4 ver3 = Vec4(0.0f, 0.0f, 0.0f, 0.0f);
+		Vec3 ver1 = Vec3(0.0f, 0.0f, 0.0f);
+		Vec3 ver2 = Vec3(0.0f, 0.0f, 0.0f);
+		Vec3 ver3 = Vec3(0.0f, 0.0f, 0.0f);
 		float planeA = 0.0f;
 		float planeB = 0.0f;
 		float planeC = 0.0f;

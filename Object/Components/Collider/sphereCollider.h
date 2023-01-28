@@ -28,4 +28,5 @@ public:
 	bool collision(Collider* c2) override;
 	bool collisionPoint(Vec2 v2) override;
 	Vec3 getCenter();
+	bool collisionTriangle(BV* triangle);
 };

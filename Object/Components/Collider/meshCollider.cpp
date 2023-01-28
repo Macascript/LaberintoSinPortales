@@ -87,9 +87,9 @@ bool Box3D::collision(BV* _b2){
 	
 	float ep1, ep2, t = 0.0f;
 	float planeIntersectX, planeIntersectY, planeIntersectZ = 0.0f;
-	Vec4 pointInPlane = Vec4(0.0f, 0.0f, 0.0f, 0.0f);
+	Vec3 pointInPlane = Vec3(0.0f, 0.0f, 0.0f);
 
-	Vec4 b2V[4];
+	Vec3 b2V[4];
 	b2V[0] = b2->ver1;
 	b2V[1] = b2->ver2;
 	b2V[2] = b2->ver3;
@@ -111,7 +111,7 @@ bool Box3D::collision(BV* _b2){
 			planeIntersectY = (b2V[k].y() * t) + (b2V[k + 1].y() * (1 - t));
 			planeIntersectZ = (b2V[k].z() * t) + (b2V[k + 1].z() * (1 - t));
 
-			pointInPlane = Vec4(planeIntersectX, planeIntersectY, planeIntersectZ, 1.0f);
+			pointInPlane = Vec3(planeIntersectX, planeIntersectY, planeIntersectZ);
 
 			if (PointInTriangle(ver1, ver2, ver3, pointInPlane))
 			{
@@ -123,7 +123,7 @@ bool Box3D::collision(BV* _b2){
 	return false;
 }
 
-bool PointInTriangle(Vec4 vertex1, Vec4 vertex2, Vec4 vertex3, Vec4 point)
+bool PointInTriangle(Vec3 vertex1, Vec3 vertex2, Vec3 vertex3, Vec3 point)
 {
 	//primero calculamos el area del triangulo
 	float distX = vertex1.x() - vertex2.x();
@@ -150,7 +150,7 @@ bool PointInTriangle(Vec4 vertex1, Vec4 vertex2, Vec4 vertex3, Vec4 point)
 
 	//ahora inicializamos un nuevo array que contendrá las 3 areas de los triangulos generados con el punto de interseccion y los 3 vertices del triangulo
 	float smallTriArea[3] = { 0.0f, 0.0f, 0.0f };
-	Vec4 triVert[4];
+	Vec3 triVert[4];
 	triVert[0] = vertex1;
 	triVert[1] = vertex2;
 	triVert[2] = vertex3;
@@ -221,25 +221,25 @@ void Box3D::update(){
         vertex_t v=vertexlist->data()[facelist->data()[triangleIdx *3]];    
         newpos = v2 * v.posicion;
 
-        ver1 = newpos;
+        ver1 = Vec3(newpos.x(),newpos.y(),newpos.z());
 
 		v = vertexlist->data()[facelist->data()[(triangleIdx * 3)+1]];
 		newpos = v2 * v.posicion;
 
-		ver2 = newpos;
+		ver2 = Vec3(newpos.x(), newpos.y(), newpos.z());
 
 		v = vertexlist->data()[facelist->data()[(triangleIdx * 3) + 2]];
 		newpos = v2 * v.posicion;
 
-		ver3 = newpos;
+		ver3 = Vec3(newpos.x(), newpos.y(), newpos.z());
 
-		Vec4 edge1 = ver2 - ver1;
-		Vec4 edge2 = ver3 - ver1;
+		Vec3 edge1 = ver2 - ver1;
+		Vec3 edge2 = ver3 - ver1;
 		Vec3 miniEdge1 = Vec3(edge1.x(), edge1.y(), edge1.z());
 		Vec3 miniEdge2 = Vec3(edge2.x(), edge2.y(), edge2.z());
 		Vec3 faceNormal = Utils::cross(miniEdge1, miniEdge2);
-		Vec4 faceNormalized = Vec4(Utils::normalize(faceNormal),0.0f);
-		Vec4 triPoint = (ver1 + ver2 + ver3) / 3.0f;
+		Vec3 faceNormalized = Utils::normalize(faceNormal);
+		Vec3 triPoint = (ver1 + ver2 + ver3) / 3.0f;
 
 		//formula del plano: Ax + By + Cz + D = 0
 		planeA = faceNormalized.x();
@@ -276,6 +276,8 @@ bool MeshCollider::collision(Collider* c2)
 		return collisionMesh((MeshCollider*)c2);
 	if (instanceof<BoxCollider>(c2))
 		return collisionBox((BoxCollider*)c2);
+	if (instanceof<SphereCollider>(c2))
+		return collisionSphere((SphereCollider*)c2);
 	return false;
 }
 
@@ -303,7 +305,7 @@ bool MeshCollider::collisionBox(BoxCollider* c2)
 	bool collision = false;
 	while (!collision && it1 != boxList->end())
 	{
-		//TODO
+		collision = c2->collisionTriangle((*it1));
 		it1++;
 	}
 	return collision;
@@ -316,7 +318,7 @@ bool MeshCollider::collisionSphere(SphereCollider* c2)
 	bool collision = false;
 	while (!collision && it1 != boxList->end())
 	{
-		//TODO
+		collision = c2->collisionTriangle((*it1));
 		it1++;
 	}
 	return collision;

@@ -47,6 +47,10 @@ Vec3 Utils::cross(Vec3& vector1, Vec3& vector2) {
     return Vec3(glm::cross(vector1.getVector(), vector2.getVector()));
 }
 
+float Utils::dot(Vec3& vector1, Vec3& vector2) {
+    return glm::dot(vector1.getVector(), vector2.getVector());
+}
+
 Vec3 Utils::normalize(Vec3& vector) {
     return Vec3(glm::normalize(vector.getVector()));
 }

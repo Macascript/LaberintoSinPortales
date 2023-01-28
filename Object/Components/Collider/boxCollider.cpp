@@ -72,10 +72,17 @@ bool BoxCollider::collisionMesh(MeshCollider* c2)
     bool collision = false;
     while (!collision && it1 != c2->boxList->end())
     {
-        //TODO
+        collision = this->collisionTriangle((*it1));
         it1++;
     }
     return collision;
+}
+
+bool BoxCollider::collisionTriangle(BV* _b2)
+{
+    Box3D* b2 = (Box3D*)_b2;
+
+
 }
 
 bool BoxCollider::collisionSphere(SphereCollider* c2)
