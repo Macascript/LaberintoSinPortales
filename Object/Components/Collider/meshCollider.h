@@ -42,12 +42,13 @@ class Box3D: public BV
 {
 public:
 		//glm::vec3 position=glm::vec3(0,0,0);//esquina inferior izquierda
-		float xMax=0;
-		float yMax=0;
-		float zMax=0;
-		float xMin=0;
-		float yMin=0;
-		float zMin=0;
+		Vec4 ver1 = Vec4(0.0f, 0.0f, 0.0f, 0.0f);
+		Vec4 ver2 = Vec4(0.0f, 0.0f, 0.0f, 0.0f);
+		Vec4 ver3 = Vec4(0.0f, 0.0f, 0.0f, 0.0f);
+		float planeA = 0.0f;
+		float planeB = 0.0f;
+		float planeC = 0.0f;
+		float planeD = 0.0f;
 		Object* obj=nullptr;
 		int triangleIdx;
 		Box3D();

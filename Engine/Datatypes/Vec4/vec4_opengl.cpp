@@ -48,6 +48,14 @@ Vec4 Vec4::operator + (Vec4 vec4){
 	return Vec4(vector + vec4.getVector());
 }
 
+Vec4 Vec4::operator - (Vec4 vec4) {
+	return Vec4(vector - vec4.getVector());
+}
+
 Vec4 Vec4::operator * (Vec4 vec4) {
 	return Vec4(vector * vec4.getVector());
+}
+
+Vec4 Vec4::operator / (float constant) {
+	return Vec4(vector / constant);
 }
