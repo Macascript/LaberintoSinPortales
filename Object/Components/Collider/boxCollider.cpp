@@ -82,7 +82,7 @@ bool BoxCollider::collisionTriangle(BV* _b2)
 {
     Box3D* b2 = (Box3D*)_b2;
 
-
+    return false;
 }
 
 bool BoxCollider::collisionSphere(SphereCollider* c2)
