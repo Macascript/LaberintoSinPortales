@@ -8,6 +8,7 @@ SphereCollider::SphereCollider(Camera* camera) {
 
 bool SphereCollider::collision(Collider* c2)
 {
+    center = gameObject->transform->position + offset;
     if (c2 == nullptr) return false;
     if (instanceof<MeshCollider>(c2))
         return collisionMesh((MeshCollider*)c2);
