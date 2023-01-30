@@ -117,7 +117,8 @@ void Mesh::loadFromFile(std::string modelFileName, std::string vShaderFilename, 
 	fin.close();
 
 	shader = new Shader(vShaderFilename, fShaderFilename);
-	texture = new Texture(textureFilename);
+	if (textureFilename != "")
+		texture = new Texture(textureFilename);
 }
 
 void Mesh::setTexture(std::string name) {
@@ -139,3 +140,9 @@ Mesh::~Mesh() {
 }
 
 void Mesh::update() {}
+
+void Mesh::setTexture(Texture* texture){
+	if (this->texture != nullptr)
+		delete this->texture;
+	this->texture = texture;
+}

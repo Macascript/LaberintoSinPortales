@@ -49,13 +49,16 @@ void Camera::update()
 		bool canZ = SceneManager::actualScene()->getCollisions(this)->size() == 0;
 		if (canX){
 			transform->position.getX() = futureTransform.x();
+		}else{
+			lookAt.getX() = actualLookAt.x();
 		}
 		if (!canZ){
 			transform->position.getZ() = position.z();
+			lookAt.getZ() = actualLookAt.z();
 		}
 		position = transform->position;
 	}
-
+	actualLookAt = lookAt;
 	if (Input::getKey('S')) {
 		this->transform->position = this->transform->position - Utils::normalize(auxVector) * Input::getSpeed();
 		lookAt = lookAt - Utils::normalize(auxVector) * Input::getSpeed();
@@ -68,13 +71,16 @@ void Camera::update()
 		bool canZ = SceneManager::actualScene()->getCollisions(this)->size() == 0;
 		if (canX){
 			transform->position.getX() = futureTransform.x();
+		}else{
+			lookAt.getX() = actualLookAt.x();
 		}
 		if (!canZ){
 			transform->position.getZ() = position.z();
+			lookAt.getZ() = actualLookAt.z();
 		}
 		position = transform->position;
 	}
-
+	actualLookAt = lookAt;
 	if (Input::getKey('D'))
 	{
 		this->transform->position = this->transform->position + Utils::normalize(auxCross) * Input::getSpeed();
@@ -91,7 +97,7 @@ void Camera::update()
 			lookAt = actualLookAt;
 		}
 	}
-
+	actualLookAt = lookAt;
 	if (Input::getKey('A'))
 	{
 		this->transform->position = this->transform->position - Utils::normalize(auxCross) * Input::getSpeed();

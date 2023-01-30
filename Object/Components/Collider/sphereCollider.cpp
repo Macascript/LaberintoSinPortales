@@ -36,7 +36,7 @@ bool SphereCollider::collisionMesh(MeshCollider* c2)
     bool collision = false;
     while (!collision && it1 != c2->boxList->end())
     {
-        collision = this->collisionTriangle((*it1));
+        collision = this->collisionTriangle(*it1);
         it1++;
     }
     return collision;

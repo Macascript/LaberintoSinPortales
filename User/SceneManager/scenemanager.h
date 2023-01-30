@@ -9,7 +9,7 @@ class Camera;
 class SceneManager {
 private:
 	static SceneManager* sceneManager;
-	int actualSceneIndex = 1;
+	int actualSceneIndex = 2;
 	Camera* camera;
 public:
     SceneManager(Camera* cam);

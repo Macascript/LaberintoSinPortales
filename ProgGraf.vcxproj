@@ -41,6 +41,7 @@
     <ClCompile Include="Object\Components\Collider\boxCollider.cpp" />
     <ClCompile Include="Object\Components\Collider\meshCollider.cpp" />
     <ClCompile Include="Object\Components\Collider\sphereCollider.cpp" />
+    <ClCompile Include="Object\Components\RenderToTexture\render_to_texture.cpp" />
     <ClCompile Include="Object\Components\Text\text_opengl.cpp" />
     <ClCompile Include="Engine\Window\window_metal.cpp" />
     <ClCompile Include="Engine\Window\window_opengl.cpp" />
@@ -60,6 +61,7 @@
     <ClCompile Include="User\Scripts\LaberintoScene.cpp" />
     <ClCompile Include="User\Scripts\LookAtFollower.cpp" />
     <ClCompile Include="User\Scripts\MenuScene.cpp" />
+    <ClCompile Include="User\Scripts\PortalScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Commons\common.h" />
@@ -84,6 +86,7 @@
     <ClInclude Include="Object\Components\Collider\boxCollider.h" />
     <ClInclude Include="Object\Components\Collider\meshCollider.h" />
     <ClInclude Include="Object\Components\Collider\sphereCollider.h" />
+    <ClInclude Include="Object\Components\RenderToTexture\render_to_texture.h" />
     <ClInclude Include="Object\Components\Text\text.h" />
     <ClInclude Include="Engine\Window\window.h" />
     <ClInclude Include="Object\component.h" />
@@ -102,6 +105,7 @@
     <ClInclude Include="User\Scripts\LaberintoScene.h" />
     <ClInclude Include="User\Scripts\LookAtFollower.h" />
     <ClInclude Include="User\Scripts\MenuScene.h" />
+    <ClInclude Include="User\Scripts\PortalScene.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

@@ -11,6 +11,7 @@
 #define defaultuiModel ".\\Object\\Components\\Mesh\\defaultuimodel.trg"
 #define defaultVshader ".\\Engine\\Datatypes\\Shader\\defaultvshader.glsl"
 #define defaultFshader ".\\Engine\\Datatypes\\Shader\\defaultfshader.glsl"
+#define defaultRenderTextureFshader ".\\Engine\\Datatypes\\Shader\\defaultrendertexturefshader.glsl"
 #define guiVshader ".\\Engine\\Datatypes\\Shader\\defaultguivshader.glsl"
 #define guiFshader ".\\Engine\\Datatypes\\Shader\\defaultguifshader.glsl"
 #define defaultTexture ".\\Engine\\Datatypes\\Texture\\defaulttexture.png"
@@ -30,6 +31,7 @@ public:
     Mesh(std::string modelFileName, std::string vShaderFilename, std::string fShaderFilename, std::string textureFilename);
     ~Mesh();
     void setTexture(std::string filename);
+    void setTexture(Texture* texture);
     void setShader(std::string filenamev, std::string filenamef);
     void loadFromFile(std::string modelFileName, std::string vShaderFilename, std::string fShaderFilename, std::string textureFilename);
     void setColor(int idxVertex, Vec4 color);

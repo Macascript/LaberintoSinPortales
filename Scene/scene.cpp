@@ -9,6 +9,19 @@ Scene::Scene(Camera* cam) {
 	sceneGrid = new SpatialHashing(objectList, 1, 18, 18, -10.0f, 0.0f, -10.0f, 360.0f, 20.0f, 360.0f);
 }
 
+void Scene::setSpatialHashing(int numFilas, int numColumnas, int numCeldas, float minX, float minY, float minZ, float tamX, float tamY, float tamZ)
+{
+	sceneGrid->numFilas = numFilas;
+	sceneGrid->numColumnas = numColumnas;
+	sceneGrid->numCeldas = numCeldas;
+	sceneGrid->minX = minX;
+	sceneGrid->minY = minY;
+	sceneGrid->minZ = minZ;
+	sceneGrid->tamX = tamX;
+	sceneGrid->tamY = tamY;
+	sceneGrid->tamZ = tamZ;
+}
+
 Camera* Scene::getCamera(){
 	return camera;
 }

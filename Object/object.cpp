@@ -59,7 +59,6 @@ void Object::addComponent(Component* component){
 	if (components->count(component->getType()) == 0){
 		(*components)[component->getType()] = new std::vector<Component*>();
 	}
-	std::cout << "object.cpp addComponent():" << component->getType() << std::endl;
 	component->setGameObject(this);
 	(*components)[component->getType()]->push_back(component);
 }

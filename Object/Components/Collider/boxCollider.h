@@ -12,6 +12,7 @@ class Object;
 class MeshCollider;
 class SphereCollider;
 class Component;
+class BV;
 
 class BoxCollider: public Collider{
 private:

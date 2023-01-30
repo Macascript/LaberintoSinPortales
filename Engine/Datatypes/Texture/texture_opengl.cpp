@@ -3,6 +3,12 @@
 #include "stb_image_opengl.h"
 #include "../../Commons/common_opengl.h"
 
+Texture::Texture(int w, int h, unsigned int glId){
+    this->w = w;
+    this->h = h;
+    this->glId = glId;
+}
+
 Texture::Texture(std::string filename){
     //generacion texture ID
     unsigned char* data = NULL;

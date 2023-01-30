@@ -12,11 +12,15 @@ class Mesh;
 class Text;
 class UI;
 class Scene;
+class BV;
+class Box3D;
+class Box2D;
 
 class Render;
 class Window;
 class Transform;
 class SpatialHashing;
+class RenderToTexture;
 
 #include "../Engine/Commons/common.h"
 #include "../Engine/Datatypes/Utils/utils.h"
@@ -40,5 +44,6 @@ class SpatialHashing;
 #include "../Object/Components/Text/text.h"
 #include "../Object/Components/Transform/transform.h"
 #include "../Object/Components/UI/ui.h"
+#include "../Object/Components/RenderToTexture/render_to_texture.h"
 #include "../Scene/scene.h"
 #include "../Scene/spatialHashing.h"

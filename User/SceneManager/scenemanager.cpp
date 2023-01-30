@@ -3,6 +3,7 @@
 #include "scenemanager.h"
 #include "../Scripts/MenuScene.h"
 #include "../Scripts/LaberintoScene.h"
+#include "../Scripts/PortalScene.h"
 
 SceneManager* SceneManager::sceneManager = nullptr;
 
@@ -13,6 +14,7 @@ SceneManager::SceneManager(Camera* camera){
     // USER TODO:
     (*this->list)[0] = new MenuScene(camera);
     (*this->list)[1] = new LaberintoScene(camera);
+    (*this->list)[2] = new PortalScene(camera);
     //
 }
 

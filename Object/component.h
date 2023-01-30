@@ -44,7 +44,7 @@ public:
 		Este método se llama una vez cada frame
 	*/
 	virtual void update();
-	bool enabled;
+	bool enabled = true;
 	std::string getType();
 	~Component();
 	void setGameObject(Object* obj);

@@ -7,27 +7,27 @@ Text* newTextTime;
 
 void LaberintoScene::init() {
     genLaberinto();
-    //camera->position = Vec3(0.0f, 0.0f, -18.0f);
-    //camera->lookAt = Vec3(0.0f, 0.0f, -17.999f);
+    /*camera->position = Vec3(0.0f, 0.0f, -18.0f);
+    camera->lookAt = Vec3(0.0f, 0.0f, -17.999f);*/
 
     camera->transform->position = Vec3(340.0f, 0.0f, 359.0f);
     camera->position = Vec3(340.0f, 0.0f, 359.0f);
     camera->lookAt = Vec3(340.0f, 0.0f, 358.999f);
 
-    // Object* celda = new Object();
-    // Mesh* celdaMesh = new Mesh(USER_PATH "Models\\celda3.trg", defaultVshader, defaultFshader, defaultTexture);
-    // celda->addComponent(celdaMesh);
-    // createObject(celda);
+    Object* celda = new Object();
+    Mesh* celdaMesh = new Mesh(USER_PATH "Models\\celda3.trg", defaultVshader, defaultFshader, defaultTexture);
+    celda->addComponent(celdaMesh);
+    createObject(celda);
 
-    //Object* newObject = new Object();
-    //Mesh* newMesh = new Mesh(defaultuiModel, guiVshader, guiFshader, USER_PATH "Textures\\marcianitos.png");
-    //UI* newInterface = new UI(camera);
-    //newInterface->rectPosition = Vec2(0.5, 0.5);
-    ////newInterface->layer = 1;
-    //newObject->addComponent(newMesh);
-    //newObject->addComponent(newInterface);
-    //newObject->transform->scale = Vec3(2.0f, 2.0f, 1.0f);
-    ////createObject(newObject);
+    Object* newObject = new Object();
+    Mesh* newMesh = new Mesh(defaultuiModel, guiVshader, guiFshader, USER_PATH "Textures\\marcianitos.png");
+    UI* newInterface = new UI(camera);
+    newInterface->rectPosition = Vec2(0.5, 0.5);
+    //newInterface->layer = 1;
+    newObject->addComponent(newMesh);
+    newObject->addComponent(newInterface);
+    newObject->transform->scale = Vec3(2.0f, 2.0f, 1.0f);
+    //createObject(newObject);
 
     Input::restartTime();
 
@@ -40,8 +40,10 @@ void LaberintoScene::init() {
     textTime->addComponent(newInterfaceTextTime);
     createObject(textTime);
 
-    Light* newLight = new Light(Vec3(0, 3, 0));
+    // Light* newLight = new Light(Vec3(0.0f, 10.0f, 0.0f));
+    Light* newLight = new Light(Vec3(340.0f, 0.0f, 359.0f));
     addLight(newLight);
+    // newLight->addComponent(new LookAtFollower(camera));
 
     Light* newLight2 = new Light(Vec3(0, 3, 0), Vec4(1.0f,0.0f,0.0f,1.0f));
     //addLight(newLight2);
@@ -49,14 +51,16 @@ void LaberintoScene::init() {
     BoxCollider* colliderCamera = new BoxCollider(camera);
     colliderCamera->bounds = Vec3(1, 1, 1);
     camera->addComponent(colliderCamera);
-
-    //Object* debugBox = new Object();
-    //Mesh* meshDebugBox = new Mesh(default3DModel,defaultVshader,defaultFshader,USER_PATH "Textures\\marcianitos.png");
-    //LookAtFollower* lookAtDebugBox = new LookAtFollower(camera);
-    //debugBox->transform->scale = Vec3(0.01f, 0.01f, 0.01f);
-    ////debugBox->addComponent(meshDebugBox);
-    //debugBox->addComponent(lookAtDebugBox);
-    ////createObject(debugBox);
+    createCelda(USER_PATH "Models\\celda1.trg",0, -15, 0,false,false,false,true);
+    createCelda(USER_PATH "Models\\celda1.trg", 0, -35, 0, false, false, false, true);
+    createCelda(USER_PATH "Models\\celda1.trg", 0, -55, 0, false, false, false, true);
+    Object* debugBox = new Object();
+    Mesh* meshDebugBox = new Mesh(default3DModel,defaultVshader,defaultFshader,USER_PATH "Textures\\marcianitos.png");
+    LookAtFollower* lookAtDebugBox = new LookAtFollower(camera);
+    debugBox->transform->scale = Vec3(0.01f, 0.01f, 0.01f);
+    //debugBox->addComponent(meshDebugBox);
+    debugBox->addComponent(lookAtDebugBox);
+    //createObject(debugBox);
 }
 
 
@@ -65,7 +69,7 @@ void LaberintoScene::createCelda(std::string modelo, int x, int z, int angulo, b
     celda->transform->position.getX() = x;
     celda->transform->position.getZ() = z;
     celda->transform->rotation.getY() = Utils::radians(angulo);
-    Mesh* meshCelda = new Mesh(modelo, defaultVshader, defaultFshader, USER_PATH "Textures\\lightRock.jpg");
+    Mesh* meshCelda = new Mesh(modelo, defaultVshader, defaultFshader, USER_PATH "Textures\\messyRocks_floor.jpg");
     celda->addComponent(meshCelda);
     /*Collider* colliderCelda = new MeshCollider(celda);
     celda->addComponent(colliderCelda);*/
@@ -127,7 +131,7 @@ void LaberintoScene::genLaberinto() {
     z = 0;
     while (std::getline(archivo, linea))
     {
-        std::cout << linea << std::endl;
+        // std::cout << linea << std::endl;
         //std::stringstream stream(linea); // Convertir la cadena a un stream
         //std::cout << stream.str() << std::endl;
         //std::string leyendaCelda;
@@ -137,7 +141,7 @@ void LaberintoScene::genLaberinto() {
         {
             //std::getline(stream, leyendaCelda, delimitador);
             char c = linea[i];
-            std::cout<<c<<std::endl;
+            // std::cout<<c<<std::endl;
             switch (c)
             {
             case 'O':
@@ -178,18 +182,18 @@ void LaberintoScene::genLaberinto() {
                 createCelda(USER_PATH "Models\\celda2paralelo.trg",x,z,90,false,true,false,true);
                 break;
             case 'K':
-                createCelda(USER_PATH "Models\\probandoprobando.trg",x,z,180,false,true,false,false);
+                createCelda(USER_PATH "Models\\celda1.trg",x,z,180,false,true,false,false);
                 //createCelda(USER_PATH "Models\\probandoprobando.trg",x,z,0,false,false,false,true);
                 break;
             case 'L':
-                createCelda(USER_PATH "Models\\probandoprobando.trg",x,z,90,false,false,true,false);
+                createCelda(USER_PATH "Models\\celda1.trg",x,z,90,false,false,true,false);
                 break;
             case 'M':
-                createCelda(USER_PATH "Models\\probandoprobando.trg",x,z,0,false,false,false,true);
+                createCelda(USER_PATH "Models\\celda1.trg",x,z,0,false,false,false,true);
                 //createCelda(USER_PATH "Models\\probandoprobando.trg",x,z,180,false,true,false,false);
                 break;
             case 'N':
-                createCelda(USER_PATH "Models\\probandoprobando.trg",x,z,270,true,false,false,false);
+                createCelda(USER_PATH "Models\\celda1.trg",x,z,270,true,false,false,false);
                 break;
             case 'P':
                 createCelda(USER_PATH "Models\\celda4.trg", x, z,0,true,true,true,true);

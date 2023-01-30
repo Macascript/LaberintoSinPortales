@@ -30,7 +30,7 @@ public:
 		float yMin=0;
 		float xMin=0;
 		Object* obj=nullptr;
-		int triangleIdx;
+		int triangleIdx = 0;
 		Box2D();
 		bool collision(BV* b2);
 		bool collisionPoint(Vec2 v2);
@@ -50,7 +50,7 @@ public:
 		float planeC = 0.0f;
 		float planeD = 0.0f;
 		Object* obj=nullptr;
-		int triangleIdx;
+		int triangleIdx = 0;
 		Box3D();
 		bool collision(BV* b2);
 		bool collisionPoint(Vec2 v2);

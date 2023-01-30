@@ -39,4 +39,5 @@ public:
 	void addLight(Light* light);
 	std::vector<Object*>* getCollisions(Object* obj);
 	std::vector<Object*>* getCollisions(Collider* col);
+	void setSpatialHashing(int numFilas, int numColumnas, int numCeldas, float minX, float minY, float minZ, float tamX, float tamY, float tamZ);
 };

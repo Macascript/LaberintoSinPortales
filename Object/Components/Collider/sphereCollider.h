@@ -11,6 +11,7 @@ class Collider;
 class Camera;
 class Object;
 class Component;
+class BV;
 
 class SphereCollider : public Collider {
 private:

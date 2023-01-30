@@ -1,5 +1,6 @@
 #include "meshCollider.h"
 
+bool PointInTriangle(Vec3 vertex1, Vec3 vertex2, Vec3 vertex3, Vec3 point);
 
 Box2D::Box2D(){
 
@@ -89,7 +90,7 @@ bool Box3D::collision(BV* _b2){
 	float planeIntersectX, planeIntersectY, planeIntersectZ = 0.0f;
 	Vec3 pointInPlane = Vec3(0.0f, 0.0f, 0.0f);
 
-	Vec3 b2V[4];
+	Vec3 b2V[4] = {};
 	b2V[0] = b2->ver1;
 	b2V[1] = b2->ver2;
 	b2V[2] = b2->ver3;
@@ -150,7 +151,7 @@ bool PointInTriangle(Vec3 vertex1, Vec3 vertex2, Vec3 vertex3, Vec3 point)
 
 	//ahora inicializamos un nuevo array que contendrá las 3 areas de los triangulos generados con el punto de interseccion y los 3 vertices del triangulo
 	float smallTriArea[3] = { 0.0f, 0.0f, 0.0f };
-	Vec3 triVert[4];
+	Vec3 triVert[4] = {};
 	triVert[0] = vertex1;
 	triVert[1] = vertex2;
 	triVert[2] = vertex3;
@@ -305,7 +306,7 @@ bool MeshCollider::collisionBox(BoxCollider* c2)
 	bool collision = false;
 	while (!collision && it1 != boxList->end())
 	{
-		collision = c2->collisionTriangle((*it1));
+		collision = c2->collisionTriangle(*it1);
 		it1++;
 	}
 	return collision;
@@ -318,7 +319,7 @@ bool MeshCollider::collisionSphere(SphereCollider* c2)
 	bool collision = false;
 	while (!collision && it1 != boxList->end())
 	{
-		collision = c2->collisionTriangle((*it1));
+		collision = c2->collisionTriangle(*it1);
 		it1++;
 	}
 	return collision;

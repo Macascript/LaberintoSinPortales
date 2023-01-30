@@ -72,7 +72,7 @@ bool BoxCollider::collisionMesh(MeshCollider* c2)
     bool collision = false;
     while (!collision && it1 != c2->boxList->end())
     {
-        collision = this->collisionTriangle((*it1));
+        collision = this->collisionTriangle(*it1);
         it1++;
     }
     return collision;
@@ -111,7 +111,7 @@ bool BoxCollider::collisionTriangle(BV* _b2)
     float p1 = Utils::dot(v1, a00);
     float p2 = Utils::dot(v2, a00);
     float r = yMax * abs(f0.z()) + zMax * abs(f0.y());
-    if (std::max(-std::max(p0, p1, p2), std::min(p0, p1, p2)) > r)
+    if (std::max(-std::max(p0, std::max(p1, p2)), std::min(p0, std::min(p1, p2))) > r)
         return false;
 
     //Test axis a01
@@ -120,7 +120,7 @@ bool BoxCollider::collisionTriangle(BV* _b2)
     p1 = Utils::dot(v1, a01);
     p2 = Utils::dot(v2, a01);
     r = yMax * abs(f1.z()) + zMax * abs(f1.y());
-    if (std::max(-std::max(p0, p1, p2), std::min(p0, p1, p2)) > r)
+    if (std::max(-std::max(p0, std::max(p1, p2)), std::min(p0, std::min(p1, p2))) > r)
         return false;
 
     //Test axis a02
@@ -129,7 +129,7 @@ bool BoxCollider::collisionTriangle(BV* _b2)
     p1 = Utils::dot(v1, a02);
     p2 = Utils::dot(v2, a02);
     r = yMax * abs(f2.z()) + zMax * abs(f2.y());
-    if (std::max(-std::max(p0, p1, p2), std::min(p0, p1, p2)) > r)
+    if (std::max(-std::max(p0, std::max(p1, p2)), std::min(p0, std::min(p1, p2))) > r)
         return false;
 
     //Test axis a10
@@ -138,7 +138,7 @@ bool BoxCollider::collisionTriangle(BV* _b2)
     p1 = Utils::dot(v1, a10);
     p2 = Utils::dot(v2, a10);
     r = xMax * abs(f0.z()) + zMax * abs(f0.x());
-    if (std::max(-std::max(p0, p1, p2), std::min(p0, p1, p2)) > r)
+    if (std::max(-std::max(p0, std::max(p1, p2)), std::min(p0, std::min(p1, p2))) > r)
         return false;
 
     //Test axis a11
@@ -147,7 +147,7 @@ bool BoxCollider::collisionTriangle(BV* _b2)
     p1 = Utils::dot(v1, a11);
     p2 = Utils::dot(v2, a11);
     r = xMax * abs(f1.z()) + zMax * abs(f1.x());
-    if (std::max(-std::max(p0, p1, p2), std::min(p0, p1, p2)) > r)
+    if (std::max(-std::max(p0, std::max(p1, p2)), std::min(p0, std::min(p1, p2))) > r)
         return false;
 
     //Test axis a12
@@ -156,7 +156,7 @@ bool BoxCollider::collisionTriangle(BV* _b2)
     p1 = Utils::dot(v1, a12);
     p2 = Utils::dot(v2, a12);
     r = xMax * abs(f2.z()) + zMax * abs(f2.x());
-    if (std::max(-std::max(p0, p1, p2), std::min(p0, p1, p2)) > r)
+    if (std::max(-std::max(p0, std::max(p1, p2)), std::min(p0, std::min(p1, p2))) > r)
         return false;
 
     //Test axis a20
@@ -165,7 +165,7 @@ bool BoxCollider::collisionTriangle(BV* _b2)
     p1 = Utils::dot(v1, a20);
     p2 = Utils::dot(v2, a20);
     r = xMax * abs(f0.y()) + yMax * abs(f0.x());
-    if (std::max(-std::max(p0, p1, p2), std::min(p0, p1, p2)) > r)
+    if (std::max(-std::max(p0, std::max(p1, p2)), std::min(p0, std::min(p1, p2))) > r)
         return false;
 
     //Test axis a21
@@ -174,7 +174,7 @@ bool BoxCollider::collisionTriangle(BV* _b2)
     p1 = Utils::dot(v1, a21);
     p2 = Utils::dot(v2, a21);
     r = xMax * abs(f1.y()) + yMax * abs(f1.x());
-    if (std::max(-std::max(p0, p1, p2), std::min(p0, p1, p2)) > r)
+    if (std::max(-std::max(p0, std::max(p1, p2)), std::min(p0, std::min(p1, p2))) > r)
         return false;
 
     //Test axis a22
@@ -183,7 +183,7 @@ bool BoxCollider::collisionTriangle(BV* _b2)
     p1 = Utils::dot(v1, a22);
     p2 = Utils::dot(v2, a22);
     r = xMax * abs(f2.y()) + yMax * abs(f2.x());
-    if (std::max(-std::max(p0, p1, p2), std::min(p0, p1, p2)) > r)
+    if (std::max(-std::max(p0, std::max(p1, p2)), std::min(p0, std::min(p1, p2))) > r)
         return false;
 
     //endregion
@@ -191,15 +191,15 @@ bool BoxCollider::collisionTriangle(BV* _b2)
 
     //Exit if...
     //[-extents.X, extents.X] and [min(v0.X,v1.X,v2.X), max(v0.X,v1.X,v2.X)] do not overlap
-    if (std::max(v0.x(), v1.x(), v2.x()) < xMin || std::min(v0.x(), v1.x(), v2.x()) > xMax)
+    if (std::max(v0.x(), std::max(v1.x(), v2.x())) < xMin || std::min(v0.x(), std::min(v1.x(), v2.x())) > xMax)
         return false;
 
     //[-extents.Y, extents.Y] and [min(v0.Y,v1.Y,v2.Y), max(v0.Y,v1.Y,v2.Y)] do not overlap
-    if (std::max(v0.y(), v1.y(), v2.y()) < yMin || std::min(v0.y(), v1.y(), v2.y()) > yMax)
+    if (std::max(v0.y(), std::max(v1.y(), v2.y())) < yMin || std::min(v0.y(), std::min(v1.y(), v2.y())) > yMax)
         return false;
 
     //[-extents.Z, extents.Z] and [min(v0.Z,v1.Z,v2.Z), max(v0.Z,v1.Z,v2.Z)] do not overlap
-    if (std::max(v0.z(), v1.z(), v2.z()) < zMin || std::min(v0.z(), v1.z(), v2.z()) > zMax)
+    if (std::max(v0.z(), std::max(v1.z(), v2.z())) < zMin || std::min(v0.z(), std::min(v1.z(), v2.z())) > zMax)
         return false;
 
     //endregion
