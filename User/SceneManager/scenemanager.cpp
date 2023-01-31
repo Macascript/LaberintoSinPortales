@@ -14,7 +14,7 @@ SceneManager::SceneManager(Camera* camera){
     // USER TODO:
     (*this->list)[0] = new MenuScene(camera);
     (*this->list)[1] = new LaberintoScene(camera);
-    (*this->list)[2] = new PortalScene(camera);
+    //(*this->list)[2] = new PortalScene(camera);
     //
 }
 

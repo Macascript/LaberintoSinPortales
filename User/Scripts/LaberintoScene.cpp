@@ -13,20 +13,21 @@ void LaberintoScene::init() {
     camera->transform->position = Vec3(340.0f, 0.0f, 359.0f);
     camera->position = Vec3(340.0f, 0.0f, 359.0f);
     camera->lookAt = Vec3(340.0f, 0.0f, 358.999f);
+    
 
-    Object* celda = new Object();
+   /* Object* celda = new Object();
     Mesh* celdaMesh = new Mesh(USER_PATH "Models\\celda3.trg", defaultVshader, defaultFshader, defaultTexture);
     celda->addComponent(celdaMesh);
-    createObject(celda);
+    createObject(celda);*/
 
-    Object* newObject = new Object();
-    Mesh* newMesh = new Mesh(defaultuiModel, guiVshader, guiFshader, USER_PATH "Textures\\marcianitos.png");
-    UI* newInterface = new UI(camera);
-    newInterface->rectPosition = Vec2(0.5, 0.5);
-    //newInterface->layer = 1;
-    newObject->addComponent(newMesh);
-    newObject->addComponent(newInterface);
-    newObject->transform->scale = Vec3(2.0f, 2.0f, 1.0f);
+    //Object* newObject = new Object();
+    //Mesh* newMesh = new Mesh(defaultuiModel, guiVshader, guiFshader, USER_PATH "Textures\\marcianitos.png");
+    //UI* newInterface = new UI(camera);
+    //newInterface->rectPosition = Vec2(0.5, 0.5);
+    ////newInterface->layer = 1;
+    //newObject->addComponent(newMesh);
+    //newObject->addComponent(newInterface);
+    //newObject->transform->scale = Vec3(2.0f, 2.0f, 1.0f);
     //createObject(newObject);
 
     Input::restartTime();
@@ -51,15 +52,12 @@ void LaberintoScene::init() {
     BoxCollider* colliderCamera = new BoxCollider(camera);
     colliderCamera->bounds = Vec3(1, 1, 1);
     camera->addComponent(colliderCamera);
-    createCelda(USER_PATH "Models\\celda1.trg",0, -15, 0,false,false,false,true);
-    createCelda(USER_PATH "Models\\celda1.trg", 0, -35, 0, false, false, false, true);
-    createCelda(USER_PATH "Models\\celda1.trg", 0, -55, 0, false, false, false, true);
-    Object* debugBox = new Object();
-    Mesh* meshDebugBox = new Mesh(default3DModel,defaultVshader,defaultFshader,USER_PATH "Textures\\marcianitos.png");
-    LookAtFollower* lookAtDebugBox = new LookAtFollower(camera);
-    debugBox->transform->scale = Vec3(0.01f, 0.01f, 0.01f);
+    //Object* debugBox = new Object();
+    //Mesh* meshDebugBox = new Mesh(default3DModel,defaultVshader,defaultFshader,USER_PATH "Textures\\marcianitos.png");
+    //LookAtFollower* lookAtDebugBox = new LookAtFollower(camera);
+    //debugBox->transform->scale = Vec3(0.01f, 0.01f, 0.01f);
     //debugBox->addComponent(meshDebugBox);
-    debugBox->addComponent(lookAtDebugBox);
+    //debugBox->addComponent(lookAtDebugBox);
     //createObject(debugBox);
 }
 

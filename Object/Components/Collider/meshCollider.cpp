@@ -329,7 +329,7 @@ bool MeshCollider::collisionSphere(SphereCollider* c2)
 
 bool MeshCollider::collisionPoint(Vec2 v2)
 {
-    std::cout<<boxList->size()<<std::endl;
+    //std::cout<<boxList->size()<<std::endl;
 	auto it1 = boxList->begin();
 
 	bool collision = false;

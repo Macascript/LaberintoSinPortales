@@ -69,6 +69,9 @@ void MenuScene::init() {
     textButton2->addComponent(newTextButton2);
     textButton2->addComponent(newInterfaceTextButton2);
     createObject(textButton2);
+
+    /*Light* newLight = new Light(Vec3(340.0f, 0.0f, 359.0f));
+    addLight(newLight);*/
 }
 
 void loadLaberinto(){
